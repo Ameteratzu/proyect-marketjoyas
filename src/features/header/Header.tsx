@@ -10,7 +10,7 @@ export default function Header() {
       <TopBar />
       <div className="border-b border-cream/60">
         <Container className="py-4 flex items-center justify-between gap-6">
-          hola
+            chi
         </Container>
       </div>
       <div className="h-1 grad-gold" />

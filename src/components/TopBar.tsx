@@ -5,8 +5,8 @@ export default function TopBar() {
   const { t, i18n } = useTranslation("header");
 
   return (
-    <div className="grad-gold text-white text-xs">
-      <div className="container-p py-2 flex items-center justify-between">
+    <div className="grad-gold text-oscuro text-xs">
+      <div className="container-p py-2 flex items-center justify-between font-medium">
         <span className="tracking-wide">{t("freeShipping")}</span>
 
         <nav className="hidden sm:flex items-center gap-6">
@@ -14,16 +14,16 @@ export default function TopBar() {
             onClick={() =>
               i18n.changeLanguage(i18n.language === "es" ? "en" : "es")
             }
-            className="inline-flex items-center gap-2 opacity-90 hover:opacity-100"
+            className="cursor-pointer inline-flex items-center gap-2 opacity-90 hover:opacity-100"
           >
-            <Icon name="globe" className="w-4 h-4" />
+            <Icon name="globe" className="w-5 h-5 text-white" />
             <span>{t("lang")}</span>
           </button>
           <a
             href="/vender"
             className="inline-flex items-center gap-2 opacity-90 hover:opacity-100"
           >
-            <Icon name="store" className="w-4 h-4" />
+            <Icon name="store" className="w-5 h-5 text-white" />
             <span>{t("sellWithUs")}</span>
           </a>
         </nav>
