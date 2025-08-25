@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/** ====== Fuentes ====== */
+@import "@fontsource-variable/afacad";
+@import "@fontsource-variable/playfair-display";
+
+/** ====== Tokens ====== */
+@theme {
+  /** Colores de Marca */
+  --color-brand:        #D9A441; /*? dorado principal */
+  --color-accent:       #EDAE09; /*? acento/CTA */
+  --color-inver-accent: #F5F0E8; /*? acento inverso */
+  --color-golddeep:     #D4AF37; /*? dorado intenso */
+  --color-sand:         #C5A880; /*? arena */
+  --color-cream:        #F0E3CC; /*? crema */
+  --color-fondo:        #FAF7F2; /*? fondo */
+
+  /*? Neutros */
+  --color-oscuro:       #1E1E1E;
+  --color-graphite:     #484848;
+  --color-white:        #FFFFFF;
+
+  /* * Tipografías */
+  --font-sans: "Afacad Variable", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  --font-display: "Playfair Display Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/** ====== Base ====== */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-fondo text-oscuro antialiased font-sans; }
+  h1,h2,h3,.font-display { @apply font-display; }
+}
+
+/** ====== Utilidades ====== */
+/* ? Botones */
+@utility btn {
+  @apply cursor-pointer inline-flex items-center justify-center rounded-4xl px-10 py-2 text-sm font-medium transition duration-300 ease-in-out shadow-2xs;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white hover:bg-cream hover:text-oscuro focus:outline-none;
+}
+@utility btn-ghost {
+  @apply btn bg-cream text-oscuro hover:bg-brand hover:text-white;
+}
+
+@utility btn-selected {
+  @apply btn bg-transparent border border-[#c5c5c5] rounded-none hover:bg-accent text-[#6e6e6e] hover:text-white;
+}
+
+/* ? Contenedores */
+
+@utility container-p {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility card {
+  @apply rounded border border-none bg-white shadow-sm;
+}
+@utility grad-gold {
+  @apply bg-gradient-to-r from-brand to-accent text-white;
+}
+
+/* ? Tipografias */
+@utility h1 { @apply font-display font-bold tracking-tight;}
+@utility h2 { @apply font-display font-semibold tracking-tight;}
+@utility lead { @apply text-lg text-graphite;}
