@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/afacad": "^5.2.8",
+    "@fontsource-variable/playfair-display": "^5.2.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

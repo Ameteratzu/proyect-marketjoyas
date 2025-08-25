@@ -38,7 +38,7 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <button className="btn-primary">Botón primario</button>
+          <button className="btn-primary font-display">Botón primario</button>
           <button className="btn-ghost">Botón secundario</button>
           <button className="btn-selected">Botón Selección</button>
         </div>
