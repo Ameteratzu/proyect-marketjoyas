@@ -5,7 +5,6 @@ export default function App() {
         <div className="container-p h-16 flex items-center justify-between">
           <a href="/" className="inline-flex items-center gap-2">
             <img src="/logo.svg" alt="Merket Joyas" className="h-7 w-auto" />
-            <span className="font-semibold">Merket Joyas</span>
           </a>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a className="hover:text-brand" href="#">
@@ -36,6 +35,12 @@ export default function App() {
 
         <div className="rounded-xl p-6 text-white grad-gold">
           Gradiente dorado para banners o CTAs
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <button className="btn-primary">Botón primario</button>
+          <button className="btn-ghost">Botón secundario</button>
+          <button className="btn-selected">Botón Selección</button>
         </div>
       </main>
 
