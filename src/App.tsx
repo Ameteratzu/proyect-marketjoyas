@@ -1,39 +1,46 @@
 export default function App() {
   return (
-    <div className="min-h-dvh bg-white text-neutral-900">
-      <header className="border-b">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div className="min-h-dvh">
+      <header className="border-b bg-white">
+        <div className="container-p h-16 flex items-center justify-between">
           <a href="/" className="inline-flex items-center gap-2">
-            <img src="./assets/logo.svg" alt="Merket Joyas" className="h-7 w-auto" />
-            <span className="font-semibold">Market Joyas</span>
+            <img src="/logo.svg" alt="Merket Joyas" className="h-7 w-auto" />
+            <span className="font-semibold">Merket Joyas</span>
           </a>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a className="hover:text-blue-600" href="#">
+            <a className="hover:text-brand" href="#">
               Catálogo
             </a>
-            <a className="hover:text-blue-600" href="#">
+            <a className="hover:text-brand" href="#">
               Ofertas
             </a>
-            <a className="hover:text-blue-600" href="#">
+            <a className="hover:text-brand" href="#">
               Contacto
             </a>
           </nav>
+          <button className="btn-primary">Comprar</button>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <h1 className="text-3xl font-bold">Bienvenido</h1>
-        <p className="mt-2 text-neutral-600">
-          Base limpia lista para construir.
-        </p>
+      <main className="container-p py-10 space-y-6">
+        <h1 className="text-3xl font-bold">Paleta aplicada</h1>
 
-        <div className="mt-6 rounded-xl bg-black/90 text-white p-6">
-          Tailwind v4.1 activo ✨
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="h-16 rounded-lg bg-brand" />
+          <div className="h-16 rounded-lg bg-accent" />
+          <div className="h-16 rounded-lg bg-golddeep" />
+          <div className="h-16 rounded-lg bg-sand" />
+          <div className="h-16 rounded-lg bg-cream" />
+          <div className="h-16 rounded-lg bg-fondo border border-oscuro" />
+        </div>
+
+        <div className="rounded-xl p-6 text-white grad-gold">
+          Gradiente dorado para banners o CTAs
         </div>
       </main>
 
       <footer className="border-t">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-sm text-neutral-500">
+        <div className="container-p py-6 text-sm text-graphite">
           © {new Date().getFullYear()} Merket Joyas
         </div>
       </footer>

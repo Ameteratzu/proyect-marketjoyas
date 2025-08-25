@@ -1,6 +1,42 @@
 @import "tailwindcss";
 
+/** ====== Tokens ====== */
+@theme {
+  --color-brand:    #D4AF37; /*? dorado principal */
+  --color-accent:   #EDAE09; /*? acento/CTA */
+  --color-golddeep: #D9A441; /*? dorado intenso */
+  --color-sand:     #C5A880; /*? arena */
+  --color-cream:    #F0E3CC; /*? crema */
+  --color-fondo:    #FAF7F2; /*? fondo */
+
+  /*? Neutros */
+  --color-oscuro:     #1E1E1E;
+  --color-graphite: #484848;
+  --color-white:    #FFFFFF;
+}
+
+/** ====== Base ====== */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply bg-white text-neutral-900 antialiased; }
+  body { @apply bg-fondo text-oscuro antialiased; }
+}
+
+/** ====== Utilidades ====== */
+@utility btn {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white hover:bg-golddeep focus:outline-none;
+}
+@utility btn-ghost {
+  @apply btn bg-transparent text-oscuro hover:bg-cream/60;
+}
+@utility container-p {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility card {
+  @apply rounded-xl border border-cream bg-white shadow-sm;
+}
+@utility grad-gold {
+  @apply bg-gradient-to-r from-brand to-accent text-white;
 }
