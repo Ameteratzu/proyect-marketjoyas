@@ -12,8 +12,10 @@
   "dependencies": {
     "@fontsource-variable/afacad": "^5.2.8",
     "@fontsource-variable/playfair-display": "^5.2.6",
+    "i18next": "^25.4.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-i18next": "^15.7.2",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
