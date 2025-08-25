@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import TopBar from "@/components/TopBar";
+import TopBar from "@/features/header/components/TopBar";
 // import Logo from "@/components/Logo";
 // import MainNav from "@/components/MainNav";
 // import Actions from "@/components/Actions";
