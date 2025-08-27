@@ -1,4 +1,5 @@
-import Icon from "@/components/Icon";
+import { TbWorld } from "react-icons/tb";
+import { BiStore } from 'react-icons/bi';
 import { useTranslation } from "react-i18next";
 
 export default function TopBar() {
@@ -8,7 +9,7 @@ export default function TopBar() {
     <div className="bg-primary text-white text-xs">
       <div className="container-p py-2 flex items-center justify-between font-medium">
         <span className="tracking-wide">{t("freeShipping")}</span>
-
+        
         <nav className="hidden sm:flex items-center gap-6">
           <button
             onClick={() =>
@@ -16,14 +17,14 @@ export default function TopBar() {
             }
             className="cursor-pointer inline-flex items-center gap-2 opacity-90 hover:opacity-100"
           >
-            <Icon name="globe" className="w-5 h-5 text-white" />
+            <TbWorld className="iconSecundario" />
             <span>{t("lang")}</span>
           </button>
           <a
             href="/vender"
             className="inline-flex items-center gap-2 opacity-90 hover:opacity-100"
           >
-            <Icon name="store" className="w-5 h-5 text-white" />
+            <BiStore className="iconSecundario" />
             <span>{t("sellWithUs")}</span>
           </a>
         </nav>
