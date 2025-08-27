@@ -1,10 +1,4 @@
-import AppShell from "@/app/AppShell";
-import Home from "@/pages/Home/Home";
-
+import AppRouter from "@/routes/Router";
 export default function App() {
-  return (
-    <AppShell>
-      <Home />
-    </AppShell>
-  );
+  return <AppRouter />;
 }

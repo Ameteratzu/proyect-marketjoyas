@@ -1,11 +1,8 @@
-// Sirve para definir las rutas de la aplicación con carga diferida de componentes de página.
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AppShell from "@/app/AppShell";
-import { PATHS } from "./path";
-// import Loading from "@/components/Loading";
+import { PATHS } from "./paths";
 
-// Lazy pages
 const Home = lazy(() => import("@/pages/Home/Home"));
 const Quote = lazy(() => import("@/pages/Quote/Quote"));
 const Compare = lazy(() => import("@/pages/Compare/Compare"));
@@ -18,11 +15,9 @@ const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 function RootLayout() {
   return (
     <AppShell>
-      {/* <Suspense fallback={<Loading />}> */}
-      <Suspense fallback={<div>Cargando...</div>}>
+      <Suspense fallback={<div className="container-p py-10">Cargando…</div>}>
         <Outlet />
       </Suspense>
-      {/* </Suspense> */}
     </AppShell>
   );
 }
@@ -43,7 +38,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-
-export default function Router() {
-    return <RouterProvider router={router} />;
+export default function AppRouter() {
+  return <RouterProvider router={router} />;
 }
