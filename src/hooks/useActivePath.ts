@@ -1,3 +1,4 @@
+// Hook para determinar si una ruta está activa (para el menú)
 import { useMemo } from "react";
 
 export function useActivePath(pathname: string, href: string) {
