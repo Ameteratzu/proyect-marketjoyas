@@ -5,7 +5,7 @@ export default function TopBar() {
   const { t, i18n } = useTranslation("header");
 
   return (
-    <div className="grad-gold text-oscuro text-xs">
+    <div className="bg-primary text-white text-xs">
       <div className="container-p py-2 flex items-center justify-between font-medium">
         <span className="tracking-wide">{t("freeShipping")}</span>
 
