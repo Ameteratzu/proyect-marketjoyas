@@ -23,7 +23,7 @@ export default function SearchBar(props: Props) {
           className="w-full px-6 py-3 outline-primary placeholder:text-graphite/70"
         />
         <button className="bg-primary rounded-full text-white px-4 py-3 cursor-pointer hover:bg-primary/75 transition-all duration-300">
-          <FaSearch name="search" className="w-5 h-5" />
+          <FaSearch name="search" className="iconSecundario" />
         </button>
       </div>
     </form>

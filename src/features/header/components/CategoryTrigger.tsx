@@ -10,7 +10,7 @@ export default function CategoryTrigger(props: Props) {
       onClick={props.onClick}
       className="text-[24px] inline-flex items-center gap-2 text-primary hover:text-primary/75 transition-all duration-300 cursor-pointer"
     >
-      <HiMenu className="w-7 h-auto" />
+      <HiMenu className="iconPrincipal" />
       <span className="font-semibold">{t("products")}</span>
     </button>
   );
