@@ -1,8 +1,9 @@
+// Router para la aplicación usando React Router
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AppShell from "@/app/AppShell";
 import { PATHS } from "./path";
-import Loading from "@/components/Loading";
+// import Loading from "@/components/Loading";
 
 // Lazy pages
 const Home = lazy(() => import("@/pages/Home/Home"));
