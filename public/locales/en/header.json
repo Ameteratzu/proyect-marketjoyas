@@ -10,5 +10,8 @@
     "stores": "Tiendas",
     "about": "Nosotros",
     "contact": "Contacto",
-    "searchPlaceholder": "Buscar joyería, anillos, collares..."
+    "searchPlaceholder": "Buscar joyería, anillos, collares...",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "favorites": "Favoritos"
 }

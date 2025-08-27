@@ -10,5 +10,8 @@
     "stores": "Stores",
     "about": "About Us",
     "contact": "Contact",
-    "searchPlaceholder": "Search jewelry, rings, necklaces..."
+    "searchPlaceholder": "Search jewelry, rings, necklaces...",
+    "login": "Login",
+    "register": "Register",
+    "favorites": "Favorites"
 }
