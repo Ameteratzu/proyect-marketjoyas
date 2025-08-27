@@ -2,7 +2,8 @@ import Container from "@/components/Container";
 import TopBar from "@/features/header/components/TopBar";
 import Logo from "@/features/header/components/logo";
 import CategoryTrigger from "@/features/header/components/CategoryTrigger";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "@/features/header/components/SearchBar";
+import Actions from "@/features/header/components/Action";
 
 export default function Header() {
   return (
@@ -13,6 +14,7 @@ export default function Header() {
           <Logo />
           <CategoryTrigger />
           <SearchBar />
+          <Actions />
         </Container>
       </div>
       <div className="h-1 grad-gold" />

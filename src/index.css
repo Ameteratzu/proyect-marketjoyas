@@ -46,6 +46,15 @@
   @apply btn bg-transparent border border-[#c5c5c5] rounded-none hover:bg-secondary text-[#6e6e6e] hover:text-white;
 }
 
+/* ? Iconos */
+@utility iconPrincipal {
+  @apply w-7 h-auto;
+}
+
+@utility iconSecundario {
+  @apply w-5 h-auto;
+}
+
 /* ? Contenedores */
 @utility container-p {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
