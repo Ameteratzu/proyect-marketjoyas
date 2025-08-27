@@ -1,4 +1,4 @@
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 type Props = { onSubmit?: (value: string) => void };
@@ -22,7 +22,7 @@ export default function SearchBar(props: Props) {
           placeholder={t("searchPlaceholder")}
           className="w-full px-6 py-3 outline-primary placeholder:text-graphite/70"
         />
-        <button className="bg-primary rounded-full text-white px-4 py-3">
+        <button className="bg-primary rounded-full text-white px-4 py-3 cursor-pointer hover:bg-primary/75 transition-all duration-300">
           <FaSearch name="search" className="w-5 h-5" />
         </button>
       </div>
