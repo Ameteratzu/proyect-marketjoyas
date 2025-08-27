@@ -1,4 +1,4 @@
-// Router para la aplicación usando React Router
+// Sirve para definir las rutas de la aplicación con carga diferida de componentes de página.
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AppShell from "@/app/AppShell";
