@@ -1,12 +1,11 @@
 import type { NavItem } from "./header.types";
 
 export const MAIN_NAV: Array<NavItem> = [
-  { id: "home",     label: "Principal", href: "/" },
-  { id: "products", label: "Productos", href: "/productos" },
-  { id: "quote",    label: "Cotizar",   href: "/cotizar" },
-  { id: "compare",  label: "Comparar",  href: "/comparar" },
-  { id: "blog",     label: "Blog",      href: "/blog" },
-  { id: "stores",   label: "Tiendas",   href: "/tiendas" },
-  { id: "about",    label: "Nosotros",  href: "/nosotros" },
-  { id: "contact",  label: "Contacto",  href: "/contacto" },
+  { id: "home",     labelKey: "principal", href: "/" },
+  { id: "quote",    labelKey: "quote",     href: "/cotizar" },
+  { id: "compare",  labelKey: "compare",   href: "/comparar" },
+  { id: "blog",     labelKey: "blog",      href: "/blog" },
+  { id: "stores",   labelKey: "stores",    href: "/tiendas" },
+  { id: "about",    labelKey: "about",     href: "/nosotros" },
+  { id: "contact",  labelKey: "contact",   href: "/contacto" },
 ];
