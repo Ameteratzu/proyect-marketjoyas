@@ -9,5 +9,6 @@
     "blog": "Blog",
     "stores": "Tiendas",
     "about": "Nosotros",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "searchPlaceholder": "Buscar joyería, anillos, collares..."
 }

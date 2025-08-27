@@ -9,5 +9,6 @@
     "blog": "Blog",
     "stores": "Stores",
     "about": "About Us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "searchPlaceholder": "Search jewelry, rings, necklaces..."
 }
