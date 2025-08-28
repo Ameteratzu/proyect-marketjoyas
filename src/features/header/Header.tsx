@@ -11,10 +11,27 @@ export default function Header() {
     <header role="banner" className="sticky top-0 z-50 bg-inver-accent">
       <TopBar />
       <Container className="py-4 flex items-center justify-between gap-6">
-        <Logo />
-        <CategoryTrigger />
-        <SearchBar />
-        <Actions />
+        <div className="container-p py-3 md:py-4">
+          {/* mobile: fila superior */}
+          <div className="flex items-center justify-between md:hidden gap-3">
+            <CategoryTrigger />
+            <Logo />
+            <Actions />
+          </div>
+
+          {/* búsqueda mobile */}
+          <div className="mt-3 md:hidden">
+            <SearchBar />
+          </div>
+
+          {/* desktop */}
+          <div className="hidden md:flex items-center justify-between gap-6">
+            <Logo />
+            <CategoryTrigger />
+            <SearchBar />
+            <Actions />
+          </div>
+        </div>
       </Container>
       <MainNav />
     </header>
