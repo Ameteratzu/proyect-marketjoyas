@@ -3,8 +3,8 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 // Si cargas desde archivos usa http-backend; aquí pondré resources en memoria:
-import esHeader from "@/../public/locales/es/header.json";
-import enHeader from "@/../public/locales/en/header.json";
+import esHeader from "@/locales/es/header.json";
+import enHeader from "@/locales/en/header.json";
 
 i18n
   .use(LanguageDetector)

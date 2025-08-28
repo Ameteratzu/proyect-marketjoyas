@@ -1,4 +1,4 @@
-import iconLogo from "@/../public/logo.svg";
+import iconLogo from "@/assets/logoMarketJoyas.svg";
 import { PATHS } from "@/routes/paths";
 import { Link } from "react-router-dom";
 
