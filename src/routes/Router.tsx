@@ -11,11 +11,12 @@ const Stores = lazy(() => import("@/pages/Stores/Stores"));
 const About = lazy(() => import("@/pages/About/About"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
+import LoadingAnimate from "@/components/LoadingAnimate";
 
 function RootLayout() {
   return (
     <AppShell>
-      <Suspense fallback={<div className="container-p py-10">Cargando…</div>}>
+      <Suspense fallback={<LoadingAnimate />}>
         <Outlet />
       </Suspense>
     </AppShell>

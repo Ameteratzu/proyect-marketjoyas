@@ -78,3 +78,10 @@
 @utility h1 { @apply font-display font-bold tracking-tight;}
 @utility h2 { @apply font-display font-semibold tracking-tight;}
 @utility lead { @apply text-lg text-graphite;}
+
+/* * Animacion para el loading animate */
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 2s linear infinite;
+  }
+}
