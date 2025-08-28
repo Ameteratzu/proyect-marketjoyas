@@ -5,20 +5,28 @@ import { useTranslation } from "react-i18next";
 
 export default function Actions() {
   const { t } = useTranslation("header");
-  const base = "inline-flex items-center gap-2 text-primary hover:text-primary/75 hover:opacity-90 cursor-pointer transition-all duration-300";
+  const base =
+    "inline-flex items-center gap-2 text-primary hover:text-primary/75 hover:opacity-90 cursor-pointer transition-all duration-300";
 
   return (
-    <div className="flex items-center gap-8">
-      <a href="/cuenta" className={base}>
-        <FiUser className="iconPrincipal" />
-        <span className="text-xl font-semibold text-[24px]">{t("login")}</span>
+    <div className="flex items-center gap-3 md:gap-4">
+      <button type="button" className={base}>
+        <FiUser className="iconSocial md:iconPrincipal" />
+        {/* oculto en mobile, visible desde md+ */}
+        <span className="hidden md:inline text-[20px] md:text-[24px] font-semibold">
+          {t("login")}
+        </span>
         <VisuallyHidden>{t("login")}</VisuallyHidden>
-      </a>
-      <a href="/favoritos" className={base}>
-        <MdFavoriteBorder className="iconPrincipal" />
-        <span className="text-xl font-semibold text-[24px]">{t("favorites")}</span>
+      </button>
+
+      <button type="button" className={base}>
+        <MdFavoriteBorder className="iconSocial md:iconPrincipal" />
+        {/* oculto en mobile, visible desde md+ */}
+        <span className="hidden md:inline text-[20px] md:text-[24px] font-semibold">
+          {t("favorites")}
+        </span>
         <VisuallyHidden>{t("favorites")}</VisuallyHidden>
-      </a>
+      </button>
     </div>
   );
 }
