@@ -24,7 +24,7 @@ export default function Header() {
 
   return (
     <>
-      {/* ===== Header NORMAL (no sticky) ===== */}
+      {/* ===== Header ===== */}
       <header role="banner" className="bg-bg-light shadow-2xl">
         <TopBar />
 
