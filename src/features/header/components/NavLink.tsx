@@ -1,37 +1,30 @@
+import { NavLink as RRNavLink } from "react-router-dom";
 import { cn } from "@/lib/cn";
 
 type Props = {
-  href: string;
-  active?: boolean;
+  to: string;
   children?: React.ReactNode;
+  end?: boolean;
 };
 
 export default function NavLink(props: Props) {
-  const base = "relative text-xl font-medium transition-colors duration-300";
-
-  const activeCls = "text-accent-warm";
-  const inactiveCls = "text-primary hover:text-accent-warm";
-
-  const underline =
-    "after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:bg-accent-warm after:transition-transform after:duration-300 after:-translate-x-1/2 after:origin-center";
-
-  const underlineActive = "after:w-full after:scale-x-100";
-  const underlineInactive = "after:w-full after:scale-x-0 hover:after:scale-x-100";
-
-  const cls = cn(
-    base,
-    props.active ? activeCls : inactiveCls,
-    underline,
-    props.active ? underlineActive : underlineInactive
-  );
-
   return (
-    <a
-      href={props.href}
-      className={cls}
-      aria-current={props.active ? "page" : undefined}
+    <RRNavLink
+      to={props.to}
+      end={props.end}
+      className={({ isActive }) =>
+        cn(
+          "relative text-xl font-medium transition-colors duration-300",
+          isActive ? "text-accent-warm" : "text-primary hover:text-accent-warm",
+          // underline: desde el centro con animación
+          "after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:bg-accent-warm after:transition-transform after:duration-300 after:-translate-x-1/2 after:origin-center after:w-full",
+          isActive
+            ? "after:scale-x-100"
+            : "after:scale-x-0 hover:after:scale-x-100"
+        )
+      }
     >
       {props.children}
-    </a>
+    </RRNavLink>
   );
 }
