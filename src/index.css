@@ -7,18 +7,16 @@
 /** ====== Tokens ====== */
 @theme {
   /** Colores de Marca */
-  --color-brand:        #D9A441; /*? dorado principal */
-  --color-accent:       #EDAE09; /*? acento/CTA */
-  --color-inver-accent: #F5F0E8; /*? acento inverso */
-  --color-golddeep:     #D4AF37; /*? dorado intenso */
-  --color-sand:         #C5A880; /*? arena */
-  --color-cream:        #F0E3CC; /*? crema */
-  --color-fondo:        #FAF7F2; /*? fondo */
+  --color-primary:      #1F6F61; /*? verde azulado principal */
+  --color-secondary:    #1C2B2D; /*? azul grisáceo oscuro */
+  --color-bg-light:     #FDFCF9; /*? fondo claro / marfil */
+  --color-accent-warm:  #D4B483; /*? arena / dorado cálido */
+  --color-neutral:      #E0E0E0; /*? gris neutro claro */
 
   /*? Neutros */
-  --color-oscuro:       #1E1E1E;
-  --color-graphite:     #484848;
-  --color-white:        #FFFFFF;
+  --color-dark:         #1C2B2D; /*? oscuro base */
+  --color-graphite:     #484848; /*? gris grafito */
+  --color-white:        #FFFFFF; /*? blanco */
 
   /* * Tipografías */
   --font-sans: "Afacad Variable", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
@@ -28,7 +26,7 @@
 /** ====== Base ====== */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply bg-fondo text-oscuro antialiased font-sans; }
+  body { @apply bg-bg-light text-dark antialiased font-sans; }
   h1,h2,h3,.font-display { @apply font-display; }
 }
 
@@ -38,26 +36,38 @@
   @apply cursor-pointer inline-flex items-center justify-center rounded-4xl px-10 py-2 text-sm font-medium transition duration-300 ease-in-out shadow-2xs;
 }
 @utility btn-primary {
-  @apply btn bg-brand text-white hover:bg-cream hover:text-oscuro focus:outline-none;
+  @apply btn bg-primary text-white hover:bg-accent-warm hover:text-dark focus:outline-none;
 }
 @utility btn-ghost {
-  @apply btn bg-cream text-oscuro hover:bg-brand hover:text-white;
+  @apply btn bg-neutral text-dark hover:bg-primary hover:text-white;
 }
 
 @utility btn-selected {
-  @apply btn bg-transparent border border-[#c5c5c5] rounded-none hover:bg-accent text-[#6e6e6e] hover:text-white;
+  @apply btn bg-transparent border border-[#c5c5c5] rounded-none hover:bg-secondary text-[#6e6e6e] hover:text-white;
+}
+
+/* ? Iconos */
+@utility iconPrincipal {
+  @apply w-7 h-auto;
+}
+
+@utility iconSecundario {
+  @apply w-5 h-auto;
+}
+
+@utility iconSocial {
+  @apply w-6 h-auto;
 }
 
 /* ? Contenedores */
-
 @utility container-p {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 @utility card {
   @apply rounded border border-none bg-white shadow-sm;
 }
-@utility grad-gold {
-  @apply bg-gradient-to-r from-brand to-accent text-white;
+@utility grad-primary {
+  @apply bg-gradient-to-r from-primary to-secondary text-white;
 }
 
 /* ? Tipografias */
