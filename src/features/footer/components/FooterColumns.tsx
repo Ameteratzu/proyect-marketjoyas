@@ -17,7 +17,7 @@ export default function FooterColumns() {
         <section key={group.id} aria-labelledby={`ft-${group.id}`}>
           <h3
             id={`ft-${group.id}`}
-            className="font-display uppercase text-[22px] md:text-[24px] tracking-wide text-accent-warm mb-6 underline underline-offset-4"
+            className="font-display font-bold uppercase text-[22px] md:text-[24px] tracking-wide text-accent-warm mb-6 underline underline-offset-4"
           >
             {t(group.titleKey)}
           </h3>

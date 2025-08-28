@@ -1,3 +1,4 @@
+import Footer from "@/features/footer/Footer";
 import Header from "@/features/header/Header";
 import ScrollToTop from "@/routes/ScrollToTop";
 
@@ -9,6 +10,7 @@ export default function AppShell(props: Props) {
       <Header />
       <ScrollToTop />
       <main id="content">{props.children}</main>
+      <Footer />
     </div>
   );
 }

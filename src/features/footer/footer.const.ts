@@ -1,4 +1,4 @@
-// Esto sirve para definir los grupos de enlaces que se mostrarán en el pie de página del sitio web.
+// Esto sirve para 
 import type { FooterGroup } from "./footer.types";
 
 export const FOOTER_GROUPS: FooterGroup[] = [
