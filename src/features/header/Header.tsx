@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import TopBar from "@/features/header/components/TopBar";
-import Logo from "@/features/header/components/logo";
+import Logo from "@/features/header/components/Logo";
 import CategoryTrigger from "@/features/header/components/CategoryTrigger";
 import SearchBar from "@/features/header/components/SearchBar";
 import Actions from "@/features/header/components/Action";
