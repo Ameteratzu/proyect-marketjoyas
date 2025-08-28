@@ -1,0 +1,24 @@
+{
+    "brandAlt": "Market Joyas",
+    "account": {
+        "title": "MI CUENTA",
+        "profile": "Mi perfil",
+        "store": "Mi tienda",
+        "cart": "Carrito",
+        "privacy": "Política de privacidad"
+    },
+    "info": {
+        "title": "INFORMACIÓN",
+        "about": "Acerca de nosotros",
+        "refund": "Política de reembolso",
+        "claimBook": "Libro de reclamaciones"
+    },
+    "contact": {
+        "title": "CONTACTO",
+        "address": "Lima, Perú",
+        "email": "contacto@marketjoyas.com",
+        "phone": "+51 997 136 771"
+    },
+    "developedBy": "Desarrollado por AM Code",
+    "rights": "Todos los derechos reservados."
+}

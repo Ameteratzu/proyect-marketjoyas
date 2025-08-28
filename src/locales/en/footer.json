@@ -1,0 +1,24 @@
+{
+    "brandAlt": "Market Joyas",
+    "account": {
+        "title": "MY ACCOUNT",
+        "profile": "My Profile",
+        "store": "My Store",
+        "cart": "Cart",
+        "privacy": "Privacy Policy"
+    },
+    "info": {
+        "title": "INFORMATION",
+        "about": "About Us",
+        "refund": "Refund Policy",
+        "claimBook": "Claims Book"
+    },
+    "contact": {
+        "title": "CONTACT",
+        "address": "Lima, Peru",
+        "email": "contact@marketjoyas.com",
+        "phone": "+51 997 136 771"
+    },
+    "developedBy": "Built by AM Code",
+    "rights": "All rights reserved."
+}

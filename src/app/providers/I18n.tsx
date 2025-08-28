@@ -2,9 +2,10 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-// Si cargas desde archivos usa http-backend; aquí pondré resources en memoria:
 import esHeader from "@/locales/es/header.json";
 import enHeader from "@/locales/en/header.json";
+import esFooter from "@/locales/es/footer.json";
+import enFooter from "@/locales/en/footer.json";
 
 i18n
   .use(LanguageDetector)
@@ -26,13 +27,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (puedes añadir más: 'footer', 'home', etc.)
-    ns: ["header"],
+    ns: ["header", "footer"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader },
-      en: { header: enHeader },
+      es: { header: esHeader, footer:esFooter },
+      en: { header: enHeader, footer:enFooter },
     },
   });
 
