@@ -1,0 +1,23 @@
+{
+    "sections": {
+        "jewelry": "JEWELRY",
+        "stores": "STORES",
+        "custom": "CUSTOM JEWELRY"
+    },
+    "viewStore": "View Store",
+    "jewelry": {
+        "earrings": "Earrings",
+        "rings": "Rings",
+        "necklaces": "Necklaces",
+        "bracelets": "Bracelets",
+        "sets": "Sets"
+    },
+    "custom": {
+        "title": "EARRINGS, RINGS, CHAINS & MORE",
+        "subtitle": "Customized to your needs!",
+        "forHim": "For him",
+        "forHer": "For her",
+        "forKids": "For kids",
+        "alt": "Handcraft custom jewelry"
+    }
+}

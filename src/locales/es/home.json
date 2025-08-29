@@ -1,0 +1,23 @@
+{
+    "sections": {
+        "jewelry": "JOYAS",
+        "stores": "TIENDAS",
+        "custom": "JOYAS PERSONALIZADAS"
+    },
+    "viewStore": "Ver Tienda",
+    "jewelry": {
+        "earrings": "Aretes",
+        "rings": "Sortijas",
+        "necklaces": "Collares",
+        "bracelets": "Pulseras",
+        "sets": "Conjuntos"
+    },
+    "custom": {
+        "title": "ARETES, ANILLOS, SORTIJAS, CADENAS Y MÁS",
+        "subtitle": "¡Personalizados a tu medida!",
+        "forHim": "Para él",
+        "forHer": "Para ella",
+        "forKids": "Para niños",
+        "alt": "Elaboración de joyas personalizadas"
+    }
+}
