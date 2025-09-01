@@ -34,7 +34,7 @@ export default function HeroCarousel() {
       onTouchEnd={() => setPaused(false)}
     >
       {/* viewport con alto adaptable */}
-      <div className="relative w-full h-[48vw] max-h-[540px] min-h-[220px]">
+      <div className="relative w-full h-[95vw] xs:h-[80vw] sm:h-[60vw] md:h-[480px] lg:h-[540px] min-h-[260px]">
         {/* Pista */}
         <div
           className="absolute inset-0 flex transition-transform duration-700 ease-out"
@@ -55,26 +55,30 @@ export default function HeroCarousel() {
                   className="w-full h-full object-cover select-none pointer-events-auto"
                   draggable={false}
                 />
-                <div className="absolute inset-0 bg-black/30 z-0" />
-                <div className="absolute inset-0 flex items-center justify-start px-6 md:px-16">
-                  <div className="relative z-10 max-w-xl text-left text-white space-y-4">
+                {/* Overlay mejorado para legibilidad en mobile */}
+                <div className="absolute inset-0 bg-black/40 md:bg-gradient-to-tr md:to-transparent z-0" />
+                <div className="absolute inset-0 flex items-center justify-center md:justify-start pl-4 pr-4 sm:pl-8 sm:pr-8 md:pl-32 md:pr-16">
+                  <div className="relative z-10 w-full max-w-xl text-center md:text-left text-white space-y-3 sm:space-y-4">
                     {show("badge") && (
-                      <span className="inline-block bg-primary px-4 py-1 rounded-md text-sm font-semibold">
+                      <span className="inline-block bg-primary px-3 py-1 rounded-md text-xs sm:text-sm font-semibold tracking-wide">
                         {k("badge")}
                       </span>
                     )}
                     {show("title") && (
-                      <h2 className="font-display text-2xl md:text-4xl font-bold leading-tight drop-shadow-lg">
+                      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
                         {k("title")}
                       </h2>
                     )}
                     {show("subtitle") && (
-                      <p className="text-lg md:text-xl font-medium drop-shadow">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium drop-shadow">
                         {k("subtitle")}
                       </p>
                     )}
                     {ctaHref && ctaLabel && (
-                      <a href={ctaHref} className="btn btn-primary mt-1">
+                      <a
+                        href={ctaHref}
+                        className="btn btn-primary mt-2 sm:mt-3 inline-block text-sm sm:text-base px-6 py-2"
+                      >
                         {ctaLabel}
                       </a>
                     )}
@@ -91,18 +95,16 @@ export default function HeroCarousel() {
             <button
               type="button"
               onClick={prev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 grid 
-              place-items-center w-10 h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
+              className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 place-items-center w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
             >
               <HiChevronLeft />
             </button>
             <button
               type="button"
               onClick={next}
-              className="absolute right-3 top-1/2 -translate-y-1/2 grid 
-              place-items-center w-10 h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
+              className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 place-items-center w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
             >
-              <HiChevronRight className="w-6 h-6" />
+              <HiChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
               <VisuallyHidden>Siguiente</VisuallyHidden>
             </button>
           </>
@@ -110,12 +112,12 @@ export default function HeroCarousel() {
 
         {/* Indicadores */}
         {total > 1 && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-3">
+          <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3">
             {HERO_SLIDES.map((s, i) => (
               <button
                 key={s.id}
                 onClick={() => goTo(i)}
-                className={`w-2.5 h-2.5 rounded-full transition cursor-pointer ${
+                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition cursor-pointer ${
                   i === index ? "bg-dark/70" : "bg-white/50 hover:bg-white/75"
                 }`}
                 aria-label={`Ir al slide ${i + 1}`}
