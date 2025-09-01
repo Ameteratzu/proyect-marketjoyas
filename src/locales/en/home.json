@@ -19,5 +19,32 @@
         "forHer": "For her",
         "forKids": "For kids",
         "alt": "Handcraft custom jewelry"
+    },
+    "hero": {
+        "b1": {
+            "alt": "New earrings and rings products",
+            "title": "EARRINGS & RINGS",
+            "subtitle": "exclusive in-store and on sale",
+            "badge": "New products!",
+            "cta": { "label": "VIEW MORE", "href": "/products" }
+        },
+        "b2": {
+            "alt": "Jewelry that tells stories",
+            "title": "JEWELRY THAT TELLS STORIES",
+            "subtitle": "each piece is an eternal memory living in you",
+            "cta": { "label": "VIEW MORE", "href": "/products" }
+        },
+        "b3": {
+            "alt": "Exclusive and personalized designs",
+            "title": "EXCLUSIVE & PERSONALIZED DESIGNS",
+            "subtitle": "within your reach",
+            "cta": { "label": "VIEW CATALOG", "href": "/catalog" }
+        },
+        "b4": {
+            "alt": "The best quality is here",
+            "title": "THE BEST QUALITY IS HERE",
+            "subtitle": "within your reach",
+            "cta": { "label": "VIEW CATALOG", "href": "/catalog" }
+        }
     }
 }

@@ -1,13 +1,14 @@
 import VisuallyHidden from "@/components/VisuallyHidden";
 import { HERO_SLIDES } from "./hero.const";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import { cn } from "@/lib/cn";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function HeroCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = HERO_SLIDES.length;
+  const { t } = useTranslation("home");
 
   // Autoplay
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function HeroCarousel() {
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % total);
     }, 5000);
-
     return () => clearInterval(id);
   }, [paused, total]);
 
@@ -41,42 +41,41 @@ export default function HeroCarousel() {
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {HERO_SLIDES.map((s) => {
-            const Img = (
-              <img
-                key={s.id}
-                src={s.image}
-                alt={s.alt ?? ""}
-                className="w-full h-full object-cover select-none pointer-events-auto"
-                draggable={false}
-              />
-            );
+            const k = (path: string, def = "") =>
+              t(`hero.${s.id}.${path}`, { defaultValue: def });
+            const show = (path: string) =>
+              k(path, "__missing__") !== "__missing__";
+            const ctaHref = k("cta.href");
+            const ctaLabel = k("cta.label");
             return (
               <div key={s.id} className="shrink-0 w-full h-full relative">
-                {/* imagen + overlay */}
-                {Img}
-                <div className="absolute inset-0 bg-black/15 z-0"></div>
-
-                {/* contenido del slide */}
+                <img
+                  src={s.image}
+                  alt={show("alt") ? k("alt") : ""}
+                  className="w-full h-full object-cover select-none pointer-events-auto"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-black/30 z-0" />
                 <div className="absolute inset-0 flex items-center justify-start px-6 md:px-16">
-                  <div className="relative z-10 max-w-xl text-left text-white space-y-4 m-30">
-                    {s.badge && (
+                  <div className="relative z-10 max-w-xl text-left text-white space-y-4">
+                    {show("badge") && (
                       <span className="inline-block bg-primary px-4 py-1 rounded-md text-sm font-semibold">
-                        {s.badge}
+                        {k("badge")}
                       </span>
                     )}
-                    {s.title && (
+                    {show("title") && (
                       <h2 className="font-display text-2xl md:text-4xl font-bold leading-tight drop-shadow-lg">
-                        {s.title}
+                        {k("title")}
                       </h2>
                     )}
-                    {s.subtitle && (
+                    {show("subtitle") && (
                       <p className="text-lg md:text-xl font-medium drop-shadow">
-                        {s.subtitle}
+                        {k("subtitle")}
                       </p>
                     )}
-                    {s.cta && (
-                      <a href={s.cta.href} className="btn btn-primary mt-1">
-                        {s.cta.label}
+                    {ctaHref && ctaLabel && (
+                      <a href={ctaHref} className="btn btn-primary mt-1">
+                        {ctaLabel}
                       </a>
                     )}
                   </div>
@@ -92,15 +91,16 @@ export default function HeroCarousel() {
             <button
               type="button"
               onClick={prev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
+              className="absolute left-3 top-1/2 -translate-y-1/2 grid 
+              place-items-center w-10 h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
             >
               <HiChevronLeft />
             </button>
-
             <button
               type="button"
               onClick={next}
-              className="absolute right-3 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-full  bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 grid 
+              place-items-center w-10 h-10 rounded-full bg-accent-warm text-white hover:bg-white hover:text-dark transition-all cursor-pointer duration-300"
             >
               <HiChevronRight className="w-6 h-6" />
               <VisuallyHidden>Siguiente</VisuallyHidden>
@@ -115,10 +115,9 @@ export default function HeroCarousel() {
               <button
                 key={s.id}
                 onClick={() => goTo(i)}
-                className={cn(
-                  "w-2.5 h-2.5 rounded-full transition cursor-pointer",
+                className={`w-2.5 h-2.5 rounded-full transition cursor-pointer ${
                   i === index ? "bg-dark/70" : "bg-white/50 hover:bg-white/75"
-                )}
+                }`}
                 aria-label={`Ir al slide ${i + 1}`}
                 aria-current={i === index ? "true" : undefined}
               />
