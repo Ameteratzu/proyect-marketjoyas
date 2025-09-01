@@ -52,17 +52,35 @@ export default function HeroCarousel() {
             );
             return (
               <div key={s.id} className="shrink-0 w-full h-full relative">
-                {s.href ? (
-                  <a href={s.href} className="absolute inset-0 block">
-                    {Img}
-                    <div className="absolute inset-0 bg-black/30"></div>
-                  </a>
-                ) : (
-                  <>
-                    {Img}
-                    <div className="absolute inset-0 bg-black/15"></div>
-                  </>
-                )}
+                {/* imagen + overlay */}
+                {Img}
+                <div className="absolute inset-0 bg-black/15 z-0"></div>
+
+                {/* contenido del slide */}
+                <div className="absolute inset-0 flex items-center justify-start px-6 md:px-16">
+                  <div className="relative z-10 max-w-xl text-left text-white space-y-4 m-30">
+                    {s.badge && (
+                      <span className="inline-block bg-primary px-4 py-1 rounded-md text-sm font-semibold">
+                        {s.badge}
+                      </span>
+                    )}
+                    {s.title && (
+                      <h2 className="font-display text-2xl md:text-4xl font-bold leading-tight drop-shadow-lg">
+                        {s.title}
+                      </h2>
+                    )}
+                    {s.subtitle && (
+                      <p className="text-lg md:text-xl font-medium drop-shadow">
+                        {s.subtitle}
+                      </p>
+                    )}
+                    {s.cta && (
+                      <a href={s.cta.href} className="btn btn-primary mt-1">
+                        {s.cta.label}
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -99,9 +117,7 @@ export default function HeroCarousel() {
                 onClick={() => goTo(i)}
                 className={cn(
                   "w-2.5 h-2.5 rounded-full transition cursor-pointer",
-                  i === index
-                    ? "bg-dark/70"
-                    : "bg-white/50 hover:bg-white/75"
+                  i === index ? "bg-dark/70" : "bg-white/50 hover:bg-white/75"
                 )}
                 aria-label={`Ir al slide ${i + 1}`}
                 aria-current={i === index ? "true" : undefined}
