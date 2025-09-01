@@ -60,24 +60,24 @@ export default function HeroCarousel() {
                 <div className="absolute inset-0 flex items-center justify-center md:justify-start pl-4 pr-4 sm:pl-8 sm:pr-8 md:pl-32 md:pr-16">
                   <div className="relative z-10 w-full max-w-xl text-center md:text-left text-white space-y-3 sm:space-y-4">
                     {show("badge") && (
-                      <span className="inline-block bg-primary px-3 py-1 rounded-md text-xs sm:text-sm font-semibold tracking-wide">
+                      <span className="font-display inline-block bg-primary text-accent-warm px-5 md:px-20 py-2 rounded-md text-2xl font-semibold tracking-wide italic">
                         {k("badge")}
                       </span>
                     )}
                     {show("title") && (
-                      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
+                      <h2 className="font-sans text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
                         {k("title")}
                       </h2>
                     )}
                     {show("subtitle") && (
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium drop-shadow">
+                      <p className="text-[18px] sm:text-base md:text-lg lg:text-xl font-medium drop-shadow">
                         {k("subtitle")}
                       </p>
                     )}
                     {ctaHref && ctaLabel && (
                       <a
                         href={ctaHref}
-                        className="btn btn-primary mt-2 sm:mt-3 inline-block text-sm sm:text-base px-6 py-2"
+                        className="btn btn-primary mt-2 sm:mt-3 inline-block text-[18px] px-6 py-2"
                       >
                         {ctaLabel}
                       </a>
