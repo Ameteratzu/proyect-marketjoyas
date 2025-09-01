@@ -10,7 +10,13 @@
         "rings": "Sortijas",
         "necklaces": "Collares",
         "bracelets": "Pulseras",
-        "sets": "Conjuntos"
+        "sets": "Conjuntos",
+        "weddingBands": "Alianzas de Matrimonio",
+        "chains": "Cadenas",
+        "frames": "Cuadros Adornos",
+        "piercing": "Piercing",
+        "cuffs": "Puñeras",
+        "anklets": "Tobilleras"
     },
     "custom": {
         "title": "ARETES, ANILLOS, SORTIJAS, CADENAS Y MÁS",

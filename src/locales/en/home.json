@@ -10,7 +10,13 @@
         "rings": "Rings",
         "necklaces": "Necklaces",
         "bracelets": "Bracelets",
-        "sets": "Sets"
+        "sets": "Sets",
+        "weddingBands": "Wedding Bands",
+        "chains": "Chains",
+        "frames": "Display Frames",
+        "piercing": "Piercing",
+        "cuffs": "Cuffs",
+        "anklets": "Anklets"
     },
     "custom": {
         "title": "EARRINGS, RINGS, CHAINS & MORE",
