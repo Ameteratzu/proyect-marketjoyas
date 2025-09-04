@@ -68,14 +68,14 @@ export default function JewelryCategories() {
         {t("sections.jewelry")}
       </SectionTitle>
 
-      <div className="relative">
+      <div className="relative container-p">
         {isDesktop && total > itemsPerView && (
           <>
             <button
               type="button"
               onClick={() => go(-1)}
               disabled={!canPrev}
-              className={`hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full transition shadow ${
+              className={`hidden md:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full transition shadow ${
                 canPrev
                   ? "bg-primary/85 text-white hover:bg-accent-warm hover:text-dark cursor-pointer"
                   : "bg-primary/15 text-primary/40 cursor-not-allowed"
@@ -88,7 +88,7 @@ export default function JewelryCategories() {
               type="button"
               onClick={() => go(1)}
               disabled={!canNext}
-              className={`hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full transition shadow ${
+              className={`hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full transition shadow ${
                 canNext
                   ? "bg-primary/85 text-white hover:bg-accent-warm hover:text-dark cursor-pointer"
                   : "bg-primary/15 text-primary/40 cursor-not-allowed"
@@ -103,7 +103,7 @@ export default function JewelryCategories() {
         <div
           className={
             isDesktop
-              ? "overflow-hidden px-2"
+              ? "overflow-hidden"
               : "px-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth"
           }
         >
@@ -112,8 +112,8 @@ export default function JewelryCategories() {
             aria-label={t("sections.jewelry")}
             className={`flex ${
               isDesktop
-                ? "gap-0 transition-transform duration-500 ease-out"
-                : "gap-3 md:gap-4"
+                ? "transition-transform duration-500 ease-out"
+                : ""
             }`}
             style={
               isDesktop
@@ -128,8 +128,8 @@ export default function JewelryCategories() {
                   key={cat.id}
                   className={
                     isDesktop
-                      ? "shrink-0 md:px-2 lg:px-3"
-                      : "snap-start shrink-0 basis-[65%] xs:basis-[55%] sm:basis-[40%]"
+                      ? "shrink-0"
+                      : "snap-start shrink-0 basis-[60%] xs:basis-[55%] sm:basis-[40%]"
                   }
                   style={
                     isDesktop
@@ -144,7 +144,7 @@ export default function JewelryCategories() {
                 >
                   <a
                     href={cat.href ?? "#"}
-                    className="group relative block aspect-[3/4] w-full overflow-hidden rounded-sm focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-warm/60 cursor-pointer"
+                    className="group relative block aspect-auto w-full overflow-hidden  focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-warm/60 cursor-pointer"
                     aria-label={label}
                   >
                     <img
