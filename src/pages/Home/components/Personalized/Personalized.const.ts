@@ -1,5 +1,5 @@
 import type {} from "react";
-import personalizedImg from "@/assets/personalized.png";
+import personalizedImg from "@/assets/personalized.jpg";
 
 export const PERSONALIZED_IMAGE = {
   src: personalizedImg,
@@ -9,7 +9,7 @@ export const PERSONALIZED_IMAGE = {
 export type AudienceKey = "forHim" | "forHer" | "forKids";
 
 export const AUDIENCE: Array<{ id: AudienceKey; href: string }> = [
-  { id: "forHim", href: "/categories/para-ellos" },
-  { id: "forHer", href: "/categories/para-ellas" },
-  { id: "forKids", href: "/categories/para-ninos" },
+  { id: "forHim", href: "/categorias/para-ellos" },
+  { id: "forHer", href: "/categorias/para-ellas" },
+  { id: "forKids", href: "/categorias/para-ninos" },
 ];

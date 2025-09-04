@@ -2,7 +2,8 @@
     "sections": {
         "jewelry": "JEWELRY",
         "stores": "STORES",
-        "custom": "CUSTOM JEWELRY"
+        "custom": "CUSTOM JEWELRY",
+        "personalized": "PERSONALIZED"
     },
     "viewStore": "View Store",
     "jewelry": {

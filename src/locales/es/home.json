@@ -2,7 +2,8 @@
     "sections": {
         "jewelry": "JOYAS",
         "stores": "TIENDAS",
-        "custom": "JOYAS PERSONALIZADAS"
+        "custom": "JOYAS PERSONALIZADAS",
+        "personalized": "PERSONALIZADAS"
     },
     "viewStore": "Ver Tienda",
     "jewelry": {
