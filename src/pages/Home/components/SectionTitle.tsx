@@ -23,7 +23,7 @@ export default function SectionTitle({
   return (
     <h2
       id={id}
-      className={`relative my-8 text-center text-primary font-display text-2xl md:text-3xl ${
+      className={`relative uppercase my-8 text-center text-primary font-sans text-2xl md:text-3xl ${
         className ?? ""
       }`}
     >
