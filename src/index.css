@@ -85,3 +85,7 @@
     animation: spin 2s linear infinite;
   }
 }
+
+/** Utils: ocultar scrollbar en contenedores scroll */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
