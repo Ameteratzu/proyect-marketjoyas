@@ -77,7 +77,7 @@ export default function HeroCarousel() {
                     {ctaHref && ctaLabel && (
                       <a
                         href={ctaHref}
-                        className="btn btn-primary mt-2 sm:mt-3 inline-block text-[18px] px-6 py-2"
+                        className="font-display btn btn-primary mt-2 sm:mt-3 inline-block text-[18px] px-6 py-2"
                       >
                         {ctaLabel}
                       </a>
