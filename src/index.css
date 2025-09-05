@@ -85,3 +85,9 @@
     animation: spin 2s linear infinite;
   }
 }
+
+/* Inputs */
+@utility input-base {
+  @apply  mt-1 block w-full border-0 border-b border-gray-400 focus:border-primary focus:ring-0 placeholder:text-gray-400 p-2;
+}
+
