@@ -1,0 +1,19 @@
+{
+  "welcome": "¡Bienvenido!",
+  "close": "Cerrar menú",
+  "categories": {
+    "alliance_marriage": "Alianza y Matrimonio",
+    "rings": "Sortijas",
+    "earrings": "Aretes",
+    "chains_necklaces": "Cadenas y collares",
+    "charms": "Dijes",
+    "bracelets": "Pulseras",
+    "bangles": "Puñeras",
+    "anklets": "Tobilleras",
+    "sets": "Sets - Juegos",
+    "piercing": "Piercing",
+    "frames_decor": "Cuadros y Adornos",
+    "accessories": "Accesorios",
+    "gems": "Gemas"
+  }
+}
