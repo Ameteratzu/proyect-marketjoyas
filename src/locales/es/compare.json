@@ -1,0 +1,28 @@
+{
+    "title": "Comparar productos",
+    "empty": {
+        "headline": "Aún no se han agregado productos para comparación.",
+        "sub": "Para comparar dale click en",
+        "cta": "Ver productos"
+    },
+    "columns": {
+        "feature": "Característica",
+        "price": "Precio",
+        "availability": "Disponibilidad",
+        "rating": "Calificación",
+        "category": "Categoría",
+        "material": "Material",
+        "occasion": "Ocasión o Compromiso",
+        "gem": "Gemas y Piedras",
+        "brand": "Marca/Tienda",
+        "actions": "Acciones"
+    },
+    "actions": {
+        "quote": "Cotizar",
+        "fav": "Agregar Favoritos"
+    },
+    "badges": {
+        "instock": "En stock",
+        "nostock": "Sin stock"
+    }
+}

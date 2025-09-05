@@ -1,0 +1,28 @@
+{
+    "title": "Compare products",
+    "empty": {
+        "headline": "No products added to comparison yet.",
+        "sub": "To compare click on",
+        "cta": "Browse products"
+    },
+    "columns": {
+        "feature": "Feature",
+        "price": "Price",
+        "availability": "Availability",
+        "rating": "Rating",
+        "category": "Category",
+        "material": "Material",
+        "occasion": "Occasion/Commitment",
+        "gem": "Gems & Stones",
+        "brand": "Brand/Store",
+        "actions": "Actions"
+    },
+    "actions": {
+        "quote": "Get quote",
+        "fav": "Add to favorites"
+    },
+    "badges": {
+        "instock": "In stock",
+        "nostock": "Out of stock"
+    }
+}
