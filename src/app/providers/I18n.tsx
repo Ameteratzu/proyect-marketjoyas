@@ -10,6 +10,8 @@ import esHome from "@/locales/es/home.json";
 import enHome from "@/locales/en/home.json";
 import esSidebar from "@/locales/es/sidebar.json";
 import enSidebar from "@/locales/en/sidebar.json";
+import esCompare from "@/locales/es/compare.json";
+import enCompare from "@/locales/en/compare.json";
 
 
 
@@ -33,13 +35,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (acá se añade más)
-    ns: ["header", "footer", "home", "sidebar"],
+    ns: ["header", "footer", "home", "sidebar", "compare"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar },
-      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare },
     },
   });
 
