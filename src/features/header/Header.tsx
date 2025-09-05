@@ -10,13 +10,14 @@ import useHideOnScroll from "@/hooks/useHideOnScroll";
 import useOnScreen from "@/hooks/useOnScreen";
 import { cn } from "@/lib/cn";
 
-
 import Sidebar from "./components/Sidebar";
+import AuthModal from "../login/components/AuthModal";
+
 
 export default function Header() {
   
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const [openAuth, setOpenAuth] = useState(false);
   // Sentinel y hooks de scroll
   const sentinelRef = useRef<HTMLDivElement>(null);
   const headerVisible = useOnScreen(sentinelRef, "-100px");
@@ -35,7 +36,7 @@ export default function Header() {
               {/* 👈 Pasa la función para abrir el sidebar al hacer clic */}
               <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
               <Logo />
-              <Actions />
+              <Actions onLoginClick={() => setOpenAuth(true)} />
             </div>
             {/* ... el resto del código del header ... */}
             <div className="mt-3 md:hidden">
@@ -46,7 +47,7 @@ export default function Header() {
               {/* 👈 Pasa la función para abrir el sidebar en desktop */}
               <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
               <SearchBar />
-              <Actions />
+              <Actions onLoginClick={() => setOpenAuth(true)} />
             </div>
           </div>
         </Container>
@@ -66,7 +67,7 @@ export default function Header() {
             {/* 👈 Pasa la función para abrir el sidebar en la barra flotante móvil */}
             <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
             <Logo />
-            <Actions />
+             <Actions onLoginClick={() => setOpenAuth(true)} />
           </div>
           <div className="mt-3 md:hidden">
             <SearchBar />
@@ -83,6 +84,9 @@ export default function Header() {
 
       {/* 👈 Renderiza el Sidebar y pasa el estado y la función para cerrarlo */}
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <AuthModal open={openAuth} onClose={() => setOpenAuth(false)} />
     </>
+    
   );
+  
 }

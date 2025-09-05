@@ -3,14 +3,18 @@ import { MdFavoriteBorder } from "react-icons/md";
 import VisuallyHidden from "@/components/VisuallyHidden";
 import { useTranslation } from "react-i18next";
 
-export default function Actions() {
+type Props = {
+  onLoginClick?: () => void;
+};
+
+export default function Actions({ onLoginClick }: Props) {
   const { t } = useTranslation("header");
   const base =
     "inline-flex items-center gap-2 text-primary hover:text-primary/75 hover:opacity-90 cursor-pointer transition-all duration-300";
 
   return (
     <div className="flex items-center gap-3 md:gap-4">
-      <button type="button" className={base}>
+      <button type="button" className={base} onClick={onLoginClick}>
         <FiUser className="iconSocial md:iconPrincipal" />
         {/* oculto en mobile, visible desde md+ */}
         <span className="hidden md:inline text-[20px] md:text-[24px] font-semibold">
