@@ -8,6 +8,10 @@ import esFooter from "@/locales/es/footer.json";
 import enFooter from "@/locales/en/footer.json";
 import esHome from "@/locales/es/home.json";
 import enHome from "@/locales/en/home.json";
+import esSidebar from "@/locales/es/sidebar.json";
+import enSidebar from "@/locales/en/sidebar.json";
+
+
 
 i18n
   .use(LanguageDetector)
@@ -29,13 +33,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (acá se añade más)
-    ns: ["header", "footer", "home"],
+    ns: ["header", "footer", "home", "sidebar"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome },
-      en: { header: enHeader, footer: enFooter, home: enHome },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar },
     },
   });
 
