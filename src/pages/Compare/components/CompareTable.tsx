@@ -110,7 +110,7 @@ export default function CompareTable({ items }: Props) {
               {items.map((p) => (
                 <td key={`actions-${p.id}`} className="py-5 px-5">
                   <div className="flex flex-col items-center justify-center gap-3">
-                    {/* Botón favoritos: forzamos una sola línea con whitespace-nowrap y un ancho mínimo */}
+                    {/* Botón favoritos  */}
                     <button className="btn btn-ghost w-full text-[16px] whitespace-nowrap min-w-[170px] inline-flex items-center justify-center">
                       {t("actions.fav")}
                       <FaRegHeart className="ml-2 shrink-0" />
