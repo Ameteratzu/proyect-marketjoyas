@@ -1,5 +1,6 @@
 import StockBadge from "./components/StockBadge";
 import RatingStars from "./components/RatingStars";
+import EmptyState from "./components/EmptyState";
 
 export default function Compare() {
     return (
@@ -11,6 +12,8 @@ export default function Compare() {
           <StockBadge inStock={true} />
           <h1>Prueba de RatingStars</h1>
           <RatingStars value={4} reviews={20} />
+          <h1>Prueba de EmptyState</h1>
+          <EmptyState />
         </section>
       );
 }
