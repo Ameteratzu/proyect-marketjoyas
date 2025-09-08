@@ -5,7 +5,6 @@ import RatingStars from "./RatingStars";
 import StockBadge from "./StockBadge";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 type Props = {
