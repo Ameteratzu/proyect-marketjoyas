@@ -19,7 +19,8 @@
     },
     "actions": {
         "quote": "Cotizar",
-        "fav": "Agregar Favoritos"
+        "fav": "Agregar Favoritos",
+        "remove": "Quitar"
     },
     "badges": {
         "instock": "En stock",

@@ -19,7 +19,8 @@
     },
     "actions": {
         "quote": "Get quote",
-        "fav": "Add to favorites"
+        "fav": "Add to favorites",
+        "remove": "Remove"
     },
     "badges": {
         "instock": "In stock",

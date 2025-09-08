@@ -6,6 +6,7 @@ import StockBadge from "./StockBadge";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 type Props = {
   items: CompareItem[];
@@ -33,12 +34,13 @@ export default function CompareTable({ items, onRemove }: Props) {
                     <button
                       type="button"
                       aria-label={`Quitar ${p.name} de la comparación`}
-                      title={t("remove") ?? "Quitar"}
+                      title={t("actions.remove") ?? "Quitar"}
                       onClick={() => onRemove(p.id)}
-                      className="absolute top-2 left-0 text-dark/70 hover:text-red-600 cursor-pointer bg-white rounded-full p-1.5 hover:shadow-md transform hover:scale-110 duration-300"
+                      className="absolute top-2 left-2 text-dark/70 hover:text-red-600 cursor-pointer bg-white rounded-full p-1.5 hover:shadow-md transform hover:scale-110 duration-300"
                     >
-                      <div className="text-3xl text-center">
-                        <MdDeleteForever className="text-center" />
+                      <div className="text-3xl text-center items-center flex flex-col">
+                        <AiFillCloseCircle className="text-center" />
+                        <span className="text-sm">{t("actions.remove")}</span>
                       </div>
                     </button>
                   )}
