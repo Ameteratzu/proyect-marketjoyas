@@ -21,7 +21,7 @@ export const MOCK_ITEMS: CompareItem[] = [
     name: "Sortija Oro 18k",
     price: "S/ 3,990",
     availability: "in",
-    rating: 4.6,
+    rating: 5,
     reviews: 89,
     category: "Sortijas",
     material: "Oro 18k",
@@ -71,4 +71,18 @@ export const MOCK_ITEMS: CompareItem[] = [
     gem: "Moissanita",
     brand: "Renzo Costa",
   },
+  {
+    id: "p-04",
+    image: "https://picsum.photos/seed/j4/140/100",
+    name: "Aros Plata 950 Moissanita",
+    price: "S/ 2,000",
+    availability: "in",
+    rating: 3,
+    reviews: 39,
+    category: "Aros",
+    material: "Plata 950",
+    occasion: "Compromiso",
+    gem: "Moissanita",
+    brand: "Renzo Costa",
+  }
 ];

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useTranslation } from "react-i18next";
-import SectionTitle from "../../../../components/SectionTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { STORES, type Store } from "./StoresSection.const";
 import { cn } from "@/lib/cn";
 

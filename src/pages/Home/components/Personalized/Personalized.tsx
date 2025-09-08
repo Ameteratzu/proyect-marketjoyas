@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SectionTitle from "../../../../components/SectionTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { AUDIENCE, PERSONALIZED_IMAGE } from "./Personalized.const";
 
 export default function Personalized() {
