@@ -4,7 +4,7 @@ export type CompareItem = {
   image?: string;
   name: string;
   price: string;
-  avaibility: "in" | "out";
+  availability: "in" | "out";
   rating: number;
   reviews?: number;
   category: string;
@@ -16,7 +16,7 @@ export type CompareItem = {
 
 export type CompareFeatureRow =
   | "price"
-  | "avaibility"
+  | "availability"
   | "rating"
   | "category"
   | "material"
