@@ -5,10 +5,14 @@ import RatingStars from "./RatingStars";
 import StockBadge from "./StockBadge";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 
-type Props = { items: CompareItem[] };
+type Props = {
+  items: CompareItem[];
+  onRemove?: (id: string) => void; // ⬅️ nuevo (opcional)
+};
 
-export default function CompareTable({ items }: Props) {
+export default function CompareTable({ items, onRemove }: Props) {
   const { t } = useTranslation("compare");
 
   return (
@@ -21,8 +25,24 @@ export default function CompareTable({ items }: Props) {
               <th className="text-left py-4 px-5 font-semibold text-dark text-[16px] w-48">
                 {t("columns.feature")}
               </th>
+
               {items.map((p) => (
-                <th key={p.id} className="py-4 px-5 text-center">
+                <th key={p.id} className="py-4 px-5 text-center relative">
+                  {/* Botón eliminar arriba, centrado */}
+                  {onRemove && (
+                    <button
+                      type="button"
+                      aria-label={`Quitar ${p.name} de la comparación`}
+                      title={t("remove") ?? "Quitar"}
+                      onClick={() => onRemove(p.id)}
+                      className="absolute top-2 left-0 text-dark/70 hover:text-red-600 cursor-pointer bg-white rounded-full p-1.5 hover:shadow-md transform hover:scale-110 duration-300"
+                    >
+                      <div className="text-3xl text-center">
+                        <MdDeleteForever className="text-center" />
+                      </div>
+                    </button>
+                  )}
+
                   <div className="mx-auto w-[120px]">
                     <div className="aspect-[1.2] overflow-hidden rounded-lg bg-neutral hover:scale-110 transition-transform duration-300 cursor-pointer">
                       {p.image ? (
@@ -115,6 +135,7 @@ export default function CompareTable({ items }: Props) {
                       {t("actions.fav")}
                       <FaRegHeart className="ml-2 shrink-0" />
                     </button>
+
                     <button className="btn btn-primary w-full text-[16px] inline-flex items-center justify-center min-w-[140px]">
                       {t("actions.quote")}
                       <MdOutlineAddShoppingCart className="ml-2 shrink-0" />
