@@ -89,3 +89,13 @@
 /** Utils: ocultar scrollbar en contenedores scroll */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* * Separador estilizado */
+.separador {
+  border: 0;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 2px 6px -2px rgba(0,0,0,.25);
+  border-radius: 2px;
+  margin-top: 12px;
+}
