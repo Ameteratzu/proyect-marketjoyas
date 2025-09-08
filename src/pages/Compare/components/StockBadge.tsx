@@ -5,7 +5,7 @@ export default function StockBadge({ inStock }: Props) {
     <span
       className={`inline-flex items-center rounded-full px-1.5 py-1.5 text-[16px] font-medium text-white ${
         inStock
-          ? "bg-primary/50 ring-1"
+          ? "bg-primary ring-1"
           : "bg-orange-700 ring-1"
       }`}
     >
