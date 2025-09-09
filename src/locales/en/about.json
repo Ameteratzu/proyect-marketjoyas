@@ -1,0 +1,46 @@
+{
+    "hero": {
+        "alt": "Market Joyas banner",
+        "kicker": "About",
+        "title": "Market",
+        "brand": "Joyas",
+        "lead": "A revolution in online jewelry. The best shopping experience and unique pieces with fast, secure delivery."
+    },
+    "specialties": {
+        "title": "Our specialties",
+        "subtitle": "The experience of our team and our years of experience have allowed us to develop an extensive network of suppliers, ensuring that our clients always get what they are looking for.",
+        "clients": {
+            "title": "1M+ loyal customers",
+            "desc": "Trust and proven quality from our community."
+        },
+        "shipping": {
+            "title": "Free shipping across Peru",
+            "desc": "Safe and fast delivery to your door."
+        },
+        "deals": {
+            "title": "Great offers & discounts",
+            "desc": "Constant promotions on selected jewelry."
+        },
+        "brands": {
+            "title": "Local brands",
+            "desc": "We partner with top local brands."
+        }
+    },
+    "band": {
+        "kicker": "Join Market Joyas today!",
+        "title": "Trusted by thousands across Peru",
+        "desc": "We work with reliable couriers so your jewelry arrives safe and on time.",
+        "cta": "View products",
+        "alt": "Customers receiving orders"
+    },
+    "story": {
+        "kicker": "Market Joyas",
+        "title": "Across the country",
+        "body": "Our passion for jewelry helped us build a trusted supplier network. Find unique, quality pieces wherever you are.",
+        "alt": "Model wearing necklace"
+    },
+    "contact": {
+        "lead": "Questions? Get in touch or visit us to know more!",
+        "cta": "Sign up"
+    }
+}

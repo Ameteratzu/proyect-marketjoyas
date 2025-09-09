@@ -2,9 +2,19 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-// Si cargas desde archivos usa http-backend; aquí pondré resources en memoria:
 import esHeader from "@/locales/es/header.json";
 import enHeader from "@/locales/en/header.json";
+import esFooter from "@/locales/es/footer.json";
+import enFooter from "@/locales/en/footer.json";
+import esHome from "@/locales/es/home.json";
+import enHome from "@/locales/en/home.json";
+import esSidebar from "@/locales/es/sidebar.json";
+import enSidebar from "@/locales/en/sidebar.json";
+import esCompare from "@/locales/es/compare.json";
+import enCompare from "@/locales/en/compare.json";
+import esAbout from "@/locales/es/about.json";
+import enAbout from "@/locales/en/about.json";
+
 
 i18n
   .use(LanguageDetector)
@@ -25,14 +35,14 @@ i18n
 
     interpolation: { escapeValue: false },
 
-    // Namespaces (puedes añadir más: 'footer', 'home', etc.)
-    ns: ["header"],
+    // Namespaces (acá se añade más)
+    ns: ["header", "footer", "home", "sidebar", "compare", "about"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader },
-      en: { header: enHeader },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout },
     },
   });
 

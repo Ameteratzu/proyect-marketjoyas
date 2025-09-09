@@ -1,8 +1,21 @@
+import HeroCarousel from "@/pages/Home/components/HeroCarousel/HeroCarousel";
+import JewelryCategories from "@/pages/Home/components/JewelryCategories/JewelryCategories";
+import StoresSection from "@/pages/Home/components/StoresSection/StoresSection";
+import Personalized from "./components/Personalized/Personalized";
+
 export default function Home() {
   return (
-    <section className="container-p py-12">
-      <h1 className="h1 text-3xl">Bienvenido a Market Joyas</h1>
-      <p className="lead mt-3">Tu tienda en línea de joyas exclusivas.</p>
-    </section>
+    <>
+      <HeroCarousel />
+      {/* Sección: Joyas */}
+      <JewelryCategories />
+
+      {/* Sección: Tiendas */}
+      <StoresSection />
+
+      {/* Sección: Personalizados */}
+      <Personalized />
+
+    </>
   );
 }

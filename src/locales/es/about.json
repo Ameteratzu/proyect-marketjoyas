@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "alt": "Banner de Market Joyas",
+    "kicker": "Sobre",
+    "title": "Market",
+    "brand": "Joyas",
+    "lead": "Una revolución en la joyería online. La mejor experiencia de compra y piezas únicas con envío rápido y seguro."
+  },
+  "specialties": {
+    "title": "Nuestras especialidades",
+    "subtitle": "La experiencia de nuestro equipo y nuestros años de experiencia nos han permitido desarrollar una amplia red de proveedores, garantizando que nuestros clientes siempre encuentren lo que buscan.",
+    "clients": {
+      "title": "Más de 1 millón de clientes habituales",
+      "desc": "Confianza y calidad probada por nuestra comunidad."
+    },
+    "shipping": {
+      "title": "Envío gratuito a todo el Perú",
+      "desc": "Opciones de despacho seguro y rápido a tu domicilio."
+    },
+    "deals": {
+      "title": "Ofertas y descuentos increíbles",
+      "desc": "Promociones constantes en joyas seleccionadas."
+    },
+    "brands": {
+      "title": "Marcas nacionales",
+      "desc": "Trabajamos con marcas locales de primera calidad."
+    }
+  },
+  "band": {
+    "kicker": "¡Únete hoy a Market Joyas!",
+    "title": "Confiada por miles de clientes en todo el Perú",
+    "desc": "Trabajamos con mensajería de confianza para que tus joyas lleguen seguras y puntuales a tu hogar.",
+    "cta": "Ver productos",
+    "alt": "Clientes recibiendo pedidos"
+  },
+  "story": {
+    "kicker": "Market Joyas",
+    "title": "En todo el país",
+    "body": "Nuestra pasión por la joyería nos ha permitido crear una red de proveedores confiables. Aquí encuentras piezas únicas y de calidad sin importar dónde estés.",
+    "alt": "Modelo con collar"
+  },
+  "contact": {
+    "lead": "¿Tienes alguna consulta? ¡Contáctanos o visítanos para conocernos mejor!",
+    "cta": "Regístrate"
+  }
+}

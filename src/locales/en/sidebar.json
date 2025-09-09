@@ -1,0 +1,19 @@
+{
+  "welcome": "Welcome!",
+  "close": "Close menu",
+  "categories": {
+    "alliance_marriage": "Wedding & Marriage",
+    "rings": "Rings",
+    "earrings": "Earrings",
+    "chains_necklaces": "Chains & Necklaces",
+    "charms": "Charms",
+    "bracelets": "Bracelets",
+    "bangles": "Bangles",
+    "anklets": "Anklets",
+    "sets": "Sets",
+    "piercing": "Piercing",
+    "frames_decor": "Frames & Decor",
+    "accessories": "Accessories",
+    "gems": "Gems"
+  }
+}
