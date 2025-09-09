@@ -12,7 +12,7 @@ export default function SpecialtiesGrid() {
       </SectionTitle>
       <div className="container-p">
         <div className="text-center mb-8">
-          <p className="mt-2 text-graphite max-w-2xl mx-auto">
+          <p className="mt-2 text-graphite max-w-3xl mx-auto">
             {t("specialties.subtitle")}
           </p>
         </div>
