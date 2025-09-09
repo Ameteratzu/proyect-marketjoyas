@@ -9,13 +9,13 @@ export default function BandCta({ image = "/src/assets/about/EntregandoProductos
     <section className="bg-primary text-white mt-16 text-center md:text-left">
       <div className="container-p py-10 md:py-14 grid md:grid-cols-2 gap-8 items-center">
         <div className="order-2 md:order-1">
-          <p className="text-accent-warm font-bold text-xl tracking-wide">
+          <p className="text-accent-warm font-bold text-xl tracking-wide uppercase">
             {t("band.kicker")}
           </p>
-          <h3 className="mt-1 font-display text-3xl md:text-4xl">
+          <h3 className="mt-1 font-display text-3xl md:text-4xl max-w-lg">
             {t("band.title")}
           </h3>
-          <p className="mt-3 text-white/90 max-w-xl">{t("band.desc")}</p>
+          <p className="mt-3 text-white/90 max-w-100 text-lg">{t("band.desc")}</p>
           <a href="/productos" className="btn btn-light mt-6 inline-block text-lg">
             {t("band.cta")}
           </a>
