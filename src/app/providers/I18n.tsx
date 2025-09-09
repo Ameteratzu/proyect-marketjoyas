@@ -12,7 +12,8 @@ import esSidebar from "@/locales/es/sidebar.json";
 import enSidebar from "@/locales/en/sidebar.json";
 import esCompare from "@/locales/es/compare.json";
 import enCompare from "@/locales/en/compare.json";
-
+import esAbout from "@/locales/es/about.json";
+import enAbout from "@/locales/en/about.json";
 
 
 i18n
@@ -35,13 +36,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (acá se añade más)
-    ns: ["header", "footer", "home", "sidebar", "compare"],
+    ns: ["header", "footer", "home", "sidebar", "compare", "about"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare },
-      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout },
     },
   });
 
