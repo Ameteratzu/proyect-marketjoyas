@@ -9,25 +9,25 @@ export type Specialty = {
 export const SPECIALTIES: Specialty[] = [
   {
     id: "clients",
-    image: "/src/assets/Especialidad1.jpg",
+    image: "/src/assets/about/Especialidad1.png",
     titleKey: "specialties.clients.title",
     descKey: "specialties.clients.desc",
   },
   {
     id: "shipping",
-    image: "/src/assets/Especialidad2.jpg",
+    image: "/src/assets/about/Especialidad2.png",
     titleKey: "specialties.shipping.title",
     descKey: "specialties.shipping.desc",
   },
   {
     id: "deals",
-    image: "/src/assets/Especialidad3.jpg",
+    image: "/src/assets/about/Especialidad3.png",
     titleKey: "specialties.deals.title",
     descKey: "specialties.deals.desc",
   },
   {
     id: "brands",
-    image: "/src/assets/Especialidad4.jpg",
+    image: "/src/assets/about/Especialidad4.png",
     titleKey: "specialties.brands.title",
     descKey: "specialties.brands.desc",
   },
