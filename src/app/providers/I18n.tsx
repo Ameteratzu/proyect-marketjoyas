@@ -10,6 +10,8 @@ import esHome from "@/locales/es/home.json";
 import enHome from "@/locales/en/home.json";
 import esSidebar from "@/locales/es/sidebar.json";
 import enSidebar from "@/locales/en/sidebar.json";
+import esQuote from "@/locales/es/quote.json";
+import enQuote from "@/locales/en/quote.json";
 
 
 
@@ -38,8 +40,8 @@ i18n
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar },
-      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, quote: esQuote },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, quote: enQuote },
     },
   });
 
