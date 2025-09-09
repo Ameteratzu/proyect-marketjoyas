@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SectionTitle from "@/pages/Home/components/SectionTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { JEWELRY_CATEGORIES } from "./jewelry.const";
 import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
