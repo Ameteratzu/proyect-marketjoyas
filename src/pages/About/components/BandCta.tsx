@@ -16,7 +16,7 @@ export default function BandCta({ image = "/src/assets/about/EntregandoProductos
             {t("band.title")}
           </h3>
           <p className="mt-3 text-white/90 max-w-xl">{t("band.desc")}</p>
-          <a href="/productos" className="btn btn-light mt-6 inline-block">
+          <a href="/productos" className="btn btn-light mt-6 inline-block text-xl">
             {t("band.cta")}
           </a>
         </div>
