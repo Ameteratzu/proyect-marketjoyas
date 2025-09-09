@@ -28,7 +28,7 @@ export default function StoryBlock({
       </div>
       <div className="py-10 md:py-14 text-center">
         <p className="text-dark text-xl">{t("contact.lead")}</p>
-        <a href="/registro" className="btn btn-primary mt-5 inline-block text-xl">
+        <a href="/registro" className="btn btn-primary mt-5 inline-block text-lg">
           {t("contact.cta")}
         </a>
       </div>
