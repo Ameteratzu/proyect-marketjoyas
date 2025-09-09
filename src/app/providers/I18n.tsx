@@ -14,6 +14,8 @@ import esCompare from "@/locales/es/compare.json";
 import enCompare from "@/locales/en/compare.json";
 import esAbout from "@/locales/es/about.json";
 import enAbout from "@/locales/en/about.json";
+import esQuote from "@/locales/es/quote.json";
+import enQuote from "@/locales/en/quote.json";
 
 
 i18n
@@ -41,8 +43,8 @@ i18n
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout },
-      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote },
     },
   });
 
