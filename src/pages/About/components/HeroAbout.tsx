@@ -13,7 +13,7 @@ export default function HeroAbout({
         <img
           src={bg}
           alt={t("hero.alt")}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 h-full md:object-center"
           draggable={false}
         />
         <div className="absolute inset-0" />
@@ -23,7 +23,7 @@ export default function HeroAbout({
               {t("hero.kicker")}
               <span className="text-primary"> {t("hero.title")} {t("hero.brand")}</span>
             </h1>
-            <p className="mt-3 max-w-2xl text-white/90 leading-relaxed">
+            <p className="mt-3 max-w-2xl text-white/90 leading-relaxed pr-0 md:pr-50">
               {t("hero.lead")}
             </p>
           </div>
