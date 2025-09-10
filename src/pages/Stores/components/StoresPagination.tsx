@@ -14,8 +14,16 @@ export default function StoresPagination({
 }: Props) {
   if (totalPages <= 1) return null;
 
-  const go = (p: number) => () =>
+  const scrollTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const go = (p: number) => () => {
     onPageChange(Math.min(Math.max(1, p), totalPages));
+    scrollTop();
+  };
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
