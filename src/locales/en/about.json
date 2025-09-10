@@ -1,9 +1,9 @@
 {
     "hero": {
-        "alt": "Market Joyas banner",
+        "alt": "Centro Joyero banner",
         "kicker": "About",
-        "title": "Market",
-        "brand": "Joyas",
+        "title": "Centro",
+        "brand": "Joyero",
         "lead": "A revolution in online jewelry. The best shopping experience and unique pieces with fast, secure delivery."
     },
     "specialties": {
@@ -27,14 +27,14 @@
         }
     },
     "band": {
-        "kicker": "Join Market Joyas today!",
+        "kicker": "Join Centro Joyero today!",
         "title": "Trusted by thousands across Peru",
         "desc": "We work with reliable couriers so your jewelry arrives safe and on time.",
         "cta": "View products",
         "alt": "Customers receiving orders"
     },
     "story": {
-        "kicker": "Market Joyas",
+        "kicker": "Centro Joyero",
         "title": "Across the country",
         "body": "Our passion for jewelry helped us build a trusted supplier network. Find unique, quality pieces wherever you are.",
         "alt": "Model wearing necklace"

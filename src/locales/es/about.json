@@ -1,9 +1,9 @@
 {
   "hero": {
-    "alt": "Banner de Market Joyas",
+    "alt": "Banner de Centro Joyero",
     "kicker": "Sobre",
-    "title": "Market",
-    "brand": "Joyas",
+    "title": "Centro",
+    "brand": "Joyero",
     "lead": "Una revolución en la joyería online. La mejor experiencia de compra y piezas únicas con envío rápido y seguro."
   },
   "specialties": {
@@ -27,14 +27,14 @@
     }
   },
   "band": {
-    "kicker": "¡Únete hoy a Market Joyas!",
+    "kicker": "¡Únete hoy a Centro Joyero!",
     "title": "Confiada por miles de clientes en todo el Perú",
     "desc": "Trabajamos con mensajería de confianza para que tus joyas lleguen seguras y puntuales a tu hogar.",
     "cta": "Ver productos",
     "alt": "Clientes recibiendo pedidos"
   },
   "story": {
-    "kicker": "Market Joyas",
+    "kicker": "Centro Joyero",
     "title": "En todo el país",
     "body": "Nuestra pasión por la joyería nos ha permitido crear una red de proveedores confiables. Aquí encuentras piezas únicas y de calidad sin importar dónde estés.",
     "alt": "Modelo con collar"
