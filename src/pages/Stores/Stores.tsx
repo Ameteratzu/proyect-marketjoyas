@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import SectionTitle from "@/components/SectionTitle";
 import StoresGrid from "./components/StoresGrid";
 import StoresPagination from "./components/StoresPagination";
 import { ALL_STORES } from "./stores.const";
