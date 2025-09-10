@@ -1,5 +1,5 @@
 {
-    "brandAlt": "Market Joyas",
+    "brandAlt": "Centro Joyero",
     "account": {
         "title": "MY ACCOUNT",
         "profile": "My Profile",
@@ -16,7 +16,7 @@
     "contact": {
         "title": "CONTACT",
         "address": "Lima, Peru",
-        "email": "contact@marketjoyas.com",
+        "email": "contact@centrojoyero.com",
         "phone": "+51 997 136 771"
     },
     "developedBy": "Built by AM Code",

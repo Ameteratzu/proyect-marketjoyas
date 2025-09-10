@@ -3,7 +3,7 @@ import bannerImage from '../../assets/quotes/baner_cuotas.png';
 import instagramIcon from '../../assets/quotes/instagramIcon.png';
 import facebookIcon from '../../assets/quotes/facebookIcon.png';
 import twitterIcon from '../../assets/quotes/twitterIcon.png';
-import logoMarketJoyas from '../../assets/quotes/logoMarketJoyas.png';
+import logoMarketJoyas from '../../assets/logoMarketJoyas.svg';
 import { useTranslation } from "react-i18next";
 
 const Quote = () => {
@@ -172,12 +172,12 @@ const Quote = () => {
                 <div className="flex justify-center mt-12">
                     <div className="bg-white p-8 w-full max-w-[1437px] rounded-md shadow-lg border border-gray-300 flex flex-col md:flex-row items-center justify-between">
                         
-                        {/* Logo y nombre de Market Joyas */}
+                        {/* Logo y nombre de Centro Joyero */}
                         <div className="flex flex-col items-center sm:flex-row mb-6 md:mb-0">
-                            <img src={logoMarketJoyas} alt="Market Joyas Logo" className="h-20 mr-4" />
+                            <img src={logoMarketJoyas} alt="Centro Joyero Logo" className="h-20 mr-4" />
                             <div className="text-center sm:text-left">
-                                <p className="text-xl font-bold text-graphite">MARKET JOYAS</p>
-                                <p className="text-md text-graphite/70">Market Joyas</p>
+                                <p className="text-xl font-bold text-graphite">CENTRO JOYERO</p>
+                                <p className="text-md text-graphite/70">Centro Joyero</p>
                                 <div className="flex justify-center sm:justify-start space-x-4 mt-2">
                                     <a href="#" className="text-graphite hover:text-primary">
                                         <img src={facebookIcon} alt="Facebook" className="h-6 w-6" />
@@ -192,7 +192,7 @@ const Quote = () => {
                             </div>
                         </div>
 
-                        {/* Texto descriptivo de Market Joyas */}
+                        {/* Texto descriptivo de Centro Joyero */}
                         <div className="w-full md:w-1/2 text-graphite/80 text-lg leading-relaxed text-center md:text-left mt-6 md:mt-0">
                             <p>{t('market_joyas_info')}</p>
                         </div>
