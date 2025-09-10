@@ -1,67 +1,74 @@
-// src/features/Login/components/AuthModal.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import ResetPasswordModal from "./ResetPasswordModal"; // Nombre correcto
+import ResetPasswordModal from "./ResetPasswordModal";
 
 type Props = {
-  open: boolean;       // Controla si el modal se muestra o no
-  onClose: () => void; // Función que se ejecuta al cerrar el modal
+  open: boolean;
+  onClose: () => void;
 };
 
 export default function AuthModal({ open, onClose }: Props) {
-  // Estado para manejar la vista activa: "login", "register" o "reset"
+  const { t } = useTranslation("login");
   const [tab, setTab] = useState<"login" | "register" | "reset">("login");
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Si el modal no está abierto, no renderizamos nada
-  if (!open) return null;
+  useEffect(() => {
+    if (open) {
+      setIsVisible(true);
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
+
+  if (!open && !isVisible) return null;
 
   return (
-    // Fondo semitransparente que ocupa toda la pantalla
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      
-      {/* Caja blanca del modal */}
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-md relative p-6">
+    <div className={`fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`bg-white rounded-xl shadow-lg w-full max-w-md relative p-6 transform transition-transform duration-300 ${isVisible ? 'scale-100' : 'scale-95'}`}>
         
-        {/* Botón para cerrar el modal */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black"
+          className="absolute top-3 right-3 text-gray-500 hover:text-black p-1 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
+          aria-label={t("common:close")}
         >
-          ✕
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
 
-        {/* Ocultamos pestañas si estamos en reset */}
         {tab !== "reset" && (
-          <div className="flex border-b mb-4">
-            {/* Botón pestaña Ingresar */}
+          <div className="flex border-b mb-6">
             <button
-              className={`flex-1 py-2 text-center ${
-                tab === "login" ? "border-b-2 border-primary font-semibold" : ""
+              className={`flex-1 py-3 text-center font-medium transition-colors ${
+                tab === "login" 
+                  ? "text-primary border-b-2 border-primary" 
+                  : "text-gray-500 hover:text-gray-700"
               }`}
               onClick={() => setTab("login")}
             >
-              Ingresar
+              {t("login.title")}
             </button>
-
-            {/* Botón pestaña Registrarse */}
             <button
-              className={`flex-1 py-2 text-center ${
-                tab === "register"
-                  ? "border-b-2 border-primary font-semibold"
-                  : ""
+              className={`flex-1 py-3 text-center font-medium transition-colors ${
+                tab === "register" 
+                  ? "text-primary border-b-2 border-primary" 
+                  : "text-gray-500 hover:text-gray-700"
               }`}
               onClick={() => setTab("register")}
             >
-              Registrarse
+              {t("register.title")}
             </button>
           </div>
         )}
 
-        {/* Render dinámico */}
-        {tab === "login" && <LoginForm onForgot={() => setTab("reset")} />}
-        {tab === "register" && <RegisterForm />}
-        {tab === "reset" && <ResetPasswordModal onBack={() => setTab("login")} />}
+        <div className="min-h-[300px]">
+          {tab === "login" && <LoginForm onForgot={() => setTab("reset")} />}
+          {tab === "register" && <RegisterForm />}
+          {tab === "reset" && <ResetPasswordModal onBack={() => setTab("login")} />}
+        </div>
       </div>
     </div>
   );

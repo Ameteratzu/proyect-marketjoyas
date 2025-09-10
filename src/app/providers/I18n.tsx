@@ -6,6 +6,8 @@ import esHeader from "@/locales/es/header.json";
 import enHeader from "@/locales/en/header.json";
 import esFooter from "@/locales/es/footer.json";
 import enFooter from "@/locales/en/footer.json";
+import esLogin from "@/locales/es/login.json";
+import enLogin from "@/locales/en/login.json";
 
 i18n
   .use(LanguageDetector)
@@ -27,13 +29,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (puedes añadir más: 'footer', 'home', etc.)
-    ns: ["header", "footer"],
+    ns: ["header", "footer", "login"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer:esFooter },
-      en: { header: enHeader, footer:enFooter },
+      es: { header: esHeader, footer:esFooter , login: esLogin},
+      en: { header: enHeader, footer:enFooter , login: enLogin},
     },
   });
 

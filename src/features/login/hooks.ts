@@ -1,44 +1,42 @@
-import { useState } from "react";
-
-// Importamos funciones que hacen llamadas al backend (login, logout, register)
+import { useState, useEffect } from "react";
 import { login, logout, register } from "./services";
-
-// Importamos los tipos TypeScript que definimos en types.ts
 import type { LoginCredentials, RegisterData, User } from "./types";
 
-//Hook principal de autenticación
 export function useAuth() {
-  // Estado con la información del usuario autenticado (o null si no está logueado)
   const [user, setUser] = useState<User | null>(null);
-
-  // Estado para saber si hay una petición en proceso (loading spinner, deshabilitar botones, etc.)
   const [loading, setLoading] = useState(false);
-
-  // Estado para mostrar errores si algo falla
   const [error, setError] = useState<string | null>(null);
 
-  // 📌 LOGIN
+  // Cargar usuario desde localStorage al iniciar
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (err) {
+        console.error("Error parsing saved user:", err);
+        localStorage.removeItem("user");
+      }
+    }
+  }, []);
+
   async function handleLogin(credentials: LoginCredentials) {
-    setLoading(true); // activa loading
-    setError(null);   // limpia errores previos
+    setLoading(true);
+    setError(null);
     try {
-      // Llama al backend con email y password
       const loggedUser = await login(credentials);
-
-      // Si responde OK, guardamos el usuario en el estado
       setUser(loggedUser);
-
-      // Persistimos en localStorage para mantener sesión al refrescar
       localStorage.setItem("user", JSON.stringify(loggedUser));
+      return true; // Éxito
     } catch (err: any) {
-      // Si hay error, lo mostramos
-      setError(err.response?.data?.message || "Error al iniciar sesión");
+      const errorMessage = err.response?.data?.message || "Error al iniciar sesión";
+      setError(errorMessage);
+      return false; // Fallo
     } finally {
-      setLoading(false); // siempre desactiva loading al terminar
+      setLoading(false);
     }
   }
 
-  // 📌 REGISTER
   async function handleRegister(data: RegisterData) {
     setLoading(true);
     setError(null);
@@ -46,20 +44,27 @@ export function useAuth() {
       const newUser = await register(data);
       setUser(newUser);
       localStorage.setItem("user", JSON.stringify(newUser));
+      return true;
     } catch (err: any) {
-      setError(err.response?.data?.message || "Error al registrarse");
+      const errorMessage = err.response?.data?.message || "Error al registrarse";
+      setError(errorMessage);
+      return false;
     } finally {
       setLoading(false);
     }
   }
 
-  // 📌 LOGOUT
   async function handleLogout() {
-    await logout(); // avisa al backend si es necesario
-    setUser(null);  // limpia usuario
-    localStorage.removeItem("user"); // elimina sesión guardada
+    try {
+      await logout();
+    } catch (err) {
+      console.error("Error during logout:", err);
+    } finally {
+      setUser(null);
+      localStorage.removeItem("user");
+      localStorage.removeItem("rememberEmail");
+    }
   }
 
-  // Retornamos todo lo que necesitamos en formularios y componentes
   return { user, loading, error, handleLogin, handleRegister, handleLogout };
 }
