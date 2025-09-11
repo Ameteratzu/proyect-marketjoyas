@@ -13,5 +13,12 @@
     "reviewsCount": "reseñas",
     "filterMostRelevant": "Filtrar: más relevantes",
     "price": "Precio",
-    "for": "Por"
+    "for": "Por",
+    "reviews.subtitle": "Opiniones del producto",
+    "reviews.filter.label": "Filtrar:",
+    "reviews.filter.relevant": "más relevantes",
+    "reviews.filter.recent": "más recientes",
+    "reviews.filter.oldest": "más antiguas",
+    "reviews.filter.low": "menor calificación",
+    "noreviews": "Aún no hay reseñas."
 }

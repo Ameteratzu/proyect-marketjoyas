@@ -13,5 +13,12 @@
     "reviewsCount": "reviews",
     "filterMostRelevant": "Sort: most relevant",
     "price": "Price",
-    "for": "By"
+    "for": "By",
+    "reviews.subtitle": "Product opinions",
+    "reviews.filter.label": "Filter:",
+    "reviews.filter.relevant": "most relevant",
+    "reviews.filter.recent": "most recent",
+    "reviews.filter.oldest": "oldest",
+    "reviews.filter.low": "lowest rating",
+    "noreviews": "No reviews yet."
 }
