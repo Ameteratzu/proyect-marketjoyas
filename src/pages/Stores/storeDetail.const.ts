@@ -113,6 +113,7 @@ export const STORE_DETAILS: Record<string, StoreDetail> = {
         name: "Sortija Oro 18k princesa",
         image: productImg,
         price: "S/4,990",
+        oldPrice: "S/5,500",
         brandLogo: norma,
       },
       {
@@ -120,6 +121,7 @@ export const STORE_DETAILS: Record<string, StoreDetail> = {
         name: "Aros plata 950 moissanita",
         image: productImg,
         price: "S/2,000",
+        oldPrice: "S/3,500",
         brandLogo: norma,
       },
     ],
