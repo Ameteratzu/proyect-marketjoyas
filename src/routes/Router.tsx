@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AppShell from "@/app/AppShell";
 import { PATHS } from "./paths";
+import StoreDetail from "@/pages/Stores/StoreDetail";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
 const Quote = lazy(() => import("@/pages/Quote/Quote"));
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: PATHS.COMPARE, element: <Compare /> },
       { path: PATHS.BLOG, element: <Blog /> },
       { path: PATHS.STORES, element: <Stores /> },
+      { path: `${PATHS.STORES}/:slug`, element: <StoreDetail /> },
       { path: PATHS.ABOUT, element: <About /> },
       { path: PATHS.CONTACT, element: <Contact /> },
       { path: "*", element: <NotFound /> },
