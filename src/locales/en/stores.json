@@ -11,5 +11,7 @@
     "fav": "Add to Favorites",
     "vendorRating": "Vendor rating",
     "reviewsCount": "reviews",
-    "filterMostRelevant": "Sort: most relevant"
+    "filterMostRelevant": "Sort: most relevant",
+    "price": "Price",
+    "for": "By"
 }
