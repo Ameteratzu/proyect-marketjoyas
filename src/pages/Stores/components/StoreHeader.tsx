@@ -1,11 +1,9 @@
 import { HiMapPin, HiEnvelope, HiPhone } from "react-icons/hi2";
-import { useTranslation } from "react-i18next";
 import type { StoreDetail } from "../storeDetail.const";
 
 type Props = { store: StoreDetail };
 
 export default function StoreHeader({ store }: Props) {
-  const { t } = useTranslation("stores");
 
   const Row = ({
     icon,
