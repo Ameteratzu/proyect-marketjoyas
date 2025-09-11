@@ -1,0 +1,77 @@
+{
+    "sections": {
+        "jewelry": "JOYAS",
+        "stores": "TIENDAS",
+        "custom": "JOYAS PERSONALIZADAS",
+        "personalized": "PERSONALIZADAS"
+    },
+    "viewStore": "Ver Tienda",
+    "jewelry": {
+        "earrings": "Aretes",
+        "rings": "Sortijas",
+        "necklaces": "Collares",
+        "bracelets": "Pulseras",
+        "sets": "Conjuntos",
+        "weddingBands": "Alianzas de Matrimonio",
+        "chains": "Cadenas",
+        "frames": "Cuadros Adornos",
+        "piercing": "Piercing",
+        "cuffs": "Puñeras",
+        "anklets": "Tobilleras"
+    },
+    "custom": {
+        "title": "ARETES, ANILLOS, SORTIJAS, CADENAS Y MÁS",
+        "subtitle": "¡Personalizados a tu medida!",
+        "forHim": "Para él",
+        "forHer": "Para ella",
+        "forKids": "Para niños",
+        "alt": "Elaboración de joyas personalizadas"
+    },
+    "hero": {
+        "b1": {
+            "alt": "Nuevos productos en aros y sortijas",
+            "title": "EN AROS Y SORTIJAS",
+            "subtitle": "exclusivos de tienda y en oferta",
+            "badge": "¡Nuevos productos!",
+            "cta": {
+                "label": "VER MÁS",
+                "href": "/productos"
+            }
+        },
+        "b2": {
+            "alt": "Joyas que cuentan historias",
+            "title": "JOYAS QUE CUENTAN HISTORIAS",
+            "subtitle": "cada pieza es un recuerdo eterno que vive en ti",
+            "cta": {
+                "label": "VER MÁS",
+                "href": "/productos"
+            }
+        },
+        "b3": {
+            "alt": "Diseños exclusivos y personalizados",
+            "title": "DISEÑOS EXCLUSIVOS Y PERSONALIZADOS",
+            "subtitle": "al alcance de tus manos",
+            "cta": {
+                "label": "VER CATÁLOGO",
+                "href": "/catalogo"
+            }
+        },
+        "b4": {
+            "alt": "La mejor calidad está aquí",
+            "title": "LA MEJOR CALIDAD ESTÁ AQUÍ",
+            "subtitle": "al alcance de tus manos",
+            "cta": {
+                "label": "VER CATÁLOGO",
+                "href": "/catalogo"
+            }
+        }
+    },
+    "personalized": {
+        "title": "ARETES, ANILLOS, SORTIJAS, CADENAS Y MÁS",
+        "subtitle": "¡Personalizados a tu medida!",
+        "forHim": "Para él",
+        "forHer": "Para ella",
+        "forKids": "Para niños",
+        "see": "Ver"
+    }
+}

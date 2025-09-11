@@ -38,8 +38,13 @@
 @utility btn-primary {
   @apply btn bg-primary text-white hover:bg-accent-warm hover:text-dark focus:outline-none;
 }
+
+@utility btn-light {
+  @apply btn bg-white text-dark hover:bg-accent-warm hover:text-white focus:outline-none;
+}
+
 @utility btn-ghost {
-  @apply btn bg-neutral text-dark hover:bg-primary hover:text-white;
+  @apply btn bg-neutral text-dark hover:bg-accent-warm hover:text-white;
 }
 
 @utility btn-selected {
@@ -91,3 +96,16 @@
   @apply  mt-1 block w-full border-0 border-b border-gray-400 focus:border-primary focus:ring-0 placeholder:text-gray-400 p-2;
 }
 
+/** Utils: ocultar scrollbar en contenedores scroll */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* * Separador estilizado */
+.separador {
+  border: 0;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 2px 6px -2px rgba(0,0,0,.25);
+  border-radius: 2px;
+  margin-top: 12px;
+}

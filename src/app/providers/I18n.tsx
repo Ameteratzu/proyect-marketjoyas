@@ -6,8 +6,21 @@ import esHeader from "@/locales/es/header.json";
 import enHeader from "@/locales/en/header.json";
 import esFooter from "@/locales/es/footer.json";
 import enFooter from "@/locales/en/footer.json";
+import esHome from "@/locales/es/home.json";
+import enHome from "@/locales/en/home.json";
+import esSidebar from "@/locales/es/sidebar.json";
+import enSidebar from "@/locales/en/sidebar.json";
+import esCompare from "@/locales/es/compare.json";
+import enCompare from "@/locales/en/compare.json";
+import esAbout from "@/locales/es/about.json";
+import enAbout from "@/locales/en/about.json";
+import esQuote from "@/locales/es/quote.json";
+import enQuote from "@/locales/en/quote.json";
+import esStore from "@/locales/es/stores.json";
+import enStore from "@/locales/en/stores.json";
 import esLogin from "@/locales/es/login.json";
 import enLogin from "@/locales/en/login.json";
+
 
 i18n
   .use(LanguageDetector)
@@ -28,14 +41,14 @@ i18n
 
     interpolation: { escapeValue: false },
 
-    // Namespaces (puedes añadir más: 'footer', 'home', etc.)
-    ns: ["header", "footer", "login"],
+    // Namespaces (acá se añade más)
+    ns: ["header", "footer", "home", "sidebar", "compare", "about", "quote", "stores", "login"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer:esFooter , login: esLogin},
-      en: { header: enHeader, footer:enFooter , login: enLogin},
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote, stores: esStore, login: esLogin },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote, stores: enStore, login: enLogin },
     },
   });
 
