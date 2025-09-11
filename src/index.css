@@ -44,7 +44,7 @@
 }
 
 @utility btn-ghost {
-  @apply btn bg-neutral text-dark hover:bg-primary hover:text-white;
+  @apply btn bg-neutral text-dark hover:bg-accent-warm hover:text-white;
 }
 
 @utility btn-selected {
