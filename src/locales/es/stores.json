@@ -2,5 +2,14 @@
     "title": "Todas las tiendas",
     "goTo": "Ir a la tienda",
     "rating": "Calificación:",
-    "empty": "No hay tiendas para mostrar."
+    "empty": "No hay tiendas para mostrar.",
+    "products": "Productos",
+    "reviews": "Reseñas",
+    "notFound": "Tienda no encontrada.",
+    "noProducts": "Aún no hay productos publicados en esta tienda.",
+    "quote": "Cotizar",
+    "fav": "Agregar Favoritos",
+    "vendorRating": "Calificación del Vendedor",
+    "reviewsCount": "reseñas",
+    "filterMostRelevant": "Filtrar: más relevantes"
 }
