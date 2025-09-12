@@ -1,6 +1,6 @@
 import LoadingAnimate from "@/components/LoadingAnimate";
 import { lazy, Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import CertificatesList from "../pages/Certificates/CertificatesList";
 import Customers from "../pages/Customers/Customers";
 
@@ -16,6 +16,7 @@ const Subscriptions = lazy(
 const Staff = lazy(() => import("../pages/Staff/Staff"));
 const Reviews = lazy(() => import("../pages/Reviews/Reviews"));
 const Reports = lazy(() => import("../pages/Reports/Reports"));
+const AdminLayout = lazy(() => import("../layout/AdminLayout"));
 
 function SuspenseOutlet() {
   return (
@@ -27,12 +28,13 @@ function SuspenseOutlet() {
 export const adminRoutes = [
   {
     path: "/admin",
-    element: <Dashboard />,
+    element: <AdminLayout />,
     children: [
       {
         element: <SuspenseOutlet />,
         children: [
-          { index: true, element: <Dashboard /> },
+          { index: true, element: <Navigate to="principal" replace /> },
+          { path: "principal", element: <Dashboard /> },
           { path: "certificados", element: <CertificatesList /> },
           { path: "productos", element: <Products /> },
           { path: "suscripciones", element: <Subscriptions /> },

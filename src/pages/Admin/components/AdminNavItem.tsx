@@ -18,8 +18,8 @@ export default function AdminNavItem({ to, label, Icon, collapse }: Props) {
         cn(
           "group flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-colors",
           isActive
-            ? "bg-primary/20 text-white"
-            : "text-white/80 hover:text-white hover:bg-white/10"
+            ? "bg-primary text-white"
+            : "text-white/80 hover:text-white hover:bg-primary/35"
         )
       }
       aria-label={label}
