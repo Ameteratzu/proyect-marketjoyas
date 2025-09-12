@@ -1,0 +1,34 @@
+{
+  "sidebar": {
+    "dashboard": "Panel principal",
+    "certificates": "Certificados",
+    "products": "Productos",
+    "subscriptions": "Suscripciones",
+    "orders": "Pedidos",
+    "transactions": "Transacciones",
+    "refunds": "Reembolsos",
+    "reviews": "Opiniones",
+    "inventory": "Inventario",
+    "customers": "Clientes",
+    "staff": "Personal",
+    "reports": "Reportes",
+    "plan.badge": "Plata Mensual"
+  },
+  "topbar": {
+    "notifications": "Notificaciones",
+    "notifications.empty": "Sin notificaciones",
+    "notifications.viewAll": "Ver todas",
+    "notifications.close": "Cerrar",
+    "visitSite": "Visitar Sitio",
+    "store": "Tienda",
+    "lang": "ES",
+    "languages": {
+      "es": "Español",
+      "en": "Inglés"
+    }
+  },
+  "dashboard": {
+    "title": "Panel principal",
+    "welcome": "Bienvenido al panel de administración. Aquí irán cards/resúmenes."
+  }
+}

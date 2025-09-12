@@ -1,4 +1,5 @@
 import AdminNavItem from "./AdminNavItem";
+import { useTranslation } from "react-i18next";
 import {
   LuArrowLeftRight,
   LuRotateCcw,
@@ -17,6 +18,7 @@ import { BiSolidReport } from 'react-icons/bi';
 type Props = { collapsed: boolean };
 
 export default function AdminSidebar({ collapsed }: Props) {
+  const { t } = useTranslation("admin");
 
   return (
     <aside
@@ -30,7 +32,7 @@ export default function AdminSidebar({ collapsed }: Props) {
           {!collapsed && (
             <div className="leading-tight">
               <p className="text-xs font-display font-semibold bg-accent-warm text-dark inline-block px-4 py-0.5 rounded-full">
-                Plata Mensual
+                {t("sidebar.plan.badge")}
               </p>
             </div>
           )}
@@ -41,73 +43,73 @@ export default function AdminSidebar({ collapsed }: Props) {
       <nav className="flex flex-col gap-0.5 px-2">
         <AdminNavItem
           to="/admin/principal"
-          label="Panel principal"
+          label={t("sidebar.dashboard")}
           Icon={FaHome}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/certificados"
-          label="Certificados"
+          label={t("sidebar.certificates")}
           Icon={PiCertificateFill}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/productos"
-          label="Productos"
+          label={t("sidebar.products")}
           Icon={FaBoxOpen}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/suscripciones"
-          label="Suscripciones"
+          label={t("sidebar.subscriptions")}
           Icon={FaCreditCard}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/pedidos"
-          label="Pedidos"
+          label={t("sidebar.orders")}
           Icon={FaShoppingBag}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/transacciones"
-          label="Transacciones"
+          label={t("sidebar.transactions")}
           Icon={LuArrowLeftRight}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/reembolsos"
-          label="Reembolsos"
+          label={t("sidebar.refunds")}
           Icon={LuRotateCcw}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/opiniones"
-          label="Opiniones"
+          label={t("sidebar.reviews")}
           Icon={MdReviews}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/inventario"
-          label="Inventario"
+          label={t("sidebar.inventory")}
           Icon={FaBoxes}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/clientes"
-          label="Clientes"
+          label={t("sidebar.customers")}
           Icon={FaUsers}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/personal"
-          label="Personal"
+          label={t("sidebar.staff")}
           Icon={FaUserShield}
           collapse={collapsed}
         />
         <AdminNavItem
           to="/admin/reportes"
-          label="Reportes"
+          label={t("sidebar.reports")}
           Icon={BiSolidReport}
           collapse={collapsed}
         />

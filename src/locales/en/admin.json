@@ -1,0 +1,34 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "certificates": "Certificates",
+    "products": "Products",
+    "subscriptions": "Subscriptions",
+    "orders": "Orders",
+    "transactions": "Transactions",
+    "refunds": "Refunds",
+    "reviews": "Reviews",
+    "inventory": "Inventory",
+    "customers": "Customers",
+    "staff": "Staff",
+    "reports": "Reports",
+    "plan.badge": "Silver Monthly"
+  },
+  "topbar": {
+    "notifications": "Notifications",
+    "notifications.empty": "No notifications",
+    "notifications.viewAll": "View all",
+    "notifications.close": "Close",
+    "visitSite": "Visit Site",
+    "store": "Store",
+    "lang": "EN",
+    "languages": {
+      "es": "Spanish",
+      "en": "English"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to the admin panel. Summary cards will be shown here."
+  }
+}

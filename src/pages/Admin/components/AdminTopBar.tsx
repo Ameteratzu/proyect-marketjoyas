@@ -8,6 +8,7 @@ import {
 import AdminUserMenu from "./AdminUserMenu";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = { collapsed: boolean; onToggle: () => void };
 
@@ -43,18 +44,34 @@ const MOCK_NOTIFICATIONS: Notification[] = [
 
 export default function AdminTopbar({ collapsed, onToggle }: Props) {
   const [openNotif, setOpenNotif] = useState(false);
+  const [openLang, setOpenLang] = useState(false);
   const notifRef = useRef<HTMLDivElement | null>(null);
+  const langRef = useRef<HTMLDivElement | null>(null);
+  const { t, i18n } = useTranslation("admin");
 
-  // Cerrar al hacer clic fuera
+  // Cerrar al hacer clic fuera para ambos menús
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (!openNotif) return;
-      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+      if (
+        notifRef.current &&
+        !notifRef.current.contains(e.target as Node) &&
+        openNotif
+      ) {
         setOpenNotif(false);
+      }
+      if (
+        langRef.current &&
+        !langRef.current.contains(e.target as Node) &&
+        openLang
+      ) {
+        setOpenLang(false);
       }
     }
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpenNotif(false);
+      if (e.key === "Escape") {
+        setOpenNotif(false);
+        setOpenLang(false);
+      }
     }
     window.addEventListener("mousedown", handleClick);
     window.addEventListener("keydown", handleKey);
@@ -62,7 +79,22 @@ export default function AdminTopbar({ collapsed, onToggle }: Props) {
       window.removeEventListener("mousedown", handleClick);
       window.removeEventListener("keydown", handleKey);
     };
-  }, [openNotif]);
+  }, [openNotif, openLang]);
+
+  const currentLng = i18n.language.startsWith("en") ? "en" : "es";
+  const languages = [
+    {
+      code: "es",
+      label: t("topbar.languages.es"),
+      flag: "https://flagcdn.com/w20/pe.png",
+    },
+    {
+      code: "en",
+      label: t("topbar.languages.en"),
+      flag: "https://flagcdn.com/w20/us.png",
+    },
+  ];
+  const activeLang = languages.find((l) => l.code === currentLng)!;
   return (
     <header className="sticky top-0 z-30 border-b border-black/10 bg-bg-light/90 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="w-full flex h-16 items-center gap-3 pl-4 pr-4 sm:pr-6 lg:pr-8">
@@ -108,17 +140,17 @@ export default function AdminTopbar({ collapsed, onToggle }: Props) {
                 className="absolute right-0 mt-2 w-80 max-h-[70vh] overflow-auto rounded-xl border border-black/10 bg-white shadow-lg p-2 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2"
               >
                 <div className="flex items-center justify-between px-2 pt-1 pb-2 border-b border-neutral/60">
-                  <p className="text-sm font-medium">Notificaciones</p>
+                  <p className="text-sm font-medium">{t("topbar.notifications")}</p>
                   <button
                     onClick={() => setOpenNotif(false)}
                     className="text-xs text-graphite/70 hover:text-primary cursor-pointer"
                   >
-                    Cerrar
+                    {t("topbar.notifications.close")}
                   </button>
                 </div>
                 {MOCK_NOTIFICATIONS.length === 0 && (
                   <p className="text-xs text-graphite/60 px-2 py-4 text-center">
-                    Sin notificaciones
+                    {t("topbar.notifications.empty")}
                   </p>
                 )}
                 {MOCK_NOTIFICATIONS.map((n) => (
@@ -141,7 +173,7 @@ export default function AdminTopbar({ collapsed, onToggle }: Props) {
                 ))}
                 <div className="pt-1 border-t border-neutral/60 mt-1">
                   <button className="w-full text-xs font-medium text-primary hover:underline py-1.5 rounded-lg cursor-pointer">
-                    Ver todas
+                    {t("topbar.notifications.viewAll")}
                   </button>
                 </div>
               </div>
@@ -155,7 +187,7 @@ export default function AdminTopbar({ collapsed, onToggle }: Props) {
             className="hidden sm:flex items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm hover:bg-neutral/50"
           >
             <LuGlobe className="h-4 w-4" />
-            Visitar Sitio
+            {t("topbar.visitSite")}
           </a>
 
           {/* Tienda */}
@@ -165,19 +197,56 @@ export default function AdminTopbar({ collapsed, onToggle }: Props) {
             className="hidden sm:flex items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm hover:bg-neutral/50"
           >
             <LuStore className="h-4 w-4" />
-            Tienda
+            {t("topbar.store")}
           </a>
 
-          {/* Selector idioma mock (ES) */}
-          <button className="hidden sm:flex items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm hover:bg-neutral/50 cursor-pointer">
-            <img
-              alt="ES"
-              src="https://flagcdn.com/w20/pe.png"
-              className="h-4 w-5"
-            />
-            ES
-            <RiArrowDownSFill className="h-4 w-4" />
-          </button>
+          {/* Selector idioma */}
+          <div className="relative hidden sm:block" ref={langRef}>
+            <button
+              onClick={() => setOpenLang((v) => !v)}
+              aria-haspopup="true"
+              aria-expanded={openLang}
+              className="flex items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm hover:bg-neutral/50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40"
+            >
+              <img
+                alt={activeLang.code.toUpperCase()}
+                src={activeLang.flag}
+                className="h-4 w-5"
+              />
+              {activeLang.code.toUpperCase()}
+              <RiArrowDownSFill
+                className={`h-4 w-4 transition-transform ${
+                  openLang ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openLang && (
+              <div className="absolute right-0 mt-2 w-44 rounded-xl border border-black/10 bg-white shadow-lg py-2 text-sm flex flex-col animate-in fade-in slide-in-from-top-2">
+                {languages.map((lng) => (
+                  <button
+                    key={lng.code}
+                    onClick={() => {
+                      i18n.changeLanguage(lng.code);
+                      setOpenLang(false);
+                    }}
+                    className={`w-full px-3 py-2 text-left flex items-center gap-2 hover:bg-neutral/50 cursor-pointer ${
+                      lng.code === currentLng ? "bg-neutral/30 font-medium" : ""
+                    }`}
+                  >
+                    <img
+                      alt={lng.code.toUpperCase()}
+                      src={lng.flag}
+                      className="h-4 w-5"
+                    />
+                    <span className="flex-1">{lng.label}</span>
+                    {lng.code === currentLng && (
+                      <span className="i-[heroicons-outline:check] w-4 h-4" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <AdminUserMenu />
         </div>
