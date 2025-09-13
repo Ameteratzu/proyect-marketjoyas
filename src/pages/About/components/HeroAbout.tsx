@@ -13,7 +13,7 @@ export default function HeroAbout({
         <img
           src={bg}
           alt={t("hero.alt")}
-          className="absolute inset-0 h-full md:object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           draggable={false}
         />
         <div className="absolute inset-0" />
