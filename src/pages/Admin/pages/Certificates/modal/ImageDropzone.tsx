@@ -62,7 +62,7 @@ export default function ImageDropzone({ value, onChange }: Props) {
           </div>
           <p className="text-sm">
             Arrastra una imagen aquí o{" "}
-            <span className="underline">haz click para seleccionar</span>
+            <span className="underline cursor-pointer">haz click para seleccionar</span>
           </p>
         </div>
       )}
