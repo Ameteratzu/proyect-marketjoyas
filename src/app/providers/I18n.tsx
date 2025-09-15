@@ -18,8 +18,13 @@ import esQuote from "@/locales/es/quote.json";
 import enQuote from "@/locales/en/quote.json";
 import esStore from "@/locales/es/stores.json";
 import enStore from "@/locales/en/stores.json";
+<<<<<<< HEAD
 import esLogin from "@/locales/es/login.json";
 import enLogin from "@/locales/en/login.json";
+=======
+import esAdmin from "@/locales/es/admin.json";
+import enAdmin from "@/locales/en/admin.json";
+>>>>>>> acfc575ad6ad40684d19e85d8117c18626b47b15
 
 
 i18n
@@ -42,13 +47,22 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (acá se añade más)
+<<<<<<< HEAD
     ns: ["header", "footer", "home", "sidebar", "compare", "about", "quote", "stores", "login"],
+=======
+  ns: ["header", "footer", "home", "sidebar", "compare", "about", "quote", "stores", "admin"],
+>>>>>>> acfc575ad6ad40684d19e85d8117c18626b47b15
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
+<<<<<<< HEAD
       es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote, stores: esStore, login: esLogin },
       en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote, stores: enStore, login: enLogin },
+=======
+  es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote, stores: esStore, admin: esAdmin },
+  en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote, stores: enStore, admin: enAdmin },
+>>>>>>> acfc575ad6ad40684d19e85d8117c18626b47b15
     },
   });
 
