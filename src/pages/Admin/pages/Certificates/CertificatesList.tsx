@@ -26,7 +26,7 @@ export default function CertificatesList() {
         <h1 className="text-2xl font-semibold leading-tight">
           {t('certificates.title', { defaultValue: 'Gestión de Certificados' })}
         </h1>
-        <button className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-medium text-white shadow-sm hover:bg-primary/90 transition-colors">
+        <button className="btn btn-primary inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium transition-colors">
           <LuPlus className="h-5 w-5" />
           {t('certificates.create', { defaultValue: 'Crear Certificado' })}
         </button>
