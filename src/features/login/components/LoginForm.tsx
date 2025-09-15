@@ -18,6 +18,22 @@ export default function LoginForm({ onForgot }: Props) {
   const [validationErrors, setValidationErrors] = useState<{[key: string]: string}>({});
   const [touched, setTouched] = useState<{[key: string]: boolean}>({});
 
+  // -------------------------------
+  // Estado para controlar el modal de bienvenida
+  // -------------------------------
+  const [showWelcome, setShowWelcome] = useState(false);
+
+   const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+  if (showWelcome) {
+    const timer = setTimeout(() => {
+      setShowWelcome(false);
+    }, 2000); // Duración en milisegundos (3 segundos)
+    return () => clearTimeout(timer); // Limpiar timer si el componente se desmonta
+  }
+}, [showWelcome]);
+
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberEmail");
     if (rememberedEmail) {
@@ -70,9 +86,17 @@ export default function LoginForm({ onForgot }: Props) {
     } else if (!remember) {
       localStorage.removeItem("rememberEmail");
     }
+
+    // -------------------------------
+    // Mostrar la ventana flotante de bienvenida al iniciar sesión
+    // -------------------------------
+    if(success){
+      setShowWelcome(true);
+    }
   }
 
   return (
+    <>
     <form onSubmit={onSubmit} className="space-y-6">
       {(error || validationErrors.general) && (
         <div className="p-3 bg-red-50 border border-red-200 rounded-md">
@@ -158,5 +182,18 @@ export default function LoginForm({ onForgot }: Props) {
         )}
       </button>
     </form>
+    
+  {/* -------------------------------
+          Ventana flotante de Bienvenida
+      ------------------------------- */}
+      {showWelcome && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-4">¡Bienvenido!</h2>
+            <p className="mb-4">Has iniciado sesión correctamente.</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

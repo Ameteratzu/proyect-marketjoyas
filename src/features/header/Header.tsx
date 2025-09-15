@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"; 
+import { useRef, useState } from "react";
 import Container from "@/components/Container";
 import TopBar from "@/features/header/components/TopBar";
 import Logo from "@/features/header/components/Logo";
@@ -9,13 +9,15 @@ import MainNav from "./components/MainNav";
 import useHideOnScroll from "@/hooks/useHideOnScroll";
 import useOnScreen from "@/hooks/useOnScreen";
 import { cn } from "@/lib/cn";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../common/store/store";
 
 import Sidebar from "./components/Sidebar";
-import AuthModal from "../login/components/AuthModal";
+import AuthModal from "../../common/components/AuthModal";
 
 
 export default function Header() {
-  
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openAuth, setOpenAuth] = useState(false);
   // Sentinel y hooks de scroll
@@ -23,6 +25,8 @@ export default function Header() {
   const headerVisible = useOnScreen(sentinelRef, "-100px");
   const hideBecauseScrollingDown = useHideOnScroll(12);
   const showFloatingBar = !headerVisible && !hideBecauseScrollingDown;
+  const user = useSelector((state: RootState) => state.user.user);
+
 
   return (
     <>
@@ -36,7 +40,8 @@ export default function Header() {
               {/* 👈 Pasa la función para abrir el sidebar al hacer clic */}
               <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
               <Logo />
-              <Actions onLoginClick={() => setOpenAuth(true)} />
+              <Actions onLoginClick={() => setOpenAuth(true)} user={user?.user} />
+
             </div>
             {/* ... el resto del código del header ... */}
             <div className="mt-3 md:hidden">
@@ -47,7 +52,8 @@ export default function Header() {
               {/* 👈 Pasa la función para abrir el sidebar en desktop */}
               <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
               <SearchBar />
-              <Actions onLoginClick={() => setOpenAuth(true)} />
+              <Actions onLoginClick={() => setOpenAuth(true)} user={user?.user} />
+
             </div>
           </div>
         </Container>
@@ -67,7 +73,8 @@ export default function Header() {
             {/* 👈 Pasa la función para abrir el sidebar en la barra flotante móvil */}
             <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
             <Logo />
-             <Actions onLoginClick={() => setOpenAuth(true)} />
+            <Actions onLoginClick={() => setOpenAuth(true)} user={user?.user} />
+
           </div>
           <div className="mt-3 md:hidden">
             <SearchBar />
@@ -77,7 +84,8 @@ export default function Header() {
             {/* 👈 Pasa la función para abrir el sidebar en la barra flotante desktop */}
             <CategoryTrigger onClick={() => setIsSidebarOpen(true)} />
             <SearchBar />
-            <Actions />
+            <Actions onLoginClick={() => setOpenAuth(true)} user={user?.user} />
+
           </div>
         </div>
       </div>
@@ -86,7 +94,7 @@ export default function Header() {
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <AuthModal open={openAuth} onClose={() => setOpenAuth(false)} />
     </>
-    
+
   );
-  
+
 }

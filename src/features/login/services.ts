@@ -5,7 +5,7 @@ import type { LoginCredentials, RegisterData, User } from "./types";
 
 
 // URL base de la API
-const API_URL = "";
+const API_URL = import.meta.env.VITE_API_URL+"/auth";
 
 // Servicio para iniciar sesión
 export async function login(credentials: LoginCredentials): Promise<User> {
