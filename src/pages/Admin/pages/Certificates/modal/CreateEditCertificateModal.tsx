@@ -162,14 +162,14 @@ export default function CreateEditCertificateModal({
             type="button"
             onClick={onClose}
             className={cn(
-              "inline-flex h-11 items-center rounded-full bg-neutral px-8 text-sm font-medium text-graphite hover:bg-neutral/80 transition-colors"
+              "inline-flex h-11 items-center rounded-full btn-ghost px-8 text-sm font-medium transition-colors"
             )}
           >
             Cancelar
           </button>
           <button
             type="submit"
-            className="inline-flex h-11 items-center rounded-full bg-primary px-8 text-sm font-medium text-white shadow-sm hover:bg-primary/90 transition-colors"
+            className="inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors"
           >
             {mode === "create" ? "Crear Certificado" : "Guardar cambios"}
           </button>
