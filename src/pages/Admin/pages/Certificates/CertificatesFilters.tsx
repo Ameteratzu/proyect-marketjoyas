@@ -87,7 +87,7 @@ export function CertificatesFilters({
         <button
           onClick={onReset}
           className={cn(
-            "btn inline-flex items-center gap-2 bg-neutral px-5 h-10 text-sm font-medium text-graphite hover:bg-neutral/80 transition-colors"
+            "btn btn-ghost inline-flex items-center gap-2 px-5 h-10 text-sm font-medium transition-colors"
           )}
         >
           <LuRefreshCcw className="h-4 w-4" />
