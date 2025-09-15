@@ -78,7 +78,7 @@ export function CertificatesFilters({
         <button
           onClick={onApply}
           className={cn(
-            "inline-flex items-center gap-2 rounded-full bg-primary px-5 h-10 text-sm font-medium text-white hover:bg-primary/90 transition-colors shadow-sm"
+            "btn btn-primary inline-flex items-center gap-2  px-5 h-10 text-sm font-medium transition-colors shadow-sm"
           )}
         >
           <LuFilter className="h-4 w-4" />
@@ -87,7 +87,7 @@ export function CertificatesFilters({
         <button
           onClick={onReset}
           className={cn(
-            "inline-flex items-center gap-2 rounded-full bg-neutral px-5 h-10 text-sm font-medium text-graphite hover:bg-neutral/80 transition-colors"
+            "btn inline-flex items-center gap-2 bg-neutral px-5 h-10 text-sm font-medium text-graphite hover:bg-neutral/80 transition-colors"
           )}
         >
           <LuRefreshCcw className="h-4 w-4" />
