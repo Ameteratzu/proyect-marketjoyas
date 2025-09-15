@@ -57,7 +57,7 @@ export function CertificatesTable({
               <td className="px-4 py-3">
                 <div className="flex items-center gap-2 text-primary">
                   <button
-                    className="rounded-lg p-1.5 hover:bg-primary/10"
+                    className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
                     title={t('actions.view', { defaultValue: 'Ver' })}
                     aria-label="Ver"
                     onClick={() => onView?.(row)}
@@ -65,7 +65,7 @@ export function CertificatesTable({
                     <LuEye className="h-5 w-5" />
                   </button>
                   <button
-                    className="rounded-lg p-1.5 hover:bg-primary/10"
+                    className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
                     title={t('actions.link', { defaultValue: 'Enlace/Descargar' })}
                     aria-label="Enlace"
                     onClick={() => onLink?.(row)}
@@ -73,7 +73,7 @@ export function CertificatesTable({
                     <LuLink2 className="h-5 w-5" />
                   </button>
                   <button
-                    className="rounded-lg p-1.5 hover:bg-primary/10"
+                    className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
                     title={t('actions.edit', { defaultValue: 'Editar' })}
                     aria-label="Editar"
                     onClick={() => onEdit?.(row)}
@@ -81,7 +81,7 @@ export function CertificatesTable({
                     <LuPencil className="h-5 w-5" />
                   </button>
                   <button
-                    className="rounded-lg p-1.5 hover:bg-red-50 text-red-600"
+                    className="rounded-lg p-1.5 hover:bg-red-50 text-red-600 cursor-pointer"
                     title={t('actions.delete', { defaultValue: 'Eliminar' })}
                     aria-label="Eliminar"
                     onClick={() => onDelete?.(row)}
