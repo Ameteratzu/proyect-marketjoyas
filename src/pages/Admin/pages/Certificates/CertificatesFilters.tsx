@@ -36,7 +36,7 @@ export function CertificatesFilters({
         className
       )}
     >
-      <div className="flex-1">
+      <div className="flex-1 md:flex-[2] min-w-[260px]">
         <label className="block mb-1 text-xs font-medium tracking-wide text-graphite/70 uppercase">
           {t("certificates.searchByNameLabel", {
             defaultValue: "Buscar por nombre",
@@ -47,15 +47,15 @@ export function CertificatesFilters({
           <input
             value={qName}
             onChange={(e) => onChangeQName(e.target.value)}
-            className="input pl-9 border-1 border-graphite/30 rounded-lg p-2"
-            placeholder={t("certificates.searchByNamePlaceholder", {
-              defaultValue: "Nombre del cliente",
+            className="input w-full pl-9 pr-3 border-1 border-graphite/30 rounded-lg h-10"
+            placeholder={t("certificates.searchByName", {
+              defaultValue: "Buscar por nombre / tienda / producto",
             })}
           />
         </div>
       </div>
 
-      <div className="flex-1 md:max-w-sm">
+      <div className="flex-1 md:flex-[1] md:max-w-xs">
         <label className="block mb-1 text-xs font-medium tracking-wide text-graphite/70 uppercase">
           {t("certificates.searchByDocLabel", {
             defaultValue: "Buscar por DNI",
@@ -66,7 +66,7 @@ export function CertificatesFilters({
           <input
             value={qDoc}
             onChange={(e) => onChangeQDoc(e.target.value)}
-            className="input pl-9 border-1 border-graphite/30 rounded-lg p-2"
+            className="input w-full pl-9 pr-3 border-1 border-graphite/30 rounded-lg h-10"
             placeholder={t("certificates.searchByDocPlaceholder", {
               defaultValue: "DNI/RUC",
             })}
