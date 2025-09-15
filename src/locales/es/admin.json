@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "dashboard": "Panel principal",
+    "certificates": "Certificados",
+    "products": "Productos",
+    "subscriptions": "Suscripciones",
+    "orders": "Pedidos",
+    "transactions": "Transacciones",
+    "refunds": "Reembolsos",
+    "reviews": "Opiniones",
+    "inventory": "Inventario",
+    "customers": "Clientes",
+    "staff": "Personal",
+    "reports": "Reportes",
+    "plan.badge": "Plata Mensual"
+  },
+  "topbar": {
+    "notifications": "Notificaciones",
+    "notifications.empty": "Sin notificaciones",
+    "notifications.viewAll": "Ver todas",
+    "notifications.close": "Cerrar",
+    "visitSite": "Visitar Sitio",
+    "store": "Tienda",
+    "lang": "ES",
+    "languages": {
+      "es": "Español",
+      "en": "Inglés"
+    }
+  },
+  "dashboard": {
+    "title": "Panel principal",
+    "welcome": "Bienvenido al panel de administración. Aquí irán cards/resúmenes."
+  }
+  ,
+  "certificates": {
+    "title": "Gestión de Certificados",
+    "create": "Crear Certificado",
+    "results": "{{count}} resultados",
+    "searchByName": "Buscar por nombre / tienda / producto",
+    "searchByDoc": "Buscar por DNI / RUC",
+    "searchByNameLabel": "Buscar por nombre",
+    "searchByNamePlaceholder": "Nombre del cliente/tienda",
+    "searchByDocLabel": "Buscar por DNI",
+    "searchByDocPlaceholder": "DNI / RUC",
+    "empty": "No se encontraron certificados con los filtros actuales.",
+    "columns": {
+      "store": "Nombre de la tienda",
+      "address": "Dirección",
+      "product": "Producto",
+      "client": "Cliente",
+      "doc": "DNI/RUC",
+      "date": "Fecha",
+      "actions": "Acciones"
+    }
+  },
+  "filters": {
+    "apply": "Filtrar",
+    "clear": "Limpiar"
+  },
+  "actions": {
+    "view": "Ver",
+    "link": "Enlace/Descargar",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
+  "loading": "Cargando..."
+}

@@ -15,6 +15,7 @@ const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 const Products = lazy(() => import("@/pages/Products").then(module => ({ default: module.default }))); // Importa la página de productos
 import LoadingAnimate from "@/components/LoadingAnimate";
+import { adminRoutes } from "@/pages/Admin/routes/admin.routes";
 
 function RootLayout() {
   return (
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "*", element: <NotFound /> },
     ],
   },
+  ...adminRoutes,
 ]);
 
 export default function AppRouter() {
