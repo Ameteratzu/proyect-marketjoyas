@@ -1,16 +1,21 @@
-import { useMemo, useState, useCallback } from 'react';
-import type { Certificate } from './types';
-import { MOCK_CERTIFICATES } from './mockCertificates';
-import { filterCertificates } from './filterCertificates';
+import { useMemo, useState, useCallback } from "react";
+import type { Certificate } from "./types";
+import { MOCK_CERTIFICATES } from "./mockCertificates";
+import { filterCertificates } from "./filterCertificates";
 
 const PAGE_SIZE = 7; // Mantener configurable si se desea
 
-export function useCertificates(initialData: Certificate[] = MOCK_CERTIFICATES) {
-  const [qName, setQName] = useState('');
-  const [qDoc, setQDoc] = useState('');
+export function useCertificates(
+  initialData: Certificate[] = MOCK_CERTIFICATES
+) {
+  const [qName, setQName] = useState("");
+  const [qDoc, setQDoc] = useState("");
   const [page, setPage] = useState(1);
 
-  const filtered = useMemo(() => filterCertificates(initialData, qName, qDoc), [initialData, qName, qDoc]);
+  const filtered = useMemo(
+    () => filterCertificates(initialData, qName, qDoc),
+    [initialData, qName, qDoc]
+  );
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
   const current = useMemo(() => {
@@ -19,8 +24,8 @@ export function useCertificates(initialData: Certificate[] = MOCK_CERTIFICATES) 
   }, [filtered, page]);
 
   const reset = useCallback(() => {
-    setQName('');
-    setQDoc('');
+    setQName("");
+    setQDoc("");
     setPage(1);
   }, []);
 
@@ -34,9 +39,12 @@ export function useCertificates(initialData: Certificate[] = MOCK_CERTIFICATES) 
     setPage(1);
   }, []);
 
-  const goToPage = useCallback((n: number) => {
-    setPage(Math.min(Math.max(1, n), totalPages));
-  }, [totalPages]);
+  const goToPage = useCallback(
+    (n: number) => {
+      setPage(Math.min(Math.max(1, n), totalPages));
+    },
+    [totalPages]
+  );
 
   return {
     qName,
