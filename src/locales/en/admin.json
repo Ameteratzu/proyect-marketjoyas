@@ -31,4 +31,37 @@
     "title": "Dashboard",
     "welcome": "Welcome to the admin panel. Summary cards will be shown here."
   }
+    ,
+    "certificates": {
+      "title": "Certificates Management",
+      "create": "Create Certificate",
+      "results": "{{count}} results",
+      "searchByName": "Search by name / store / product",
+      "searchByDoc": "Search by ID / Tax ID",
+      "searchByNameLabel": "Search by name",
+      "searchByNamePlaceholder": "Client name/tienda",
+      "searchByDocLabel": "Search by ID",
+      "searchByDocPlaceholder": "ID / Tax ID",
+      "empty": "No certificates found with the current filters.",
+      "columns": {
+        "store": "Store name",
+        "address": "Address",
+        "product": "Product",
+        "client": "Client",
+        "doc": "ID/Tax ID",
+        "date": "Date",
+        "actions": "Actions"
+      }
+    },
+    "filters": {
+      "apply": "Filter",
+      "clear": "Clear"
+    },
+    "actions": {
+      "view": "View",
+      "link": "Link/Download",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "loading": "Loading..."
 }

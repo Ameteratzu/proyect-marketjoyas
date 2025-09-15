@@ -31,4 +31,37 @@
     "title": "Panel principal",
     "welcome": "Bienvenido al panel de administración. Aquí irán cards/resúmenes."
   }
+  ,
+  "certificates": {
+    "title": "Gestión de Certificados",
+    "create": "Crear Certificado",
+    "results": "{{count}} resultados",
+    "searchByName": "Buscar por nombre / tienda / producto",
+    "searchByDoc": "Buscar por DNI / RUC",
+    "searchByNameLabel": "Buscar por nombre",
+    "searchByNamePlaceholder": "Nombre del cliente/tienda",
+    "searchByDocLabel": "Buscar por DNI",
+    "searchByDocPlaceholder": "DNI / RUC",
+    "empty": "No se encontraron certificados con los filtros actuales.",
+    "columns": {
+      "store": "Nombre de la tienda",
+      "address": "Dirección",
+      "product": "Producto",
+      "client": "Cliente",
+      "doc": "DNI/RUC",
+      "date": "Fecha",
+      "actions": "Acciones"
+    }
+  },
+  "filters": {
+    "apply": "Filtrar",
+    "clear": "Limpiar"
+  },
+  "actions": {
+    "view": "Ver",
+    "link": "Enlace/Descargar",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
+  "loading": "Cargando..."
 }
