@@ -1,12 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import { LuPlus } from 'react-icons/lu';
-import { Pagination } from './Pagination';
-import { CertificatesTable } from './CertificatesTable';
-import { useCertificates } from './useCertificates';
-import { CertificatesFilters } from './CertificatesFilters';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { LuPlus } from "react-icons/lu";
+import { Pagination } from "./Pagination";
+import { CertificatesTable } from "./CertificatesTable";
+import { useCertificates } from "./useCertificates";
+import { CertificatesFilters } from "./CertificatesFilters";
+import CreateEditCertificateModal from "./modal/CreateEditCertificateModal";
 
 export default function CertificatesList() {
-  const { t } = useTranslation('admin');
+  const { t } = useTranslation("admin");
   const {
     qName,
     qDoc,
@@ -20,15 +22,20 @@ export default function CertificatesList() {
     reset,
   } = useCertificates();
 
+  const [showCreate, setShowCreate] = useState(false);
+
   return (
     <section className="rounded-xl border border-black/10 bg-white p-4 md:p-6 shadow-sm">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <h1 className="text-2xl font-semibold leading-tight">
-          {t('certificates.title', { defaultValue: 'Gestión de Certificados' })}
+          {t("certificates.title", { defaultValue: "Gestión de Certificados" })}
         </h1>
-        <button className="btn btn-primary inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium transition-colors">
+        <button
+          className="btn btn-primary inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium transition-colors"
+          onClick={() => setShowCreate(true)}
+        >
           <LuPlus className="h-5 w-5" />
-          {t('certificates.create', { defaultValue: 'Crear Certificado' })}
+          {t("certificates.create", { defaultValue: "Crear Certificado" })}
         </button>
       </div>
 
@@ -48,6 +55,17 @@ export default function CertificatesList() {
         totalPages={totalPages}
         totalItems={filteredTotal}
         onChange={setPage}
+      />
+
+      {/* MODAL: Crear/Editar */}
+      <CreateEditCertificateModal
+        open={showCreate}
+        onClose={() => setShowCreate(false)}
+        onSubmit={(values) => {
+          // Aquí luego haremos el POST/optimistic update
+          // console.log("nuevo certificado:", values);
+        }}
+        mode="create"
       />
     </section>
   );
