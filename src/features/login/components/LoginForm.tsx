@@ -23,7 +23,7 @@ export default function LoginForm({ onForgot }: Props) {
   // -------------------------------
   const [showWelcome, setShowWelcome] = useState(false);
 
-   const [userName, setUserName] = useState("");
+  // Eliminado estado userName sin uso
 
   useEffect(() => {
   if (showWelcome) {

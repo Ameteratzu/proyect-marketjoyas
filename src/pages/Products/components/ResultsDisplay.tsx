@@ -1,7 +1,5 @@
 // src/features/products/components/ResultsDisplay.tsx
 
-import React from 'react';
-
 interface ResultsDisplayProps {
   totalItems: number;
   itemsPerPage: number;

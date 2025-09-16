@@ -1,7 +1,7 @@
 import { useMemo, useState, useCallback } from "react";
 import type { Certificate } from "./types";
 import { MOCK_CERTIFICATES } from "./mockCertificates";
-import { filterCertificates } from "./filterCertificates";
+import { filterCertificates } from "./components/filterCertificates";
 
 const PAGE_SIZE = 7; // Mantener configurable si se desea
 

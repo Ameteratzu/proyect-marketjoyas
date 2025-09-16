@@ -1,6 +1,4 @@
 // src/features/products/components/ProductCard.tsx
-
-import React from 'react';
 import { MdOutlineAddShoppingCart } from 'react-icons/md';
 import { FaRegHeart } from 'react-icons/fa';
 

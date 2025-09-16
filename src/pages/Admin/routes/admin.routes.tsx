@@ -1,7 +1,7 @@
 import LoadingAnimate from "@/components/LoadingAnimate";
 import { lazy, Suspense } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import CertificatesList from "../pages/Certificates/CertificatesList";
+import CertificatesList from "../pages/Certificates/components/CertificatesList";
 import Customers from "../pages/Customers/Customers";
 
 const Dashboard = lazy(() => import("../Dasboard"));
