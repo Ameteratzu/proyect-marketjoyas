@@ -57,7 +57,7 @@ export default function ImageDropzone({ value, onChange }: Props) {
         </div>
       ) : (
         <div className="text-graphite/80">
-          <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full border border-black/10">
+          <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full border border-black/10">
             <LuImageUp className="w-5 h-5" />
           </div>
           <p className="text-sm">

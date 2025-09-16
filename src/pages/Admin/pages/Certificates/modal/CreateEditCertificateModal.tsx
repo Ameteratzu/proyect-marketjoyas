@@ -1,6 +1,6 @@
 import ModalBase from "./ModalBase";
 import ImageDropzone from "./ImageDropzone";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useCertificateForm } from "./useCertificateForm";
 import { EMPTY_CERTIFICATE_FORM } from "./useCertificateForm";
 import type { CertificateFormValues } from "./useCertificateForm";
@@ -23,10 +23,12 @@ export default function CreateEditCertificateModal({
   className,
 }: Props) {
   const { values, onChange, onInput, setValues } = useCertificateForm();
+  const firstRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (open && mode === "create") {
       setValues(EMPTY_CERTIFICATE_FORM);
+      setTimeout(() => firstRef.current?.focus(), 40);
     }
   }, [open, mode, setValues]);
 
@@ -36,7 +38,6 @@ export default function CreateEditCertificateModal({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit?.(values);
-    // por ahora solo cerramos (diseño)
     onClose();
   };
 
@@ -45,136 +46,144 @@ export default function CreateEditCertificateModal({
       open={open}
       onClose={onClose}
       title={title}
-      className={className}
+      className={cn("max-w-5xl", className)}
     >
-      <header className="flex items-center justify-between border-b border-black/10 px-5 py-4">
-        <h3 className="text-xl md:text-2xl font-semibold">{title}</h3>
-        <button
-          aria-label="Cerrar"
-          className="grid h-9 w-9 place-items-center rounded-full hover:bg-neutral/50 cursor-pointer"
-          onClick={onClose}
-        >
-          <span className="i-[heroicons-outline:x-mark] w-5 h-5" />
-        </button>
-      </header>
-
-      <form onSubmit={handleSubmit} className="px-5 py-5">
-        <div className="grid gap-x-8 gap-y-5 md:grid-cols-2">
-          {/* Columna izquierda */}
-          <div className="space-y-5">
-            <Field label="Nombre de la tienda">
-              <Input
-                value={values.storeName}
-                onChange={onInput("storeName")}
-                placeholder="Ingrese nombre de la tienda"
-              />
-            </Field>
-            <Field label="Nombre del Producto">
-              <Input
-                value={values.product}
-                onChange={onInput("product")}
-                placeholder="Ingresar nombre del producto"
-              />
-            </Field>
-            <Field label="DNI/RUC del cliente">
-              <Input
-                value={values.doc}
-                onChange={onInput("doc")}
-                placeholder="Documento"
-              />
-            </Field>
-            <Field label="Material">
-              <Select
-                value={values.material}
-                onChange={onInput("material")}
-                placeholder="--- Seleccionar material ---"
-              >
-                <option>Oro</option>
-                <option>Plata</option>
-                <option>Acero</option>
-              </Select>
-            </Field>
-            <Field label="País">
-              <Select
-                value={values.country}
-                onChange={onInput("country")}
-                placeholder="--- Seleccionar país ---"
-              >
-                <option>Perú</option>
-                <option>Chile</option>
-                <option>Colombia</option>
-                <option>México</option>
-              </Select>
-            </Field>
-          </div>
-          {/* Columna derecha */}
-          <div className="space-y-5">
-            <Field label="Dirección">
-              <Input
-                value={values.address}
-                onChange={onInput("address")}
-                placeholder="Ingrese una dirección"
-              />
-            </Field>
-            <Field label="Nombre del Cliente">
-              <Input
-                value={values.client}
-                onChange={onInput("client")}
-                placeholder="Ingresar nombre completo"
-              />
-            </Field>
-            <Field label="Piedra Preciosa">
-              <Select
-                value={values.gemstone}
-                onChange={onInput("gemstone")}
-                placeholder="--- Seleccionar gema ---"
-              >
-                <option>Diamante</option>
-                <option>Esmeralda</option>
-                <option>Zafiro</option>
-                <option>Rubí</option>
-              </Select>
-            </Field>
-            <Field label="Peso">
-              <Input
-                value={values.weight}
-                onChange={onInput("weight")}
-                placeholder="Ej. 7 grs."
-              />
-            </Field>
-            <Field label="Descripcion">
-              <Textarea
-                value={values.description}
-                onChange={onInput("description")}
-                placeholder="Agregar una descripcion corta del producto"
-              />
-            </Field>
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <Label>Imagen del producto</Label>
-          <ImageDropzone value={values.image} onChange={onChange("image")} />
-        </div>
-
-        <footer className="mt-8 flex items-center justify-end gap-4">
+      <div className="flex flex-col max-h-[90vh]">
+        <header className="flex items-center justify-between border-b border-black/10 px-5 py-4 shrink-0">
+          <h3 className="text-xl md:text-2xl font-semibold">{title}</h3>
           <button
-            type="button"
+            aria-label="Cerrar"
+            className="grid h-9 w-9 place-items-center rounded-full hover:bg-neutral/50 cursor-pointer"
             onClick={onClose}
-            className={cn(
-              "inline-flex h-11 items-center rounded-full btn-ghost px-8 text-sm font-medium transition-colors"
-            )}
+            type="button"
           >
-            Cancelar
+            <span className="i-[heroicons-outline:x-mark] w-5 h-5" />
           </button>
-          <button
-            type="submit"
-            className="inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors"
-          >
-            {mode === "create" ? "Crear Certificado" : "Guardar cambios"}
-          </button>
-        </footer>
-      </form>
+        </header>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col flex-1 overflow-hidden"
+        >
+          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-8 scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent">
+            <div className="grid gap-x-8 gap-y-5 md:grid-cols-2">
+              <div className="space-y-5">
+                <Field label="Nombre de la tienda">
+                  <Input
+                    ref={firstRef}
+                    value={values.storeName}
+                    onChange={onInput("storeName")}
+                    placeholder="Ingrese nombre de la tienda"
+                  />
+                </Field>
+                <Field label="Nombre del Producto">
+                  <Input
+                    value={values.product}
+                    onChange={onInput("product")}
+                    placeholder="Ingresar nombre del producto"
+                  />
+                </Field>
+                <Field label="DNI/RUC del cliente">
+                  <Input
+                    value={values.doc}
+                    onChange={onInput("doc")}
+                    placeholder="Documento"
+                  />
+                </Field>
+                <Field label="Material">
+                  <Select
+                    value={values.material}
+                    onChange={onInput("material")}
+                    placeholder="--- Seleccionar material ---"
+                  >
+                    <option>Oro</option>
+                    <option>Plata</option>
+                    <option>Acero</option>
+                  </Select>
+                </Field>
+                <Field label="País">
+                  <Select
+                    value={values.country}
+                    onChange={onInput("country")}
+                    placeholder="--- Seleccionar país ---"
+                  >
+                    <option>Perú</option>
+                    <option>Chile</option>
+                    <option>Colombia</option>
+                    <option>México</option>
+                  </Select>
+                </Field>
+              </div>
+              <div className="space-y-5">
+                <Field label="Dirección">
+                  <Input
+                    value={values.address}
+                    onChange={onInput("address")}
+                    placeholder="Ingrese una dirección"
+                  />
+                </Field>
+                <Field label="Nombre del Cliente">
+                  <Input
+                    value={values.client}
+                    onChange={onInput("client")}
+                    placeholder="Ingresar nombre completo"
+                  />
+                </Field>
+                <Field label="Piedra Preciosa">
+                  <Select
+                    value={values.gemstone}
+                    onChange={onInput("gemstone")}
+                    placeholder="--- Seleccionar gema ---"
+                  >
+                    <option>Diamante</option>
+                    <option>Esmeralda</option>
+                    <option>Zafiro</option>
+                    <option>Rubí</option>
+                  </Select>
+                </Field>
+                <Field label="Peso">
+                  <Input
+                    value={values.weight}
+                    onChange={onInput("weight")}
+                    placeholder="Ej. 7 grs."
+                  />
+                </Field>
+                <Field label="Descripcion">
+                  <Textarea
+                    value={values.description}
+                    onChange={onInput("description")}
+                    placeholder="Agregar una descripcion corta del producto"
+                    rows={3}
+                  />
+                </Field>
+              </div>
+            </div>
+            <div>
+              <Label>Imagen del producto</Label>
+              <ImageDropzone
+                value={values.image}
+                onChange={onChange("image")}
+              />
+            </div>
+          </div>
+          <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-end gap-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className={cn(
+                "inline-flex h-11 items-center rounded-full btn-ghost px-8 text-sm font-medium transition-colors"
+              )}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors"
+            >
+              {mode === "create" ? "Crear Certificado" : "Guardar cambios"}
+            </button>
+          </footer>
+        </form>
+      </div>
     </ModalBase>
   );
 }
