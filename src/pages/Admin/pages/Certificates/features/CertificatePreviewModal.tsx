@@ -51,9 +51,7 @@ export default function CertificatePreviewModal({ open, id, onClose }: Props) {
   const doc = data ? (
     <CertificatePdf
       data={data}
-      assets={{
-  logoUrl: "/CentroJoyeroLogo.png",
-      }}
+  // No pasar assets por defecto para no bloquear el logo real
       lookups={{ gemas, materiales }}
     />
   ) : null;
