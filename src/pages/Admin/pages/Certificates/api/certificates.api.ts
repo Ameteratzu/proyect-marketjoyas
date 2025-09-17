@@ -1,6 +1,6 @@
 import { http } from "@/common/api/http";
-import type { Certificate } from "./types";
-import type { CertificateFormValues } from "./modal/useCertificateForm";
+import type { Certificate } from "../types/types";
+import type { CertificateFormValues } from "../modal/useCertificateForm";
 import type { CloudinaryUploadResponse } from "@/common/api/cloudinary.api";
 
 // =========================

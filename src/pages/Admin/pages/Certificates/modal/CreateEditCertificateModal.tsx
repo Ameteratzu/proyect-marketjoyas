@@ -10,7 +10,7 @@ import {
   fetchGems,
   fetchMaterials,
   type OptionItem,
-} from "../certificates.api";
+} from "../api/certificates.api";
 
 type Props = {
   open: boolean;
