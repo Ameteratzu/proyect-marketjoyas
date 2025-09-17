@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { LuPlus } from "react-icons/lu";
 import { Pagination } from "./components/pagination/Pagination";
 import { CertificatesTable } from "./components/table/CertificatesTable";
+import CertificatePreviewModal from "./features/CertificatePreviewModal";
 import { useCertificates } from "./hooks/useCertificates";
 import { CertificatesFilters } from "./components/filters/CertificatesFilters";
 import CreateEditCertificateModal from "./modal/CreateEditCertificateModal";
@@ -17,6 +18,7 @@ export default function CertificatesList() {
   const [items, setItems] = useState<Certificate[]>([]);
   const { t } = useTranslation("admin");
   const toast = useToast();
+  const [previewId, setPreviewId] = useState<number | null>(null);
   const {
     qName,
     qDoc,
@@ -105,7 +107,15 @@ export default function CertificatesList() {
         </div>
       ) : (
         <>
-          <CertificatesTable rows={current} />
+          <CertificatesTable
+            rows={current}
+            onView={(row) => setPreviewId(Number(row.id))}
+          />
+          <CertificatePreviewModal
+            open={!!previewId}
+            id={previewId!}
+            onClose={() => setPreviewId(null)}
+          />
           <Pagination
             page={page}
             totalPages={totalPages}

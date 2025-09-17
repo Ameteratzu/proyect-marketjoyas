@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { setAuthToken } from "@/common/api/http";
 import "./app/providers/I18n.tsx";
+import "./polyfills.ts";
 
 import { Provider } from "react-redux";
 import { store } from "./common/store/store.ts"; // la ruta de tu store
