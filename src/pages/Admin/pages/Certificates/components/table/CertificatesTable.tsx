@@ -3,6 +3,7 @@ import { FiSend } from 'react-icons/fi';
 import type { Certificate } from '../../types/types';
 import { cn } from '@/lib/cn';
 import { useTranslation } from 'react-i18next';
+import LoadingAnimate from '@/components/LoadingAnimate';
 
 interface CertificatesTableProps {
   rows: Certificate[];
@@ -43,7 +44,7 @@ export function CertificatesTable({
           {loading && (
             <tr>
               <td colSpan={7} className="px-4 py-10 text-center text-graphite/70">
-                {t('loading', { defaultValue: 'Cargando...' })}
+                <LoadingAnimate />
               </td>
             </tr>
           )}

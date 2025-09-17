@@ -13,6 +13,7 @@ import type { CertificateFormValues } from "./modal/useCertificateForm";
 import { uploadToCloudinary } from "@/common/api/cloudinary.api";
 import { compressImage } from "@/common/utils/resizeImage";
 import { useToast } from "@/components/Toast";
+import LoadingAnimate from "@/components/LoadingAnimate";
 
 export default function CertificatesList() {
   const [items, setItems] = useState<Certificate[]>([]);
@@ -98,7 +99,10 @@ export default function CertificatesList() {
       />
 
       {loading ? (
-        <div className="py-10 text-center text-graphite/70">Cargando…</div>
+        <div className="py-10 text-center text-graphite/70">
+          <LoadingAnimate />
+        </div>
+        
       ) : error ? (
         <div className="py-10 text-center text-red-600">
           {error.includes("401")
