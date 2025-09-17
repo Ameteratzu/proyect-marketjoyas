@@ -40,14 +40,14 @@ const isRaster = (u?: string) =>
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#ffffff",
-    paddingTop: 28,
-    paddingBottom: 28,
+    paddingTop: 35,
+    paddingBottom: 20,
     paddingHorizontal: 32, // + margen lateral
   },
   frame: {
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "#C9A552",
-    padding: 36, // + respiro interior
+    padding: 24, // + respiro interior (reducido)
   },
 
   /* Header */
@@ -56,38 +56,38 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     // Reducimos espacio superior del título para que iguale el margen del footer
-    marginBottom: 18,
+    marginBottom: 12,
   },
-  logo: { width: 150, height: 82, objectFit: "contain" },
-  seal: { width: 150, height: 82, objectFit: "contain" },
+  logo: { width: 130, height: 70, objectFit: "contain" },
+  seal: { width: 130, height: 70, objectFit: "contain" },
 
   /* Títulos centrales */
   title: {
     fontFamily: "Playfair Display",
-    fontSize: 30,
+    fontSize: 28,
     textAlign: "center",
-    marginBottom: 8,
+    marginBottom: 6,
   },
   subtitle: {
     fontFamily: "Afacad",
-    fontSize: 12,
+    fontSize: 11,
     textAlign: "center",
     color: "#444",
-    lineHeight: 1.6,
-    marginHorizontal: 60, // texto más estrecho para “centrado óptico”
-    marginBottom: 14,
+    lineHeight: 1.4,
+    marginHorizontal: 50, // texto más estrecho para “centrado óptico”
+    marginBottom: 10,
   },
 
   /* Separador ornamental (imagen) */
   ornamentBox: {
-    height: 50, // reserva de espacio
+    height: 50, // reserva de espacio (reducido)
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 14,
+    marginBottom: 10,
   },
-  ornamentImg: { height: 520, width: 520, objectFit: "contain" },
+  ornamentImg: { height: 100, width: 520, objectFit: "contain" },
 
   /* “Adquiriente” y nombre */
   sectionTitle: {
@@ -100,71 +100,74 @@ const styles = StyleSheet.create({
   buyerName: {
     textAlign: "center",
     fontFamily: "Playfair Display",
-    fontSize: 22,
-    marginBottom: 18,
+    fontSize: 20,
+    marginBottom: 12,
   },
 
   /* 3 columnas: imagen | etiquetas | valores */
   threeCols: {
     flexDirection: "row",
     alignItems: "stretch",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: 520,
   },
 
   // Col 1: foto
   photoBox: {
-    width: 128,
-    height: 128,
+    width: 116,
+    height: 116,
     borderWidth: 1,
     borderColor: "#BDBDBD",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 128,
+    marginRight: 12,
   },
-  photo: { width: 128, height: 128 },
+  photo: { width: 116, height: 116 },
 
   // Col 2: labels
   labelsCol: {
-    width: 120,
-    paddingTop: 4,
+    width: 108,
+    paddingTop: 2,
   },
   label: {
     fontFamily: "Afacad",
-    fontSize: 11,
+    fontSize: 10,
     color: "#5b5b5b",
-    marginBottom: 10,
+    marginBottom: 8,
     textAlign: "right",
   },
 
   // Col 3: values
   valuesCol: {
-    flex: 1,
-    paddingTop: 4,
-    paddingLeft: 16,
+    width: 300,
+    paddingTop: 2,
+    paddingLeft: 12,
   },
   value: {
     fontFamily: "Afacad",
-    fontSize: 11,
+    fontSize: 10,
     color: "#111",
-    marginBottom: 10,
+    marginBottom: 8,
   },
 
   /* Separador inferior sutil (si aún no hay ornamento de cierre) */
   softDivider: {
-    marginTop: 22,
-    marginBottom: 12,
+    marginTop: 14,
+    marginBottom: 8,
     height: 1,
     backgroundColor: "#E6D4A5",
   },
 
   /* Footer centrado */
   footer: {
-    marginTop: 6,
+    marginTop: 4,
     textAlign: "center",
     fontFamily: "Afacad",
     color: "#444",
   },
-  footerLine: { fontSize: 10, marginBottom: 4 },
-  footerCity: { fontSize: 10, marginTop: 6 },
+  footerLine: { fontSize: 9, marginBottom: 3 },
+  footerCity: { fontSize: 9, marginTop: 4 },
 });
 
 /* Tipado */

@@ -22,7 +22,7 @@ type Props = {
 };
 
 // ====== LÍMITES DE UI ======
-const MAX_DESC = 150;
+const MAX_DESC = 70;
 
 export default function CreateEditCertificateModal({
   open,
