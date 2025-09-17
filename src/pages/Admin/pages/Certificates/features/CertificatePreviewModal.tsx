@@ -52,8 +52,7 @@ export default function CertificatePreviewModal({ open, id, onClose }: Props) {
     <CertificatePdf
       data={data}
       assets={{
-        logoUrl: "/assets/products/logo_pandora.png",
-        // selloUrl: "/assets/brand/sello.png",
+  logoUrl: "/CentroJoyeroLogo.png",
       }}
       lookups={{ gemas, materiales }}
     />

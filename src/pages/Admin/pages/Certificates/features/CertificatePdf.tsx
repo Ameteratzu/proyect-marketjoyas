@@ -8,7 +8,9 @@ import {
   Font,
 } from "@react-pdf/renderer";
 
-// === Registro de fuentes TTF servidas desde /public ===
+/* =======================
+   Fuentes locales (TTF)
+   ======================= */
 Font.register({
   family: "Playfair Display",
   fonts: [
@@ -25,70 +27,147 @@ Font.register({
   ],
 });
 
-// Acepta cualquier string como src (react-pdf se quejaba por URLs sin extensión)
+/* Helpers */
 const asImageSrc = (u?: string) =>
   typeof u === "string" && u.trim().length > 0 ? u : undefined;
 
+const isRaster = (u?: string) =>
+  !!u && /\.(png|jpe?g|webp)$/i.test((u.split("?")[0] || "").trim());
+
+/* =======================
+   Estilos
+   ======================= */
 const styles = StyleSheet.create({
-  page: { padding: 28, backgroundColor: "#ffffff" },
-  frame: { borderWidth: 4, borderColor: "#C9A552", padding: 20 },
+  page: {
+    backgroundColor: "#ffffff",
+    paddingTop: 28,
+    paddingBottom: 28,
+    paddingHorizontal: 32, // + margen lateral
+  },
+  frame: {
+    borderWidth: 4,
+    borderColor: "#C9A552",
+    padding: 36, // + respiro interior
+  },
+
+  /* Header */
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
+    // Reducimos espacio superior del título para que iguale el margen del footer
+    marginBottom: 18,
   },
-  logo: { width: 110, height: 40 },
+  logo: { width: 150, height: 82, objectFit: "contain" },
+  seal: { width: 150, height: 82, objectFit: "contain" },
+
+  /* Títulos centrales */
   title: {
     fontFamily: "Playfair Display",
-    fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 30,
     textAlign: "center",
-    marginBottom: 6,
+    marginBottom: 8,
   },
   subtitle: {
     fontFamily: "Afacad",
-    fontSize: 10,
+    fontSize: 12,
     textAlign: "center",
     color: "#444",
-    lineHeight: 1.4,
-    marginBottom: 12,
+    lineHeight: 1.6,
+    marginHorizontal: 60, // texto más estrecho para “centrado óptico”
+    marginBottom: 14,
   },
-  divider: { height: 1, backgroundColor: "#C9A552", marginVertical: 6 },
-  sectionRow: { flexDirection: "row", marginTop: 10 },
+
+  /* Separador ornamental (imagen) */
+  ornamentBox: {
+    height: 50, // reserva de espacio
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 14,
+  },
+  ornamentImg: { height: 520, width: 520, objectFit: "contain" },
+
+  /* “Adquiriente” y nombre */
+  sectionTitle: {
+    textAlign: "center",
+    fontFamily: "Playfair Display",
+    fontSize: 16,
+    color: "#8A6A1A",
+    marginBottom: 8,
+  },
+  buyerName: {
+    textAlign: "center",
+    fontFamily: "Playfair Display",
+    fontSize: 22,
+    marginBottom: 18,
+  },
+
+  /* 3 columnas: imagen | etiquetas | valores */
+  threeCols: {
+    flexDirection: "row",
+    alignItems: "stretch",
+  },
+
+  // Col 1: foto
   photoBox: {
-    width: 160,
-    height: 160,
+    width: 128,
+    height: 128,
     borderWidth: 1,
     borderColor: "#BDBDBD",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 14,
+    marginRight: 128,
   },
-  photo: { width: 160, height: 160 },
-  label: { fontFamily: "Afacad", fontSize: 9, color: "#666" },
-  value: { fontFamily: "Afacad", fontSize: 10 },
-  kv: { marginBottom: 6 },
-  sectionTitle: {
-    textAlign: "center",
-    fontFamily: "Playfair Display",
-    fontSize: 12,
-    marginVertical: 6,
-    color: "#8A6A1A",
+  photo: { width: 128, height: 128 },
+
+  // Col 2: labels
+  labelsCol: {
+    width: 120,
+    paddingTop: 4,
   },
-  footer: {
-    marginTop: 22,
-    borderTopWidth: 1,
-    borderColor: "#E5E5E5",
-    paddingTop: 10,
+  label: {
     fontFamily: "Afacad",
-    fontSize: 9,
-    color: "#444",
-    textAlign: "center",
-    lineHeight: 1.4,
+    fontSize: 11,
+    color: "#5b5b5b",
+    marginBottom: 10,
+    textAlign: "right",
   },
+
+  // Col 3: values
+  valuesCol: {
+    flex: 1,
+    paddingTop: 4,
+    paddingLeft: 16,
+  },
+  value: {
+    fontFamily: "Afacad",
+    fontSize: 11,
+    color: "#111",
+    marginBottom: 10,
+  },
+
+  /* Separador inferior sutil (si aún no hay ornamento de cierre) */
+  softDivider: {
+    marginTop: 22,
+    marginBottom: 12,
+    height: 1,
+    backgroundColor: "#E6D4A5",
+  },
+
+  /* Footer centrado */
+  footer: {
+    marginTop: 6,
+    textAlign: "center",
+    fontFamily: "Afacad",
+    color: "#444",
+  },
+  footerLine: { fontSize: 10, marginBottom: 4 },
+  footerCity: { fontSize: 10, marginTop: 6 },
 });
 
+/* Tipado */
 type CatalogItem = { id: number; nombre: string };
 
 export type CertificatePdfProps = {
@@ -105,15 +184,20 @@ export type CertificatePdfProps = {
     pais?: string;
     descripcion?: string;
     fechaEmision?: string;
+    // peso?: string;
   };
-  assets?: { logoUrl?: string; selloUrl?: string };
+  assets?: {
+    logoUrl?: string; // sello/ornamento llegan por props
+    selloUrl?: string;
+    ornamentUrl?: string; // separador decorativo
+  };
   lookups?: {
     gemas?: CatalogItem[];
     materiales?: CatalogItem[];
   };
 };
 
-// Helper para buscar nombre por id
+/* Helpers */
 const nameById = (list?: CatalogItem[], id?: number) =>
   (id && list?.find((x) => Number(x.id) === Number(id))?.nombre) || undefined;
 
@@ -135,11 +219,25 @@ const money = (n?: number) =>
       }).format(n)
     : "";
 
-export default function CertificatePdf({ data, assets, lookups }: CertificatePdfProps) {
-  const logo = asImageSrc(
-    assets?.logoUrl ?? "/assets/products/logo_pandora.png"
-  );
-  const sello = asImageSrc(assets?.selloUrl);
+/* =======================
+   Componente
+   ======================= */
+export default function CertificatePdf({
+  data,
+  assets,
+  lookups,
+}: CertificatePdfProps) {
+  // Logo/sello/ornamento PNG desde public/ con defaults para que siempre aparezcan
+  const requestedLogo = assets?.logoUrl ?? "/CentroJoyeroLogo.png?v=1"; // public/CentroJoyeroLogo.png
+  const requestedSeal = assets?.selloUrl ?? "/SelloCalidad.png"; // public/SelloCalidad.png
+  const requestedOrnament = assets?.ornamentUrl ?? "/OrnamentoAdquiriente.png"; // public/OrnamentoAdquiriente.png
+
+  const logo = isRaster(requestedLogo)
+    ? requestedLogo
+    : "/CentroJoyeroLogo.png?v=1";
+  const sello = isRaster(requestedSeal) ? requestedSeal : "/SelloCalidad.png";
+  const ornament = isRaster(requestedOrnament) ? requestedOrnament : undefined; // separador decorativo
+
   const foto = asImageSrc(data.imagenUrl);
 
   const gemaNombre = nameById(lookups?.gemas, data.gemaId);
@@ -152,24 +250,31 @@ export default function CertificatePdf({ data, assets, lookups }: CertificatePdf
           {/* Header */}
           <View style={styles.headerRow}>
             {logo ? <Image src={logo} style={styles.logo} /> : <View />}
-            {sello ? (
-              <Image src={sello} style={{ width: 64, height: 64 }} />
-            ) : (
-              <View />
-            )}
+            {sello ? <Image src={sello} style={styles.seal} /> : <View />}
           </View>
 
+          {/* Título y texto central */}
           <Text style={styles.title}>CERTIFICADO DE AUTENTICIDAD</Text>
           <Text style={styles.subtitle}>
-            Market Joyas certifica que la joya descrita a continuación es
-            auténtica y fue elaborada con materiales de alta calidad.
+            Centro Joyero certifica que la joya descrita a continuación es
+            auténtica y ha sido elaborada con materiales de alta calidad. Este
+            certificado garantiza la excelencia en diseño, fabricación y
+            cumplimiento de los estándares internacionales.
           </Text>
 
-          <View style={styles.divider} />
+          {/* Separador ornamental (deja el espacio; si no hay imagen, queda vacío) */}
+          <View style={styles.ornamentBox}>
+            {ornament ? (
+              <Image src={ornament} style={styles.ornamentImg} />
+            ) : null}
+          </View>
 
-          <Text style={styles.sectionTitle}>Adquiriente</Text>
+          {/* Adquiriente y nombre en grande */}
+          <Text style={styles.buyerName}>{data.clienteNombre}</Text>
 
-          <View style={styles.sectionRow}>
+          {/* 3 columnas */}
+          <View style={styles.threeCols}>
+            {/* Col 1: Imagen */}
             <View style={styles.photoBox}>
               {foto ? (
                 <Image src={foto} style={styles.photo} />
@@ -177,57 +282,56 @@ export default function CertificatePdf({ data, assets, lookups }: CertificatePdf
                 <Text
                   style={{
                     fontFamily: "Afacad",
-                    fontSize: 9,
+                    fontSize: 10,
                     color: "#888",
                     textAlign: "center",
+                    paddingHorizontal: 8,
                   }}
                 >
-                  FOTO JOYA O IMAGEN REFERENCIAL
+                  FOTO JOYA O{"\n"}IMAGEN REFERENCIAL
                 </Text>
               )}
             </View>
 
-            <View style={{ flex: 1 }}>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Adquiriente</Text>
-                <Text style={styles.value}>{data.clienteNombre}</Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>País</Text>
-                <Text style={styles.value}>{data.pais}</Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Descripción</Text>
-                <Text style={styles.value}>{data.descripcion}</Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Piedra preciosa</Text>
-                <Text style={styles.value}>
-                  {gemaNombre || (data.gemaId ? `#${data.gemaId}` : "-")}
-                </Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Material</Text>
-                <Text style={styles.value}>
-                  {materialNombre || (data.materialId ? `#${data.materialId}` : "-")}
-                </Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Precio</Text>
-                <Text style={styles.value}>{money(data.precio)}</Text>
-              </View>
-              <View style={styles.kv}>
-                <Text style={styles.label}>Fecha</Text>
-                <Text style={styles.value}>{fmtDate(data.fechaEmision)}</Text>
-              </View>
+            {/* Col 2: Labels */}
+            <View style={styles.labelsCol}>
+              <Text style={styles.label}>País:</Text>
+              <Text style={styles.label}>Descripción:</Text>
+              <Text style={styles.label}>Piedra preciosa:</Text>
+              <Text style={styles.label}>Material:</Text>
+              <Text style={styles.label}>Precio:</Text>
+              <Text style={styles.label}>Fecha:</Text>
+            </View>
+
+            {/* Col 3: Valores */}
+            <View style={styles.valuesCol}>
+              <Text style={styles.value}>{data.pais || "-"}</Text>
+              <Text style={styles.value}>{data.descripcion || "-"}</Text>
+              <Text style={styles.value}>
+                {gemaNombre || (data.gemaId ? `#${data.gemaId}` : "-")}
+              </Text>
+              <Text style={styles.value}>
+                {materialNombre ||
+                  (data.materialId ? `#${data.materialId}` : "-")}
+              </Text>
+              <Text style={styles.value}>{money(data.precio)}</Text>
+              <Text style={styles.value}>{fmtDate(data.fechaEmision)}</Text>
             </View>
           </View>
 
+          {/* Separación sutil antes del footer */}
+          <View style={styles.softDivider} />
+
+          {/* Footer centrado */}
           <View style={styles.footer}>
-            <Text>
-              Market Joyas SAC · Av. Ejemplo 123, Miraflores · Lima - Perú
+            <Text style={styles.footerLine}>Centro Joyero</Text>
+            <Text style={styles.footerLine}>
+              Telf: +51 997 136 771 | Web: centrojoyero.com
             </Text>
-            <Text>www.marketjoyas.com · +51 999 999 999</Text>
+            <Text style={styles.footerLine}>
+              Avenida Du 5245, Miraflores 15074.
+            </Text>
+            <Text style={styles.footerCity}>Lima - Perú</Text>
           </View>
         </View>
       </Page>
