@@ -63,7 +63,14 @@ function ToastCard({ item, onDone }: { item: ToastItem; onDone: () => void }) {
     };
   }, [onDone]);
 
-  const color = item.variant === "success" ? "bg-green-600" : item.variant === "error" ? "bg-red-600" : "bg-gray-800";
+  // Usar tokens de color de la app definidos en index.css (@theme)
+  // success -> bg-primary, error -> bg-secondary, info -> bg-graphite
+  const color =
+    item.variant === "success"
+      ? "bg-primary"
+      : item.variant === "error"
+      ? "bg-secondary"
+      : "bg-graphite";
 
   return (
     <div
