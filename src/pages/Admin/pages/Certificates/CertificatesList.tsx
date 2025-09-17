@@ -11,10 +11,12 @@ import { fetchCertificates, createCertificate } from "./certificates.api";
 import type { CertificateFormValues } from "./modal/useCertificateForm";
 import { uploadToCloudinary } from "@/common/api/cloudinary.api";
 import { compressImage } from "@/common/utils/resizeImage";
+import { useToast } from "@/components/Toast";
 
 export default function CertificatesList() {
   const [items, setItems] = useState<Certificate[]>([]);
   const { t } = useTranslation("admin");
+  const toast = useToast();
   const {
     qName,
     qDoc,
@@ -154,6 +156,7 @@ export default function CertificatesList() {
 
             await reload();
             setShowCreate(false);
+            toast.success("Certificado creado correctamente");
             return true;
           } catch (err: any) {
             const msg = err?.response?.data?.message;
