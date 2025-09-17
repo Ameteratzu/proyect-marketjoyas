@@ -41,7 +41,7 @@ export default function CertificatesList() {
       setError(null);
       try {
         const data = await fetchCertificates();
-        if (!cancelled) setItems(data);
+        if (!cancelled) setItems([...data].reverse());
       } catch (err: any) {
         if (!cancelled) {
           console.error("Error cargando certificados:", err);
@@ -62,7 +62,7 @@ export default function CertificatesList() {
     setError(null);
     try {
       const data = await fetchCertificates();
-      setItems(data);
+      setItems([...data].reverse());
     } catch (err: any) {
       console.error("Error recargando certificados:", err);
       setError(err?.message ?? "Error desconocido");
