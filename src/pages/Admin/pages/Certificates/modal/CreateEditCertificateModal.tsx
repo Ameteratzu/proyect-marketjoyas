@@ -1,16 +1,24 @@
+// src/pages/Admin/pages/Certificates/modal/CreateEditCertificateModal.tsx
 import ModalBase from "./ModalBase";
 import ImageDropzone from "./ImageDropzone";
-import { useEffect, useRef } from "react";
-import { useCertificateForm } from "./useCertificateForm";
-import { EMPTY_CERTIFICATE_FORM } from "./useCertificateForm";
+import { useEffect, useRef, useState } from "react";
+import {
+  useCertificateForm,
+  EMPTY_CERTIFICATE_FORM,
+} from "./useCertificateForm";
 import type { CertificateFormValues } from "./useCertificateForm";
 import { cn } from "@/lib/cn";
 import React from "react";
+import {
+  fetchGems,
+  fetchMaterials,
+  type OptionItem,
+} from "../certificates.api";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSubmit?: (values: CertificateFormValues) => void;
+  onSubmit?: (values: CertificateFormValues) => Promise<boolean> | boolean;
   mode?: "create" | "edit";
   className?: string;
 };
@@ -23,7 +31,14 @@ export default function CreateEditCertificateModal({
   className,
 }: Props) {
   const { values, onChange, onInput, setValues } = useCertificateForm();
+  const [materials, setMaterials] = useState<OptionItem[]>([]);
+  const [gems, setGems] = useState<OptionItem[]>([]);
+  const [loadingOpts, setLoadingOpts] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const firstRef = useRef<HTMLInputElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (open && mode === "create") {
@@ -32,13 +47,81 @@ export default function CreateEditCertificateModal({
     }
   }, [open, mode, setValues]);
 
+  useEffect(() => {
+    let cancelled = false;
+    if (!open) return;
+    setLoadingOpts(true);
+    Promise.all([fetchMaterials(), fetchGems()])
+      .then(([m, g]) => {
+        if (cancelled) return;
+        setMaterials(m);
+        setGems(g);
+      })
+      .catch(() => {
+        /* opcional: mostrar aviso */
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingOpts(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
+
   const title =
     mode === "create" ? "Crear Nuevo Certificado" : "Editar Certificado";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit?.(values);
-    onClose();
+    setSubmitError(null);
+    setSubmitSuccess(null);
+    setSubmitting(true);
+
+    // Validaciones mínimas para evitar 400
+    const missing: string[] = [];
+    if (!values.storeName?.trim()) missing.push("Nombre de la tienda");
+    if (!values.address?.trim()) missing.push("Dirección");
+    if (!values.product?.trim()) missing.push("Nombre del Producto");
+    if (!values.client?.trim()) missing.push("Nombre del Cliente");
+    if (!values.doc?.trim()) missing.push("DNI/RUC del cliente");
+
+    const gemId = Number(values.gemstone);
+    const matId = Number(values.material);
+    if (!gemId) missing.push("Piedra Preciosa");
+    if (!matId) missing.push("Material");
+
+    // precio requerido y > 0
+    const price = Number((values.price || "").toString().replace(",", "."));
+    if (!price || isNaN(price) || price <= 0) missing.push("Precio");
+
+    // país requerido
+    if (!values.country?.trim()) missing.push("País");
+
+    if (missing.length) {
+      setSubmitError(`Faltan campos requeridos: ${missing.join(", ")}`);
+      setSubmitting(false);
+      scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    try {
+      const res = await (onSubmit?.(values) ?? false);
+      if (res) {
+        setSubmitSuccess("Se registró correctamente");
+        scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        setSubmitError("No se registró correctamente");
+        scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } catch (err: any) {
+      const msg = err?.response?.data?.message;
+      let human = err?.message || "No se registró correctamente";
+      if (Array.isArray(msg)) human = msg.join(" | ");
+      else if (typeof msg === "string") human = msg;
+      setSubmitError(human);
+      scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -60,11 +143,26 @@ export default function CreateEditCertificateModal({
             <span className="i-[heroicons-outline:x-mark] w-5 h-5" />
           </button>
         </header>
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col flex-1 overflow-hidden"
         >
-          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-8 scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent">
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto px-5 py-5 space-y-8 scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent"
+          >
+            {submitError && (
+              <div className="p-3 rounded-md border border-red-200 bg-red-50 text-red-700 text-sm">
+                {submitError}
+              </div>
+            )}
+            {submitSuccess && (
+              <div className="p-3 rounded-md border border-green-200 bg-green-50 text-green-700 text-sm">
+                {submitSuccess}
+              </div>
+            )}
+
             <div className="grid gap-x-8 gap-y-5 md:grid-cols-2">
               <div className="space-y-5">
                 <Field label="Nombre de la tienda">
@@ -75,6 +173,7 @@ export default function CreateEditCertificateModal({
                     placeholder="Ingrese nombre de la tienda"
                   />
                 </Field>
+
                 <Field label="Nombre del Producto">
                   <Input
                     value={values.product}
@@ -82,6 +181,7 @@ export default function CreateEditCertificateModal({
                     placeholder="Ingresar nombre del producto"
                   />
                 </Field>
+
                 <Field label="DNI/RUC del cliente">
                   <Input
                     value={values.doc}
@@ -89,30 +189,40 @@ export default function CreateEditCertificateModal({
                     placeholder="Documento"
                   />
                 </Field>
+
                 <Field label="Material">
                   <Select
                     value={values.material}
                     onChange={onInput("material")}
-                    placeholder="--- Seleccionar material ---"
+                    placeholder={
+                      loadingOpts
+                        ? "Cargando materiales..."
+                        : "--- Seleccionar material ---"
+                    }
+                    disabled={loadingOpts}
                   >
-                    <option>Oro</option>
-                    <option>Plata</option>
-                    <option>Acero</option>
+                    {materials.map((m) => (
+                      <option key={m.id} value={String(m.id)}>
+                        {m.nombre}
+                      </option>
+                    ))}
                   </Select>
                 </Field>
+
                 <Field label="País">
                   <Select
                     value={values.country}
                     onChange={onInput("country")}
                     placeholder="--- Seleccionar país ---"
                   >
-                    <option>Perú</option>
-                    <option>Chile</option>
-                    <option>Colombia</option>
-                    <option>México</option>
+                    <option value="Perú">Perú</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="México">México</option>
                   </Select>
                 </Field>
               </div>
+
               <div className="space-y-5">
                 <Field label="Dirección">
                   <Input
@@ -121,6 +231,7 @@ export default function CreateEditCertificateModal({
                     placeholder="Ingrese una dirección"
                   />
                 </Field>
+
                 <Field label="Nombre del Cliente">
                   <Input
                     value={values.client}
@@ -128,25 +239,38 @@ export default function CreateEditCertificateModal({
                     placeholder="Ingresar nombre completo"
                   />
                 </Field>
+
                 <Field label="Piedra Preciosa">
                   <Select
                     value={values.gemstone}
                     onChange={onInput("gemstone")}
-                    placeholder="--- Seleccionar gema ---"
+                    placeholder={
+                      loadingOpts
+                        ? "Cargando gemas..."
+                        : "--- Seleccionar gema ---"
+                    }
+                    disabled={loadingOpts}
                   >
-                    <option>Diamante</option>
-                    <option>Esmeralda</option>
-                    <option>Zafiro</option>
-                    <option>Rubí</option>
+                    {gems.map((g) => (
+                      <option key={g.id} value={String(g.id)}>
+                        {g.nombre}
+                      </option>
+                    ))}
                   </Select>
                 </Field>
-                <Field label="Peso">
+
+                <Field label="Precio">
                   <Input
-                    value={values.weight}
-                    onChange={onInput("weight")}
-                    placeholder="Ej. 7 grs."
+                    type="number"
+                    inputMode="decimal"
+                    step="0.01"
+                    min="0"
+                    value={values.price}
+                    onChange={onInput("price")}
+                    placeholder="0.00"
                   />
                 </Field>
+
                 <Field label="Descripcion">
                   <Textarea
                     value={values.description}
@@ -157,6 +281,7 @@ export default function CreateEditCertificateModal({
                 </Field>
               </div>
             </div>
+
             <div>
               <Label>Imagen del producto</Label>
               <ImageDropzone
@@ -165,7 +290,17 @@ export default function CreateEditCertificateModal({
               />
             </div>
           </div>
-          <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-end gap-4">
+
+          <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-between gap-4">
+            <div className="text-sm">
+              {submitError && (
+                <span className="text-red-600">{submitError}</span>
+              )}
+              {submitSuccess && (
+                <span className="text-green-600">{submitSuccess}</span>
+              )}
+            </div>
+
             <button
               type="button"
               onClick={onClose}
@@ -175,11 +310,22 @@ export default function CreateEditCertificateModal({
             >
               Cancelar
             </button>
+
             <button
               type="submit"
-              className="inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors"
+              disabled={submitting}
+              className={cn(
+                "inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors",
+                submitting && "opacity-70 cursor-not-allowed"
+              )}
             >
-              {mode === "create" ? "Crear Certificado" : "Guardar cambios"}
+              {submitting
+                ? mode === "create"
+                  ? "Creando..."
+                  : "Guardando..."
+                : mode === "create"
+                ? "Crear Certificado"
+                : "Guardar cambios"}
             </button>
           </footer>
         </form>
@@ -188,8 +334,7 @@ export default function CreateEditCertificateModal({
   );
 }
 
-// -------------------- UI Subcomponents --------------------
-
+// ---- UI helpers ----
 const baseField =
   "w-full h-11 rounded-md border border-black/15 bg-neutral/20 px-3 text-sm placeholder:text-graphite/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition shadow-inner";
 

@@ -12,12 +12,6 @@ interface CertificatesFiltersProps {
   className?: string;
 }
 
-/*
-  Diseño aproximado al prototipo:
-  - Contenedor con fondo neutro muy claro
-  - Inputs con icono a la izquierda y placeholders cortos
-  - Botones con estilo "pill" y jerarquía visual
-*/
 export function CertificatesFilters({
   qName,
   qDoc,

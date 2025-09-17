@@ -1,3 +1,4 @@
+// src/pages/Admin/pages/Certificates/modal/useCertificateForm.ts
 import { useState } from "react";
 
 export type CertificateFormValues = {
@@ -6,10 +7,10 @@ export type CertificateFormValues = {
   product: string;
   client: string;
   doc: string;
-  gemstone: string; // Piedra preciosa
-  weight: string; // Peso (p. ej. 10 gr)
-  material: string;
+  gemstone: string; // id de la gema (string para el <select>)
+  material: string; // id del material (string para el <select>)
   country: string;
+  price: string; // precio como string en el form, lo convertimos al enviar
   description: string;
   image: File | null;
 };
@@ -21,9 +22,9 @@ export const EMPTY_CERTIFICATE_FORM: CertificateFormValues = {
   client: "",
   doc: "",
   gemstone: "",
-  weight: "",
   material: "",
-  country: "",
+  country: "Perú", // valor por defecto para cumplir contrato
+  price: "",
   description: "",
   image: null,
 };
