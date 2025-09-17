@@ -36,7 +36,6 @@ export default function CreateEditCertificateModal({
   const [gems, setGems] = useState<OptionItem[]>([]);
   const [loadingOpts, setLoadingOpts] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const firstRef = useRef<HTMLInputElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -46,7 +45,6 @@ export default function CreateEditCertificateModal({
       setValues(EMPTY_CERTIFICATE_FORM);
   // limpiar banners al abrir
   setSubmitError(null);
-  setSubmitSuccess(null);
   setSubmitting(false);
       setTimeout(() => firstRef.current?.focus(), 40);
     }
@@ -81,7 +79,6 @@ export default function CreateEditCertificateModal({
   // Cerrar modal limpiando mensajes/estado
   const handleClose = () => {
     setSubmitError(null);
-    setSubmitSuccess(null);
     setSubmitting(false);
     onClose();
   };
@@ -89,7 +86,7 @@ export default function CreateEditCertificateModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
-    setSubmitSuccess(null);
+    
 
     // Normalizar campos
     const desc = (values.description || "").trim();
@@ -131,10 +128,7 @@ export default function CreateEditCertificateModal({
     try {
       const res = await (onSubmit?.({ ...values, description: desc }) ?? false);
       if (res) {
-        setSubmitSuccess("Se registró correctamente");
-        // Asegurar visibilidad del mensaje
-        scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-        // No cerramos automáticamente para que el usuario alcance a leer
+  // Éxito: el padre cierra el modal y muestra toast.
       } else {
         setSubmitError("No se registró correctamente");
         scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
@@ -176,11 +170,6 @@ export default function CreateEditCertificateModal({
         {submitError && (
           <div className="p-3 rounded-md border border-red-200 bg-red-50 text-red-700 text-sm">
             {submitError}
-          </div>
-        )}
-        {submitSuccess && (
-          <div className="p-3 rounded-md border border-green-200 bg-green-50 text-green-700 text-sm">
-            {submitSuccess}
           </div>
         )}
         </header>
