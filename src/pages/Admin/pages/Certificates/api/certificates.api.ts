@@ -1,141 +1,71 @@
 import { http } from "@/common/api/http";
 import type { Certificate } from "../types/types";
 import type { CertificateFormValues } from "../modal/useCertificateForm";
-import type { CloudinaryUploadResponse } from "@/common/api/cloudinary.api";
+import type { CertificateDTO, CreateCertificatePayload } from "../types/types";
+import type { CloudinaryUploadResponse } from "../types/types";
+import { parsePrice, toId } from "../utils/number";
 
-// =========================
-// Listar certificados
-// =========================
-export async function fetchCertificates(): Promise<Certificate[]> {
-  // El endpoint funciona sin tiendaId. Si en algún momento se necesita,
-  // hacerlo vía query param/headers según indique el BE.
-  let { data } = await http.get("/certificados-joyas");
+// ---------- helpers ----------
 
-  // Normalización por si el backend envía { data: [...] }
-  if (!Array.isArray(data)) {
-    const arr =
-      data && Array.isArray((data as any).data) ? (data as any).data : [];
-    if (!Array.isArray(arr)) return [];
-    return arr.map((raw: any): Certificate => {
-      const dateRaw =
-        raw.date ?? raw.fecha ?? raw.fechaEmision ?? raw.createdAt;
-      const date = dateRaw ? new Date(dateRaw).toLocaleDateString("es-PE") : "";
-      return {
-        id: String(raw.id ?? raw._id ?? raw.id_certificado ?? Math.random()),
-        storeName:
-          raw.storeName ??
-          raw.store_name ??
-          raw.tiendaNombre ??
-          raw.tienda ??
-          "",
-        address:
-          raw.address ??
-          raw.direccion ??
-          raw.tiendaDireccion ??
-          raw.direccionTienda ??
-          "",
-        product:
-          raw.product ??
-          raw.producto ??
-          raw.product_name ??
-          raw.productoNombre ??
-          "",
-        client:
-          raw.client ??
-          raw.cliente ??
-          raw.client_name ??
-          raw.clienteNombre ??
-          "",
-        doc: String(
-          raw.doc ??
-            raw.documento ??
-            raw.dni ??
-            raw.ruc ??
-            raw.clienteDnioRUC ??
-            ""
-        ),
-        date,
-      };
-    });
-  }
-
-  const list: any[] = Array.isArray(data) ? data : [];
-  return list.map((raw: any): Certificate => {
-    const dateRaw = raw.date ?? raw.fecha ?? raw.fechaEmision ?? raw.createdAt;
-    const date = dateRaw ? new Date(dateRaw).toLocaleDateString("es-PE") : "";
-    return {
-      id: String(raw.id ?? raw._id ?? raw.id_certificado ?? Math.random()),
-      storeName:
-        raw.storeName ?? raw.store_name ?? raw.tiendaNombre ?? raw.tienda ?? "",
-      address:
-        raw.address ??
-        raw.direccion ??
-        raw.tiendaDireccion ??
-        raw.direccionTienda ??
-        "",
-      product:
-        raw.product ??
-        raw.producto ??
-        raw.product_name ??
-        raw.productoNombre ??
-        "",
-      client:
-        raw.client ?? raw.cliente ?? raw.client_name ?? raw.clienteNombre ?? "",
-      doc: String(
-        raw.doc ??
-          raw.documento ??
-          raw.dni ??
-          raw.ruc ??
-          raw.clienteDnioRUC ??
-          ""
-      ),
-      date,
-    };
-  });
+function dtoToCertificate(raw: CertificateDTO): Certificate {
+  const dateRaw = raw.date ?? raw.fecha ?? raw.fechaEmision ?? raw.createdAt;
+  const date = dateRaw ? new Date(dateRaw).toLocaleDateString("es-PE") : "";
+  return {
+    id: String(raw.id ?? raw._id ?? raw.id_certificado ?? Math.random()),
+    storeName: raw.tiendaNombre ?? "",
+    address: raw.tiendaDireccion ?? "",
+    product: raw.productoNombre ?? "",
+    client: raw.clienteNombre ?? "",
+    doc: String(raw.clienteDnioRUC ?? ""),
+    date,
+  };
 }
 
-// =========================
-// Crear certificado
-// (NO enviar tiendaId)
-// =========================
+function extractApiError(err: any): string {
+  const msg = err?.response?.data?.message ?? err?.message;
+  if (Array.isArray(msg)) return msg.join(" | ");
+  return String(msg || "Error desconocido");
+}
+
+// ---------- list ----------
+
+export async function fetchCertificates(): Promise<Certificate[]> {
+  const { data } = await http.get("/certificados-joyas");
+
+  // Soporta { data: [...] } o directamente [...]
+  const arr: CertificateDTO[] = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.data)
+    ? (data as any).data
+    : [];
+
+  return arr.map(dtoToCertificate);
+}
+
+// ---------- create ----------
+
 export async function createCertificate(
   values: CertificateFormValues,
   image?: CloudinaryUploadResponse
 ): Promise<{ ok: boolean; data: any }> {
-  // precio: normalizamos coma/punto y lo convertimos a número
-  const precioNumber = (() => {
-    const raw =
-      (values as any).price ?? (values as any).precio ?? values.description; // fallback por si el form aún no mapea
-    const toParse = String(values.price ?? raw ?? "0")
-      .replace(/\s/g, "")
-      .replace(",", ".");
-    const n = Number(toParse);
-    return Number.isFinite(n) ? n : 0;
-  })();
-
-  // IDs (vienen de los selects como string -> number)
-  const gid = Number(values.gemstone);
-  const mid = Number(values.material);
-
-  const payload: any = {
+  const payload: CreateCertificatePayload = {
     tiendaNombre: values.storeName,
     tiendaDireccion: values.address,
     clienteNombre: values.client,
     clienteDnioRUC: values.doc,
     productoNombre: values.product,
-    gemaId: !Number.isNaN(gid) && gid > 0 ? gid : undefined,
-    materialId: !Number.isNaN(mid) && mid > 0 ? mid : undefined,
-    precio: precioNumber, // number
-    imagenUrl: image?.url || undefined, // opcional
+    gemaId: toId(values.gemstone),
+    materialId: toId(values.material),
+    precio: parsePrice(values.price),
+    imagenUrl: image?.url || undefined,
     pais: values.country || "",
     descripcion: values.description || "",
-    // ⚠️ NO ENVIAR tiendaId (el backend lo rechaza)
   };
 
-  // Limpieza: quitar undefined
-  Object.keys(payload).forEach(
-    (k) => payload[k] === undefined && delete payload[k]
-  );
+  // Limpia undefined para evitar 400s innecesarios
+  Object.keys(payload).forEach((k) => {
+    if ((payload as any)[k] === undefined) delete (payload as any)[k];
+  });
 
   if (import.meta.env.DEV) {
     console.info(
@@ -160,9 +90,8 @@ export async function createCertificate(
   return { ok, data: d };
 }
 
-// =========================
-// Catálogos
-// =========================
+// ---------- catalogs ----------
+
 export type OptionItem = { id: number; nombre: string };
 
 export async function fetchGems(q?: string): Promise<OptionItem[]> {
