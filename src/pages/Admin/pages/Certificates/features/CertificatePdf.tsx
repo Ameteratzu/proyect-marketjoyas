@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Playfair Display",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 24,
     textAlign: "center",
     marginBottom: 6,
   },
@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
   },
 });
 
+type CatalogItem = { id: number; nombre: string };
+
 export type CertificatePdfProps = {
   data: {
     tiendaNombre: string;
@@ -105,7 +107,15 @@ export type CertificatePdfProps = {
     fechaEmision?: string;
   };
   assets?: { logoUrl?: string; selloUrl?: string };
+  lookups?: {
+    gemas?: CatalogItem[];
+    materiales?: CatalogItem[];
+  };
 };
+
+// Helper para buscar nombre por id
+const nameById = (list?: CatalogItem[], id?: number) =>
+  (id && list?.find((x) => Number(x.id) === Number(id))?.nombre) || undefined;
 
 const fmtDate = (iso?: string) => {
   try {
@@ -125,12 +135,15 @@ const money = (n?: number) =>
       }).format(n)
     : "";
 
-export default function CertificatePdf({ data, assets }: CertificatePdfProps) {
+export default function CertificatePdf({ data, assets, lookups }: CertificatePdfProps) {
   const logo = asImageSrc(
     assets?.logoUrl ?? "/assets/products/logo_pandora.png"
   );
   const sello = asImageSrc(assets?.selloUrl);
   const foto = asImageSrc(data.imagenUrl);
+
+  const gemaNombre = nameById(lookups?.gemas, data.gemaId);
+  const materialNombre = nameById(lookups?.materiales, data.materialId);
 
   return (
     <Document>
@@ -190,13 +203,13 @@ export default function CertificatePdf({ data, assets }: CertificatePdfProps) {
               <View style={styles.kv}>
                 <Text style={styles.label}>Piedra preciosa</Text>
                 <Text style={styles.value}>
-                  {data.gemaId ? `#${data.gemaId}` : "-"}
+                  {gemaNombre || (data.gemaId ? `#${data.gemaId}` : "-")}
                 </Text>
               </View>
               <View style={styles.kv}>
                 <Text style={styles.label}>Material</Text>
                 <Text style={styles.value}>
-                  {data.materialId ? `#${data.materialId}` : "-"}
+                  {materialNombre || (data.materialId ? `#${data.materialId}` : "-")}
                 </Text>
               </View>
               <View style={styles.kv}>

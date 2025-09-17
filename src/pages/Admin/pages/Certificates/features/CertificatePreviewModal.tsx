@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ModalBase from "../modal/ModalBase";
 import { PDFViewer, pdf } from "@react-pdf/renderer";
 import CertificatePdf from "./CertificatePdf";
+import { fetchGems, fetchMaterials } from "../api/certificates.api";
 import { getCertificateById } from "../api/certificates.api";
 import { cn } from "@/lib/cn";
 
@@ -16,6 +17,8 @@ export default function CertificatePreviewModal({ open, id, onClose }: Props) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [gemas, setGemas] = useState<any[]>([]);
+  const [materiales, setMateriales] = useState<any[]>([]);
 
   useEffect(() => {
     let cancel = false;
@@ -24,8 +27,16 @@ export default function CertificatePreviewModal({ open, id, onClose }: Props) {
       setLoading(true);
       setError(null);
       try {
-        const d = await getCertificateById(id);
-        if (!cancel) setData(d);
+        const [gemasData, materialesData, certData] = await Promise.all([
+          fetchGems(),
+          fetchMaterials(),
+          getCertificateById(id),
+        ]);
+        if (!cancel) {
+          setGemas(gemasData);
+          setMateriales(materialesData);
+          setData(certData);
+        }
       } catch (e: any) {
         if (!cancel) setError(e?.message ?? "Error cargando certificado");
       } finally {
@@ -44,6 +55,7 @@ export default function CertificatePreviewModal({ open, id, onClose }: Props) {
         logoUrl: "/assets/products/logo_pandora.png",
         // selloUrl: "/assets/brand/sello.png",
       }}
+      lookups={{ gemas, materiales }}
     />
   ) : null;
 
