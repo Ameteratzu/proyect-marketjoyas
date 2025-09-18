@@ -8,7 +8,12 @@ import { useCertificates } from "./hooks/useCertificates";
 import { CertificatesFilters } from "./components/filters/CertificatesFilters";
 import CreateEditCertificateModal from "./modal/CreateEditCertificateModal";
 import type { Certificate } from "./types/types";
-import { fetchCertificates, createCertificate, updateCertificate, deleteCertificate } from "./api/certificates.api";
+import {
+  fetchCertificates,
+  createCertificate,
+  updateCertificate,
+  deleteCertificate,
+} from "./api/certificates.api";
 import type { CertificateFormValues } from "./modal/useCertificateForm";
 import { uploadToCloudinary } from "@/common/api/cloudinary.api";
 import { compressImage } from "@/common/utils/resizeImage";
@@ -107,7 +112,6 @@ export default function CertificatesList() {
         <div className="py-10 text-center text-graphite/70">
           <LoadingAnimate />
         </div>
-        
       ) : error ? (
         <div className="py-10 text-center text-red-600">
           {error.includes("401")
@@ -131,24 +135,34 @@ export default function CertificatesList() {
             open={!!editRow}
             onClose={() => setEditRow(null)}
             mode="edit"
-            initialValues={editRow ? {
-              storeName: editRow.storeName || "",
-              address: editRow.address || "",
-              product: editRow.product || "",
-              client: editRow.client || "",
-              doc: editRow.doc || "",
-              country: editRow.country || "Perú",
-              gemstone: editRow.gemId != null ? String(editRow.gemId) : "",
-              material: editRow.materialId != null ? String(editRow.materialId) : "",
-              price: editRow.price != null ? String(editRow.price) : "",
-              description: editRow.description || "",
-              image: undefined,
-            } : undefined}
+            initialValues={
+              editRow
+                ? {
+                    storeName: editRow.storeName || "",
+                    address: editRow.address || "",
+                    product: editRow.product || "",
+                    client: editRow.client || "",
+                    doc: editRow.doc || "",
+                    country: editRow.country || "Perú",
+                    gemstone:
+                      editRow.gemId != null ? String(editRow.gemId) : "",
+                    material:
+                      editRow.materialId != null
+                        ? String(editRow.materialId)
+                        : "",
+                    price: editRow.price != null ? String(editRow.price) : "",
+                    description: editRow.description || "",
+                    image: undefined,
+                  }
+                : undefined
+            }
             initialImageUrl={editRow?.imageUrl}
             onSubmit={async (values: CertificateFormValues) => {
               if (!editRow) return false;
               try {
-                let uploadedImage: { url: string; public_id: string } | undefined;
+                let uploadedImage:
+                  | { url: string; public_id: string }
+                  | undefined;
                 if (values.image) {
                   try {
                     const TOO_BIG = 2.5 * 1024 * 1024;
@@ -172,9 +186,15 @@ export default function CertificatesList() {
                   }
                 }
 
-                const res = await updateCertificate(editRow.id, values, uploadedImage);
+                const res = await updateCertificate(
+                  editRow.id,
+                  values,
+                  uploadedImage
+                );
                 if (!res?.ok) {
-                  const msg = (res && (res.data?.message || res.data?.error)) || "No se pudo actualizar el certificado";
+                  const msg =
+                    (res && (res.data?.message || res.data?.error)) ||
+                    "No se pudo actualizar el certificado";
                   throw new Error(msg);
                 }
                 await reload();
@@ -183,7 +203,9 @@ export default function CertificatesList() {
                 return true;
               } catch (err: any) {
                 const msg = err?.response?.data?.message;
-                const human = Array.isArray(msg) ? msg.join(" | ") : msg || err?.message || "Error actualizando certificado";
+                const human = Array.isArray(msg)
+                  ? msg.join(" | ")
+                  : msg || err?.message || "Error actualizando certificado";
                 console.error("Error actualizando certificado:", err);
                 setError(human);
                 return false;
@@ -209,10 +231,16 @@ export default function CertificatesList() {
                   <LuTrash2 className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base font-semibold mb-1">¿Estás seguro de querer eliminar este registro?</h3>
+                  <h3 className="text-base font-semibold mb-1">
+                    ¿Estás seguro de querer eliminar este registro?
+                  </h3>
                   {confirmDelete && (
                     <p className="text-sm text-graphite/70">
-                      Cliente: <span className="font-medium">{confirmDelete.client}</span> — ID {confirmDelete.id}
+                      Cliente:{" "}
+                      <span className="font-medium">
+                        {confirmDelete.client}
+                      </span>{" "}
+                      — ID {confirmDelete.id}
                     </p>
                   )}
                 </div>
@@ -241,7 +269,11 @@ export default function CertificatesList() {
                       setConfirmDelete(null);
                     } catch (e: any) {
                       console.error("Error eliminando certificado:", e);
-                      toast.error(e?.response?.data?.message || e?.message || "No se pudo eliminar");
+                      toast.error(
+                        e?.response?.data?.message ||
+                          e?.message ||
+                          "No se pudo eliminar"
+                      );
                     } finally {
                       setDeleting(false);
                     }
