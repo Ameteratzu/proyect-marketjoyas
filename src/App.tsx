@@ -1,4 +1,9 @@
 import AppRouter from "@/routes/Router";
+import { ToastProvider } from "@/components/Toast";
 export default function App() {
-  return <AppRouter />;
+  return (
+    <ToastProvider>
+      <AppRouter />
+    </ToastProvider>
+  );
 }

@@ -1,6 +1,6 @@
 // src/pages/index.tsx
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Container from '@/components/Container';
 import CategoriesNav from '@/pages/Products/components/CategoriesNav';
 import Filters from '@/pages/Products/components/Filters';
@@ -9,8 +9,6 @@ import Sorting from '@/pages/Products/components/Sorting';
 import Pagination from '@/pages/Products/components/Pagination';
 import ResultsDisplay from '@/pages/Products/components/ResultsDisplay';
 import anillos from "@/assets/products/anillos.png";
-
-
 
 // Define el tipo para la estructura de tus productos
 interface Product {

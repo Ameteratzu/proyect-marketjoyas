@@ -91,6 +91,11 @@
   }
 }
 
+/* Inputs */
+@utility input-base {
+  @apply  mt-1 block w-full border-0 border-b border-gray-400 focus:border-primary focus:ring-0 placeholder:text-gray-400 p-2;
+}
+
 /** Utils: ocultar scrollbar en contenedores scroll */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
