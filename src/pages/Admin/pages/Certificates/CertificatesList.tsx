@@ -8,12 +8,14 @@ import { useCertificates } from "./hooks/useCertificates";
 import { CertificatesFilters } from "./components/filters/CertificatesFilters";
 import CreateEditCertificateModal from "./modal/CreateEditCertificateModal";
 import type { Certificate } from "./types/types";
-import { fetchCertificates, createCertificate, updateCertificate } from "./api/certificates.api";
+import { fetchCertificates, createCertificate, updateCertificate, deleteCertificate } from "./api/certificates.api";
 import type { CertificateFormValues } from "./modal/useCertificateForm";
 import { uploadToCloudinary } from "@/common/api/cloudinary.api";
 import { compressImage } from "@/common/utils/resizeImage";
 import { useToast } from "@/components/Toast";
 import LoadingAnimate from "@/components/LoadingAnimate";
+import ModalBase from "./modal/ModalBase";
+import { LuTrash2 } from "react-icons/lu";
 
 export default function CertificatesList() {
   const [items, setItems] = useState<Certificate[]>([]);
@@ -37,6 +39,8 @@ export default function CertificatesList() {
   const [editRow, setEditRow] = useState<Certificate | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<Certificate | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -116,6 +120,7 @@ export default function CertificatesList() {
             rows={current}
             onView={(row) => setPreviewId(Number(row.id))}
             onEdit={(row) => setEditRow(row)}
+            onDelete={(row) => setConfirmDelete(row)}
           />
           <CertificatePreviewModal
             open={!!previewId}
@@ -191,6 +196,62 @@ export default function CertificatesList() {
             totalItems={filteredTotal}
             onChange={setPage}
           />
+
+          {/* Confirmación de eliminación */}
+          <ModalBase
+            open={!!confirmDelete}
+            onClose={() => !deleting && setConfirmDelete(null)}
+            className="max-w-md"
+          >
+            <div className="p-4">
+              <div className="flex items-start gap-3">
+                <div className="shrink-0 grid place-items-center w-10 h-10 rounded-full bg-red-50 text-red-600">
+                  <LuTrash2 className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold mb-1">¿Estás seguro de querer eliminar este registro?</h3>
+                  {confirmDelete && (
+                    <p className="text-sm text-graphite/70">
+                      Cliente: <span className="font-medium">{confirmDelete.client}</span> — ID {confirmDelete.id}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  className="btn btn-ghost px-6"
+                  onClick={() => setConfirmDelete(null)}
+                  disabled={deleting}
+                >
+                  Cerrar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary px-6 disabled:opacity-60"
+                  disabled={deleting}
+                  onClick={async () => {
+                    if (!confirmDelete) return;
+                    try {
+                      setDeleting(true);
+                      await deleteCertificate(confirmDelete.id);
+                      await reload();
+                      toast.success("Certificado eliminado correctamente");
+                      setConfirmDelete(null);
+                    } catch (e: any) {
+                      console.error("Error eliminando certificado:", e);
+                      toast.error(e?.response?.data?.message || e?.message || "No se pudo eliminar");
+                    } finally {
+                      setDeleting(false);
+                    }
+                  }}
+                >
+                  {deleting ? "Eliminando..." : "Aceptar"}
+                </button>
+              </div>
+            </div>
+          </ModalBase>
         </>
       )}
 

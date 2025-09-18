@@ -57,7 +57,6 @@ export async function createCertificate(
     console.info("[certificates] create response <-", res.data);
   }
 
-  // Si llegó aquí es 2xx
   return { ok: true, data: res.data };
 }
 
@@ -77,14 +76,23 @@ export async function updateCertificate(
     );
   }
 
-  // El backend expuesto usa PATCH
   const res = await http.patch(`/certificados-joyas/${Number(id)}`, payload);
 
   if (import.meta.env.DEV) {
     console.info("[certificates] update response <-", res.data);
   }
 
-  // Si es 2xx, Axios no lanza; consideramos ok
+  return { ok: true, data: res.data };
+}
+
+// ---------- delete ----------
+export async function deleteCertificate(
+  id: number | string
+): Promise<{ ok: boolean; data: any }> {
+  const res = await http.delete(`/certificados-joyas/${Number(id)}`);
+  if (import.meta.env.DEV) {
+    console.info("[certificates] delete response <-", res.data);
+  }
   return { ok: true, data: res.data };
 }
 

@@ -7,6 +7,7 @@ import {
   fetchCertificates,
   createCertificate,
   updateCertificate,
+  deleteCertificate,
 } from "./api/certificates.api";
 import { toast } from "react-hot-toast";
 
@@ -48,7 +49,21 @@ export default function CertificatesScreen() {
   };
 
   const onDelete = async (row: Certificate) => {
-    console.log("delete", row);
+    const ok = window.confirm(
+      `¿Eliminar el certificado de "${row.client}" (ID ${row.id})? Esta acción no se puede deshacer.`
+    );
+    if (!ok) return;
+
+    try {
+      await deleteCertificate(row.id);
+      toast.success("Certificado eliminado");
+      await reload();
+    } catch (e: any) {
+      console.error("[certificates] delete error ->", e);
+      toast.error(
+        e?.response?.data?.message || "No se pudo eliminar el certificado"
+      );
+    }
   };
 
   const onEdit = (row: Certificate) => {
@@ -74,15 +89,11 @@ export default function CertificatesScreen() {
     try {
       if (modal.open && modal.mode === "edit" && modal.row) {
         const idNum = Number(modal.row.id);
-        const res = await updateCertificate(idNum, vals);
+        await updateCertificate(idNum, vals);
         toast.success("Certificado actualizado");
-        if (import.meta.env.DEV)
-          console.info("[certificates] update ok ->", res.data);
       } else {
-        const res = await createCertificate(vals);
+        await createCertificate(vals);
         toast.success("Certificado creado");
-        if (import.meta.env.DEV)
-          console.info("[certificates] create ok ->", res.data);
       }
       await reload();
       setModal({ open: false });
@@ -144,6 +155,6 @@ function mapRowToForm(row: Certificate): CertificateFormValues {
     country: row.country || "Perú",
     price: row.price != null ? String(row.price) : "",
     description: row.description || "",
-    image: null, // no tenemos el File original
+    image: null,
   };
 }
