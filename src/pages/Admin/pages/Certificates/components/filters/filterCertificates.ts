@@ -1,4 +1,4 @@
-import type { Certificate } from './types';
+import type { Certificate } from '../../types/types';
 
 export function filterCertificates(rows: Certificate[], qName: string, qDoc: string) {
   const qn = qName.trim().toLowerCase();

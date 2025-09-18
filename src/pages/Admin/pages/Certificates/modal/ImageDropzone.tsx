@@ -4,9 +4,10 @@ import { LuImageUp } from 'react-icons/lu';
 type Props = {
   value?: File | null;
   onChange: (file: File | null) => void;
+  initialUrl?: string | null;
 };
 
-export default function ImageDropzone({ value, onChange }: Props) {
+export default function ImageDropzone({ value, onChange, initialUrl }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isOver, setIsOver] = useState(false);
 
@@ -53,6 +54,18 @@ export default function ImageDropzone({ value, onChange }: Props) {
             <p className="text-xs text-graphite/70">
               {(value.size / 1024).toFixed(0)} KB
             </p>
+          </div>
+        </div>
+      ) : initialUrl ? (
+        <div className="flex items-center justify-center gap-3">
+          <img
+            src={initialUrl}
+            alt="Producto actual"
+            className="h-20 w-20 rounded-lg object-cover"
+          />
+          <div className="text-left">
+            <p className="text-sm font-medium">Imagen actual</p>
+            <p className="text-xs text-graphite/70">Haz click para reemplazar</p>
           </div>
         </div>
       ) : (

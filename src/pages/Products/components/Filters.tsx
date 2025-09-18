@@ -1,4 +1,4 @@
-import React from 'react';
+ 
 
 // Se ha eliminado las clases de tamaño fijo del componente FilterOption
 // para que se puedan aplicar de forma personalizada.

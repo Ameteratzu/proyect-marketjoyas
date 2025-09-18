@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { setAuthToken } from "@/common/api/http";
 import { login, logout, register } from "./services";
 import type { LoginCredentials, RegisterData, User } from "./types";
 
@@ -24,9 +25,12 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const loggedUser = await login(credentials);
+  const loggedUser = await login(credentials);
       setUser(loggedUser);
       localStorage.setItem("user", JSON.stringify(loggedUser));
+  // Si la API devuelve access_token directamente, configúralo. Si es token, úsalo también.
+  const token = (loggedUser as any)?.access_token ?? (loggedUser as any)?.token ?? null;
+  setAuthToken(token);
       return true; // Éxito
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Error al iniciar sesión";
@@ -41,9 +45,11 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const newUser = await register(data);
+  const newUser = await register(data);
       setUser(newUser);
       localStorage.setItem("user", JSON.stringify(newUser));
+  const token = (newUser as any)?.access_token ?? (newUser as any)?.token ?? null;
+  setAuthToken(token);
       return true;
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Error al registrarse";
@@ -63,6 +69,7 @@ export function useAuth() {
       setUser(null);
       localStorage.removeItem("user");
       localStorage.removeItem("rememberEmail");
+  setAuthToken(null);
     }
   }
 

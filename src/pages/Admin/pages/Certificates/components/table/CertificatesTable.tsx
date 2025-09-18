@@ -1,7 +1,9 @@
-import { LuEye, LuLink2, LuPencil, LuTrash2 } from 'react-icons/lu';
-import type { Certificate } from './types';
+import { LuEye, LuPencil, LuTrash2 } from 'react-icons/lu';
+import { FiSend } from 'react-icons/fi';
+import type { Certificate } from '../../types/types';
 import { cn } from '@/lib/cn';
 import { useTranslation } from 'react-i18next';
+import LoadingAnimate from '@/components/LoadingAnimate';
 
 interface CertificatesTableProps {
   rows: Certificate[];
@@ -42,7 +44,7 @@ export function CertificatesTable({
           {loading && (
             <tr>
               <td colSpan={7} className="px-4 py-10 text-center text-graphite/70">
-                {t('loading', { defaultValue: 'Cargando...' })}
+                <LoadingAnimate />
               </td>
             </tr>
           )}
@@ -66,14 +68,6 @@ export function CertificatesTable({
                   </button>
                   <button
                     className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
-                    title={t('actions.link', { defaultValue: 'Enlace/Descargar' })}
-                    aria-label="Enlace"
-                    onClick={() => onLink?.(row)}
-                  >
-                    <LuLink2 className="h-5 w-5" />
-                  </button>
-                  <button
-                    className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
                     title={t('actions.edit', { defaultValue: 'Editar' })}
                     aria-label="Editar"
                     onClick={() => onEdit?.(row)}
@@ -87,6 +81,14 @@ export function CertificatesTable({
                     onClick={() => onDelete?.(row)}
                   >
                     <LuTrash2 className="h-5 w-5" />
+                  </button>
+                  <button
+                    className="rounded-lg p-1.5 hover:bg-primary/10 cursor-pointer"
+                    title={t('actions.link', { defaultValue: 'Enlace/Descargar' })}
+                    aria-label="Enlace"
+                    onClick={() => onLink?.(row)}
+                  >
+                    <FiSend className="h-5 w-5 text-accent-warm" />
                   </button>
                 </div>
               </td>

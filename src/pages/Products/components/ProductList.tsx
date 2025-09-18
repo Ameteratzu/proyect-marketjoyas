@@ -1,6 +1,4 @@
 // src/features/products/components/ProductList.tsx
-
-import React from 'react';
 import ProductCard from './ProductCard';
 
 interface Product {

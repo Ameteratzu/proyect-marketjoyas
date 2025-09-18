@@ -1,19 +1,32 @@
+// src/pages/Admin/pages/Certificates/modal/CreateEditCertificateModal.tsx
 import ModalBase from "./ModalBase";
 import ImageDropzone from "./ImageDropzone";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCertificateForm } from "./useCertificateForm";
 import { EMPTY_CERTIFICATE_FORM } from "./useCertificateForm";
 import type { CertificateFormValues } from "./useCertificateForm";
 import { cn } from "@/lib/cn";
 import React from "react";
+import {
+  fetchGems,
+  fetchMaterials,
+  type OptionItem,
+} from "../api/certificates.api";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSubmit?: (values: CertificateFormValues) => void;
+  onSubmit?: (values: CertificateFormValues) => Promise<boolean> | boolean;
   mode?: "create" | "edit";
   className?: string;
+  /** <- NUEVO: valores iniciales cuando editas */
+  initialValues?: Partial<CertificateFormValues>;
+  /** URL de la imagen actual (solo edición) */
+  initialImageUrl?: string;
 };
+
+// ====== LÍMITES DE UI ======
+const MAX_DESC = 70;
 
 export default function CreateEditCertificateModal({
   open,
@@ -21,30 +34,124 @@ export default function CreateEditCertificateModal({
   onSubmit,
   mode = "create",
   className,
+  initialValues,
+  initialImageUrl,
 }: Props) {
   const { values, onChange, onInput, setValues } = useCertificateForm();
+  const [materials, setMaterials] = useState<OptionItem[]>([]);
+  const [gems, setGems] = useState<OptionItem[]>([]);
+  const [loadingOpts, setLoadingOpts] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const firstRef = useRef<HTMLInputElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  // Inicializar el formulario al abrir
   useEffect(() => {
-    if (open && mode === "create") {
-      setValues(EMPTY_CERTIFICATE_FORM);
-      setTimeout(() => firstRef.current?.focus(), 40);
-    }
-  }, [open, mode, setValues]);
+    if (!open) return;
+    if (mode === "create") setValues(EMPTY_CERTIFICATE_FORM);
+    else
+      setValues({
+        ...EMPTY_CERTIFICATE_FORM,
+        ...initialValues,
+      } as CertificateFormValues);
+    setSubmitError(null);
+    setSubmitting(false);
+    setTimeout(() => firstRef.current?.focus(), 40);
+  }, [open, mode, initialValues, setValues]);
+
+  // Cargar catálogos
+  useEffect(() => {
+    let cancelled = false;
+    if (!open) return;
+    setLoadingOpts(true);
+    Promise.all([fetchMaterials(), fetchGems()])
+      .then(([m, g]) => {
+        if (cancelled) return;
+        setMaterials(m);
+        setGems(g);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoadingOpts(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
 
   const title =
     mode === "create" ? "Crear Nuevo Certificado" : "Editar Certificado";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit?.(values);
+  const handleClose = () => {
+    setSubmitError(null);
+    setSubmitting(false);
     onClose();
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    const desc = (values.description || "").trim();
+
+    const missing: string[] = [];
+    if (!values.storeName?.trim()) missing.push("Nombre de la tienda");
+    if (!values.address?.trim()) missing.push("Dirección");
+    if (!values.product?.trim()) missing.push("Nombre del Producto");
+    if (!values.client?.trim()) missing.push("Nombre del Cliente");
+    if (!values.doc?.trim()) missing.push("DNI/RUC del cliente");
+    if (!values.country?.trim()) missing.push("País");
+
+    const gemId = Number(values.gemstone);
+    const matId = Number(values.material);
+    if (Number.isNaN(gemId) || gemId <= 0) missing.push("Piedra Preciosa");
+    if (Number.isNaN(matId) || matId <= 0) missing.push("Material");
+
+    if (desc.length > MAX_DESC) {
+      setSubmitError(
+        `La descripción es demasiado larga (máximo ${MAX_DESC} caracteres). Actualmente: ${desc.length}.`
+      );
+      scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (missing.length) {
+      setSubmitError(
+        `Faltan campos requeridos: ${missing.join(
+          ", "
+        )}. Selecciona opciones válidas en Material y Piedra Preciosa.`
+      );
+      scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const ok = await (onSubmit?.({ ...values, description: desc }) ?? false);
+      if (!ok) {
+        setSubmitError("No se registró correctamente");
+        scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } catch (err: any) {
+      const serverMsg =
+        err?.response?.data?.message ||
+        err?.message ||
+        "No se registró correctamente";
+      let human = String(serverMsg);
+      if (human.toLowerCase().includes("internal server error")) {
+        human = `Error del servidor. Si estabas enviando una descripción muy larga, intenta con menos de ${MAX_DESC} caracteres.`;
+      }
+      setSubmitError(human);
+      scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setSubmitting(false);
   };
 
   return (
     <ModalBase
       open={open}
-      onClose={onClose}
+      onClose={handleClose}
       title={title}
       className={cn("max-w-5xl", className)}
     >
@@ -54,17 +161,26 @@ export default function CreateEditCertificateModal({
           <button
             aria-label="Cerrar"
             className="grid h-9 w-9 place-items-center rounded-full hover:bg-neutral/50 cursor-pointer"
-            onClick={onClose}
+            onClick={handleClose}
             type="button"
           >
             <span className="i-[heroicons-outline:x-mark] w-5 h-5" />
           </button>
+          {submitError && (
+            <div className="p-3 rounded-md border border-red-200 bg-red-50 text-red-700 text-sm">
+              {submitError}
+            </div>
+          )}
         </header>
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col flex-1 overflow-hidden"
         >
-          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-8 scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent">
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto px-5 py-5 space-y-8 scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent"
+          >
             <div className="grid gap-x-8 gap-y-5 md:grid-cols-2">
               <div className="space-y-5">
                 <Field label="Nombre de la tienda">
@@ -93,11 +209,18 @@ export default function CreateEditCertificateModal({
                   <Select
                     value={values.material}
                     onChange={onInput("material")}
-                    placeholder="--- Seleccionar material ---"
+                    placeholder={
+                      loadingOpts
+                        ? "Cargando materiales..."
+                        : "--- Seleccionar material ---"
+                    }
+                    disabled={loadingOpts}
                   >
-                    <option>Oro</option>
-                    <option>Plata</option>
-                    <option>Acero</option>
+                    {materials.map((m) => (
+                      <option key={m.id} value={String(m.id)}>
+                        {m.nombre}
+                      </option>
+                    ))}
                   </Select>
                 </Field>
                 <Field label="País">
@@ -113,6 +236,7 @@ export default function CreateEditCertificateModal({
                   </Select>
                 </Field>
               </div>
+
               <div className="space-y-5">
                 <Field label="Dirección">
                   <Input
@@ -132,43 +256,64 @@ export default function CreateEditCertificateModal({
                   <Select
                     value={values.gemstone}
                     onChange={onInput("gemstone")}
-                    placeholder="--- Seleccionar gema ---"
+                    placeholder={
+                      loadingOpts
+                        ? "Cargando gemas..."
+                        : "--- Seleccionar gema ---"
+                    }
+                    disabled={loadingOpts}
                   >
-                    <option>Diamante</option>
-                    <option>Esmeralda</option>
-                    <option>Zafiro</option>
-                    <option>Rubí</option>
+                    {gems.map((g) => (
+                      <option key={g.id} value={String(g.id)}>
+                        {g.nombre}
+                      </option>
+                    ))}
                   </Select>
                 </Field>
-                <Field label="Peso">
+
+                <Field label="Precio">
                   <Input
-                    value={values.weight}
-                    onChange={onInput("weight")}
-                    placeholder="Ej. 7 grs."
+                    type="number"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={values.price}
+                    onChange={onInput("price")}
+                    placeholder="Ej. 1399.00"
+                    className="pr-12"
                   />
                 </Field>
+
                 <Field label="Descripcion">
-                  <Textarea
-                    value={values.description}
-                    onChange={onInput("description")}
-                    placeholder="Agregar una descripcion corta del producto"
-                    rows={3}
-                  />
+                  <div className="space-y-1">
+                    <Textarea
+                      value={values.description}
+                      onChange={onInput("description")}
+                      placeholder="Agregar una descripcion corta del producto"
+                      rows={3}
+                      maxLength={MAX_DESC}
+                    />
+                    <div className="text-right text-xs text-graphite/60">
+                      {(values.description || "").length}/{MAX_DESC}
+                    </div>
+                  </div>
                 </Field>
               </div>
             </div>
+
             <div>
               <Label>Imagen del producto</Label>
               <ImageDropzone
                 value={values.image}
                 onChange={onChange("image")}
+                initialUrl={initialImageUrl || undefined}
               />
             </div>
           </div>
-          <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-end gap-4">
+
+          <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-between gap-4">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className={cn(
                 "inline-flex h-11 items-center rounded-full btn-ghost px-8 text-sm font-medium transition-colors"
               )}
@@ -177,9 +322,19 @@ export default function CreateEditCertificateModal({
             </button>
             <button
               type="submit"
-              className="inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors"
+              disabled={submitting}
+              className={cn(
+                "inline-flex h-11 items-center rounded-full btn-primary px-8 text-sm font-medium transition-colors",
+                submitting && "opacity-70 cursor-not-allowed"
+              )}
             >
-              {mode === "create" ? "Crear Certificado" : "Guardar cambios"}
+              {submitting
+                ? mode === "create"
+                  ? "Creando..."
+                  : "Guardando..."
+                : mode === "create"
+                ? "Crear Certificado"
+                : "Guardar cambios"}
             </button>
           </footer>
         </form>

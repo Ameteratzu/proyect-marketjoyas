@@ -1,5 +1,4 @@
 // src/features/products/components/Pagination.tsx
-import React from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 interface PaginationProps {
