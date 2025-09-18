@@ -1,5 +1,4 @@
 // src/features/products/components/Sorting.tsx
-import React from 'react';
 import { FaAngleDown } from 'react-icons/fa6';
 
 interface SortingProps {

@@ -1,7 +1,5 @@
 // src/features/products/components/CategoriesNav.tsx
 
-import React from 'react';
-
 const categories = [
   { name: 'Compromiso', imageUrl: '/src/assets/products/nav_joyas_1.jpg' },
   { name: 'Matrimonio', imageUrl: '/src/assets/products/nav_joyas_2.png' },
