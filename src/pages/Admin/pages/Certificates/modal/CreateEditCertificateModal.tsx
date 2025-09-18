@@ -1,3 +1,4 @@
+// src/pages/Admin/pages/Certificates/modal/CreateEditCertificateModal.tsx
 import ModalBase from "./ModalBase";
 import ImageDropzone from "./ImageDropzone";
 import { useEffect, useRef, useState } from "react";
@@ -15,10 +16,13 @@ import {
 type Props = {
   open: boolean;
   onClose: () => void;
-  // onSubmit debe resolver a true/false para saber si cerramos el modal
   onSubmit?: (values: CertificateFormValues) => Promise<boolean> | boolean;
   mode?: "create" | "edit";
   className?: string;
+  /** <- NUEVO: valores iniciales cuando editas */
+  initialValues?: Partial<CertificateFormValues>;
+  /** URL de la imagen actual (solo edición) */
+  initialImageUrl?: string;
 };
 
 // ====== LÍMITES DE UI ======
@@ -30,6 +34,8 @@ export default function CreateEditCertificateModal({
   onSubmit,
   mode = "create",
   className,
+  initialValues,
+  initialImageUrl,
 }: Props) {
   const { values, onChange, onInput, setValues } = useCertificateForm();
   const [materials, setMaterials] = useState<OptionItem[]>([]);
@@ -40,17 +46,21 @@ export default function CreateEditCertificateModal({
   const firstRef = useRef<HTMLInputElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  // Inicializar el formulario al abrir
   useEffect(() => {
-    if (open && mode === "create") {
-      setValues(EMPTY_CERTIFICATE_FORM);
-  // limpiar banners al abrir
-  setSubmitError(null);
-  setSubmitting(false);
-      setTimeout(() => firstRef.current?.focus(), 40);
-    }
-  }, [open, mode, setValues]);
+    if (!open) return;
+    if (mode === "create") setValues(EMPTY_CERTIFICATE_FORM);
+    else
+      setValues({
+        ...EMPTY_CERTIFICATE_FORM,
+        ...initialValues,
+      } as CertificateFormValues);
+    setSubmitError(null);
+    setSubmitting(false);
+    setTimeout(() => firstRef.current?.focus(), 40);
+  }, [open, mode, initialValues, setValues]);
 
-  // Cargar opciones cuando se abre
+  // Cargar catálogos
   useEffect(() => {
     let cancelled = false;
     if (!open) return;
@@ -61,10 +71,7 @@ export default function CreateEditCertificateModal({
         setMaterials(m);
         setGems(g);
       })
-      .catch(() => {
-        if (cancelled) return;
-        // Silencioso; podríamos mostrar un aviso si falla
-      })
+      .catch(() => {})
       .finally(() => {
         if (!cancelled) setLoadingOpts(false);
       });
@@ -76,7 +83,6 @@ export default function CreateEditCertificateModal({
   const title =
     mode === "create" ? "Crear Nuevo Certificado" : "Editar Certificado";
 
-  // Cerrar modal limpiando mensajes/estado
   const handleClose = () => {
     setSubmitError(null);
     setSubmitting(false);
@@ -86,12 +92,9 @@ export default function CreateEditCertificateModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
-    
 
-    // Normalizar campos
     const desc = (values.description || "").trim();
 
-    // Validación simple en cliente para evitar 400/500 innecesarios
     const missing: string[] = [];
     if (!values.storeName?.trim()) missing.push("Nombre de la tienda");
     if (!values.address?.trim()) missing.push("Dirección");
@@ -105,7 +108,6 @@ export default function CreateEditCertificateModal({
     if (Number.isNaN(gemId) || gemId <= 0) missing.push("Piedra Preciosa");
     if (Number.isNaN(matId) || matId <= 0) missing.push("Material");
 
-    // Límite de descripción
     if (desc.length > MAX_DESC) {
       setSubmitError(
         `La descripción es demasiado larga (máximo ${MAX_DESC} caracteres). Actualmente: ${desc.length}.`
@@ -126,15 +128,12 @@ export default function CreateEditCertificateModal({
 
     setSubmitting(true);
     try {
-      const res = await (onSubmit?.({ ...values, description: desc }) ?? false);
-      if (res) {
-  // Éxito: el padre cierra el modal y muestra toast.
-      } else {
+      const ok = await (onSubmit?.({ ...values, description: desc }) ?? false);
+      if (!ok) {
         setSubmitError("No se registró correctamente");
         scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
       }
     } catch (err: any) {
-      // Mensaje legible para 500 por longitudes
       const serverMsg =
         err?.response?.data?.message ||
         err?.message ||
@@ -152,7 +151,7 @@ export default function CreateEditCertificateModal({
   return (
     <ModalBase
       open={open}
-  onClose={handleClose}
+      onClose={handleClose}
       title={title}
       className={cn("max-w-5xl", className)}
     >
@@ -167,12 +166,13 @@ export default function CreateEditCertificateModal({
           >
             <span className="i-[heroicons-outline:x-mark] w-5 h-5" />
           </button>
-        {submitError && (
-          <div className="p-3 rounded-md border border-red-200 bg-red-50 text-red-700 text-sm">
-            {submitError}
-          </div>
-        )}
+          {submitError && (
+            <div className="p-3 rounded-md border border-red-200 bg-red-50 text-red-700 text-sm">
+              {submitError}
+            </div>
+          )}
         </header>
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col flex-1 overflow-hidden"
@@ -236,6 +236,7 @@ export default function CreateEditCertificateModal({
                   </Select>
                 </Field>
               </div>
+
               <div className="space-y-5">
                 <Field label="Dirección">
                   <Input
@@ -270,7 +271,6 @@ export default function CreateEditCertificateModal({
                   </Select>
                 </Field>
 
-                {/* Precio: si lo usas en tu form, mantenlo aquí */}
                 <Field label="Precio">
                   <Input
                     type="number"
@@ -299,18 +299,21 @@ export default function CreateEditCertificateModal({
                 </Field>
               </div>
             </div>
+
             <div>
               <Label>Imagen del producto</Label>
               <ImageDropzone
                 value={values.image}
                 onChange={onChange("image")}
+                initialUrl={initialImageUrl || undefined}
               />
             </div>
           </div>
+
           <footer className="shrink-0 border-t border-black/10 bg-white px-5 py-4 flex items-center justify-between gap-4">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className={cn(
                 "inline-flex h-11 items-center rounded-full btn-ghost px-8 text-sm font-medium transition-colors"
               )}

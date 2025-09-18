@@ -8,7 +8,7 @@ import { useCertificates } from "./hooks/useCertificates";
 import { CertificatesFilters } from "./components/filters/CertificatesFilters";
 import CreateEditCertificateModal from "./modal/CreateEditCertificateModal";
 import type { Certificate } from "./types/types";
-import { fetchCertificates, createCertificate } from "./api/certificates.api";
+import { fetchCertificates, createCertificate, updateCertificate } from "./api/certificates.api";
 import type { CertificateFormValues } from "./modal/useCertificateForm";
 import { uploadToCloudinary } from "@/common/api/cloudinary.api";
 import { compressImage } from "@/common/utils/resizeImage";
@@ -34,6 +34,7 @@ export default function CertificatesList() {
   } = useCertificates(items);
 
   const [showCreate, setShowCreate] = useState(false);
+  const [editRow, setEditRow] = useState<Certificate | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -114,11 +115,75 @@ export default function CertificatesList() {
           <CertificatesTable
             rows={current}
             onView={(row) => setPreviewId(Number(row.id))}
+            onEdit={(row) => setEditRow(row)}
           />
           <CertificatePreviewModal
             open={!!previewId}
             id={previewId!}
             onClose={() => setPreviewId(null)}
+          />
+          <CreateEditCertificateModal
+            open={!!editRow}
+            onClose={() => setEditRow(null)}
+            mode="edit"
+            initialValues={editRow ? {
+              storeName: editRow.storeName || "",
+              address: editRow.address || "",
+              product: editRow.product || "",
+              client: editRow.client || "",
+              doc: editRow.doc || "",
+              country: editRow.country || "Perú",
+              gemstone: editRow.gemId != null ? String(editRow.gemId) : "",
+              material: editRow.materialId != null ? String(editRow.materialId) : "",
+              price: editRow.price != null ? String(editRow.price) : "",
+              description: editRow.description || "",
+              image: undefined,
+            } : undefined}
+            initialImageUrl={editRow?.imageUrl}
+            onSubmit={async (values: CertificateFormValues) => {
+              if (!editRow) return false;
+              try {
+                let uploadedImage: { url: string; public_id: string } | undefined;
+                if (values.image) {
+                  try {
+                    const TOO_BIG = 2.5 * 1024 * 1024;
+                    let fileToSend = values.image;
+                    if (values.image.size > TOO_BIG) {
+                      fileToSend = await compressImage(values.image, {
+                        maxWidth: 1280,
+                        quality: 0.82,
+                        mimeType: "image/jpeg",
+                      });
+                    }
+                    uploadedImage = await uploadToCloudinary(fileToSend);
+                  } catch (e: any) {
+                    console.error("Error subiendo imagen a Cloudinary:", e);
+                    setError(
+                      e?.response?.data?.message ||
+                        e?.message ||
+                        "Error subiendo la imagen"
+                    );
+                    return false;
+                  }
+                }
+
+                const res = await updateCertificate(editRow.id, values, uploadedImage);
+                if (!res?.ok) {
+                  const msg = (res && (res.data?.message || res.data?.error)) || "No se pudo actualizar el certificado";
+                  throw new Error(msg);
+                }
+                await reload();
+                setEditRow(null);
+                toast.success("Certificado actualizado correctamente");
+                return true;
+              } catch (err: any) {
+                const msg = err?.response?.data?.message;
+                const human = Array.isArray(msg) ? msg.join(" | ") : msg || err?.message || "Error actualizando certificado";
+                console.error("Error actualizando certificado:", err);
+                setError(human);
+                return false;
+              }
+            }}
           />
           <Pagination
             page={page}

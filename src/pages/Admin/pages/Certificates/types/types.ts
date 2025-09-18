@@ -6,17 +6,23 @@ export interface Certificate {
   client: string;
   doc: string;
   date: string;
+
+  gemId?: number;
+  materialId?: number;
+  country?: string;
+  price?: number;
+  description?: string;
+  imageUrl?: string;
 }
 
 export type CertificateDTO = {
   id?: number | string;
-  _id?: string;
-
-  // nombres “oficiales” que estás usando
+  _id?: number | string;
+  id_certificado?: number | string;
   tiendaNombre?: string;
   tiendaDireccion?: string;
   clienteNombre?: string;
-  clienteDnioRUC?: string;
+  clienteDnioRUC?: string | number;
   productoNombre?: string;
   gemaId?: number;
   materialId?: number;
@@ -24,14 +30,10 @@ export type CertificateDTO = {
   imagenUrl?: string;
   pais?: string;
   descripcion?: string;
-
-  // campos de fecha
   fechaEmision?: string;
   createdAt?: string;
   fecha?: string;
   date?: string;
-  // variantes raras que vimos antes
-  id_certificado?: string | number;
 };
 
 // Payload de creación
