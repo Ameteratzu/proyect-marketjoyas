@@ -21,25 +21,25 @@ type Notification = {
 };
 
 const MOCK_NOTIFICATIONS: Notification[] = [
-  {
-    id: "1",
-    title: "Nuevo pedido",
-    description: "Pedido #10234 recibido",
-    time: "hace 2m",
-    unread: true,
-  },
-  {
-    id: "2",
-    title: "Suscripción renovada",
-    description: "Plan Oro - Cliente Ana",
-    time: "hace 25m",
-  },
-  {
-    id: "3",
-    title: "Reembolso completado",
-    description: "Pedido #10198",
-    time: "hace 1h",
-  },
+  // {
+  //   id: "1",
+  //   title: "Nuevo pedido",
+  //   description: "Pedido #10234 recibido",
+  //   time: "hace 2m",
+  //   unread: true,
+  // },
+  // {
+  //   id: "2",
+  //   title: "Suscripción renovada",
+  //   description: "Plan Oro - Cliente Ana",
+  //   time: "hace 25m",
+  // },
+  // {
+  //   id: "3",
+  //   title: "Reembolso completado",
+  //   description: "Pedido #10198",
+  //   time: "hace 1h",
+  // },
 ];
 
 export default function AdminTopbar({ collapsed, onToggle }: Props) {
