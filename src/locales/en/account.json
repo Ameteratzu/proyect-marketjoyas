@@ -42,7 +42,16 @@
     },
     "address": {
         "title": "My address",
-        "empty": "You haven't saved an address yet."
+        "sectionTitle": "Addresses",
+        "empty": "You haven't saved an address yet.",
+        "emptyHelp": "Save your location! This will make your next purchases even faster.",
+        "addBtn": "Add address",
+        "confirmDelete": "Delete this address?",
+        "form": {
+            "createTitle": "Add New Address",
+            "editTitle": "Edit Address",
+            "requiredHelp": "Required fields"
+        }
     },
     "favorites": {
         "title": "My favorites",

@@ -42,7 +42,16 @@
     },
     "address": {
         "title": "Mi dirección",
-        "empty": "No has guardado una dirección todavía."
+        "sectionTitle": "Direcciones",
+        "empty": "No has guardado una dirección todavía.",
+        "emptyHelp": "¡Guarda tu ubicación! Para que tus próximas compras sean aún más rápidas.",
+        "addBtn": "Agregar dirección",
+        "confirmDelete": "¿Eliminar esta dirección?",
+        "form": {
+            "createTitle": "Agregar Nueva Dirección",
+            "editTitle": "Editar Dirección",
+            "requiredHelp": "Datos obligatorios"
+        }
     },
     "favorites": {
         "title": "Mis favoritos",
