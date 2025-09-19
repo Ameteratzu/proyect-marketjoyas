@@ -1,0 +1,78 @@
+{
+    "ordersTotal": "Pedidos totales:",
+    "menu": {
+        "info": "Mi información",
+        "orders": "Mis pedidos",
+        "address": "Mi dirección",
+        "favorites": "Mis favoritos",
+        "help": "Necesito ayuda",
+        "logout": "Cerrar sesión"
+    },
+    "info": {
+        "title": "Editar mi información personal",
+        "fullName": "Nombres y Apellidos",
+        "docType": "Tipo de documentación",
+        "docNumber": "Documento",
+        "phone": "Celular",
+        "email": "Correo electrónico",
+        "save": "Guardar Cambios"
+    },
+    "placeholders": {
+        "fullName": "Tu nombre completo",
+        "docType": "DNI / CE / Pasaporte",
+        "docNumber": "Número de documento"
+    },
+    "password": {
+        "title": "Cambiar contraseña",
+        "current": "Contraseña actual",
+        "new": "Nueva contraseña",
+        "save": "Cambiar contraseña",
+        "rules": {
+            "min": "Mín. 8 caracteres",
+            "upper": "1 mayúscula",
+            "number": "1 número",
+            "special": "1 carácter especial",
+            "lower": "1 minúscula",
+            "space": "Sin espacios"
+        }
+    },
+    "orders": {
+        "title": "Mis pedidos",
+        "empty": "Aún no tienes pedidos registrados."
+    },
+    "address": {
+        "title": "Mi dirección",
+        "sectionTitle": "Direcciones",
+        "empty": "No has guardado una dirección todavía.",
+        "emptyHelp": "¡Guarda tu ubicación! Para que tus próximas compras sean aún más rápidas.",
+        "addBtn": "Agregar dirección",
+        "confirmDelete": "¿Eliminar esta dirección?",
+        "form": {
+            "createTitle": "Agregar Nueva Dirección",
+            "editTitle": "Editar Dirección",
+            "requiredHelp": "Datos obligatorios"
+        }
+    },
+    "favorites": {
+        "title": "Mis favoritos",
+        "empty": "Aún no has agregado productos a favoritos."
+    },
+    "help": {
+        "title": "¿Necesitas ayuda? Contáctanos",
+        "subtitle": "Aquí encontrarás nuestros canales de atención",
+        "whatsapp": {
+            "title": "Hablemos por WhatsApp",
+            "desc": "Escríbenos de lunes a sábados de 8:00 a 20:00.",
+            "cta": "Iniciar WhatsApp"
+        },
+        "phone": {
+            "title": "Compremos por teléfono",
+            "desc": "Te ayudamos a comprar de lunes a sábados de 09:00 a 22:00 h. domingos y festivos de 09:00 a 21:00 h.",
+            "cta": "Llamar a venta telefónica"
+        },
+        "socials": {
+            "title": "Síguenos",
+            "subtitle": "Encuéntranos en:"
+        }
+    }
+}

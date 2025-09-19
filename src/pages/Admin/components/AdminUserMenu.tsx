@@ -1,9 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { LuLogOut, LuUser, LuActivity } from "react-icons/lu";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "@/common/store/user.slice";
+import { setAuthToken } from "@/common/api/http";
 
 export default function AdminUserMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
@@ -41,7 +48,26 @@ export default function AdminUserMenu() {
             <LuActivity className="h-4 w-4" /> Actividad
           </button>
           <hr className="my-1" />
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50">
+          <button
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+            onClick={() => {
+              setOpen(false);
+              if (pathname === "/") {
+                try {
+                  const rememberedEmail = localStorage.getItem("rememberEmail");
+                  localStorage.clear();
+                  if (rememberedEmail)
+                    localStorage.setItem("rememberEmail", rememberedEmail);
+                } finally {
+                  setAuthToken(null);
+                  dispatch(logout());
+                }
+              } else {
+                sessionStorage.setItem("pendingLogout", "1");
+                navigate("/", { replace: true });
+              }
+            }}
+          >
             <LuLogOut className="h-4 w-4" /> Cerrar sesión
           </button>
         </div>

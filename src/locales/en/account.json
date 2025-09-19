@@ -1,0 +1,78 @@
+{
+    "ordersTotal": "Total orders:",
+    "menu": {
+        "info": "My information",
+        "orders": "My orders",
+        "address": "My address",
+        "favorites": "My favorites",
+        "help": "Need help",
+        "logout": "Log out"
+    },
+    "info": {
+        "title": "Edit my personal information",
+        "fullName": "Full name",
+        "docType": "Document type",
+        "docNumber": "Document number",
+        "phone": "Phone",
+        "email": "Email",
+        "save": "Save changes"
+    },
+    "placeholders": {
+        "fullName": "Your full name",
+        "docType": "ID / CE / Passport",
+        "docNumber": "Document number"
+    },
+    "password": {
+        "title": "Change password",
+        "current": "Current password",
+        "new": "New password",
+        "save": "Change password",
+        "rules": {
+            "min": "Min. 8 characters",
+            "upper": "1 uppercase",
+            "number": "1 number",
+            "special": "1 special character",
+            "lower": "1 lowercase",
+            "space": "No spaces"
+        }
+    },
+    "orders": {
+        "title": "My orders",
+        "empty": "You don't have any orders yet."
+    },
+    "address": {
+        "title": "My address",
+        "sectionTitle": "Addresses",
+        "empty": "You haven't saved an address yet.",
+        "emptyHelp": "Save your location! This will make your next purchases even faster.",
+        "addBtn": "Add address",
+        "confirmDelete": "Delete this address?",
+        "form": {
+            "createTitle": "Add New Address",
+            "editTitle": "Edit Address",
+            "requiredHelp": "Required fields"
+        }
+    },
+    "favorites": {
+        "title": "My favorites",
+        "empty": "You haven't added favorites yet."
+    },
+    "help": {
+        "title": "Need help? Contact us",
+        "subtitle": "Here you can find our support channels",
+        "whatsapp": {
+            "title": "Chat via WhatsApp",
+            "desc": "Write to us Monday to Saturday from 8:00 to 20:00.",
+            "cta": "Start WhatsApp"
+        },
+        "phone": {
+            "title": "Buy by phone",
+            "desc": "We help you buy Mon–Sat 09:00–22:00. Sundays and holidays 09:00–21:00.",
+            "cta": "Call sales"
+        },
+        "socials": {
+            "title": "Follow us",
+            "subtitle": "Find us on:"
+        }
+    }
+}
