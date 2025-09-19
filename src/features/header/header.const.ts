@@ -9,5 +9,5 @@ export const MAIN_NAV: Array<NavItem> = [
   { id: "blog",    labelKey: "blog",    href: PATHS.BLOG },
   { id: "stores",  labelKey: "stores",  href: PATHS.STORES },
   { id: "about",   labelKey: "about",   href: PATHS.ABOUT },
-  { id: "contact", labelKey: "contact", href: PATHS.CONTACT },
+  { id: "testimony", labelKey: "testimony", href: PATHS.TESTIMONY },
 ];
