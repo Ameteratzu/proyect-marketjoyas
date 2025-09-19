@@ -22,6 +22,8 @@ import esLogin from "@/locales/es/login.json";
 import enLogin from "@/locales/en/login.json";
 import esAdmin from "@/locales/es/admin.json";
 import enAdmin from "@/locales/en/admin.json";
+import esAccount from "@/locales/es/account.json";
+import enAccount from "@/locales/en/account.json";
 
 
 i18n
@@ -44,13 +46,13 @@ i18n
     interpolation: { escapeValue: false },
 
     // Namespaces (acá se añade más)
-  ns: ["header", "footer", "home", "sidebar", "compare", "about", "quote", "stores", "admin", "login"],
+  ns: ["header", "footer", "home", "sidebar", "compare", "about", "quote", "stores", "admin", "login", "account"],
     defaultNS: "header",
 
     // Resources en memoria
     resources: {
-      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote, stores: esStore, admin: esAdmin, login: esLogin },
-      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote, stores: enStore, admin: enAdmin, login: enLogin },
+      es: { header: esHeader, footer: esFooter, home: esHome, sidebar: esSidebar, compare: esCompare, about: esAbout, quote: esQuote, stores: esStore, admin: esAdmin, login: esLogin, account: esAccount },
+      en: { header: enHeader, footer: enFooter, home: enHome, sidebar: enSidebar, compare: enCompare, about: enAbout, quote: enQuote, stores: enStore, admin: enAdmin, login: enLogin, account: enAccount },
     },
   });
 
