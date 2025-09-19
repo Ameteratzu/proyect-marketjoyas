@@ -9,13 +9,15 @@ import {
 } from "react-icons/lu";
 import { FiHelpCircle } from 'react-icons/fi';
 import SidebarItem from "./SidebarItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getUiUser } from "../utils";
+//
 
 export default function AccountSidebar() {
   const { t } = useTranslation("account");
   const user = useMemo(() => getUiUser(), []);
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
@@ -47,8 +49,8 @@ export default function AccountSidebar() {
         </p>
       </div>
 
-      {/* Menu */}
-      <nav className="mt-6 space-y-2">
+  {/* Menu: horizontal scroll en móvil, vertical en desktop */}
+  <nav className="mt-6 flex gap-3 overflow-x-auto pb-2 -mx-0 px-6 snap-x md:block md:space-y-2 md:overflow-visible md:px-0 md:mx-0">
         <SidebarItem
           to="/cuenta"
           icon={<LuUser />}
@@ -77,13 +79,17 @@ export default function AccountSidebar() {
         />
       </nav>
 
-      {/* Cerrar sesión (solo diseño) */}
+      {/* Cerrar sesión */}
       <div className="pt-6 mt-6 border-t border-neutral-200">
         <NavLink
           to="#"
           className="flex items-center gap-3 px-3 py-2 rounded-lg text-red-600 hover:bg-red-50"
-          onClick={(e) => e.preventDefault()}
-          aria-disabled
+          onClick={(e) => {
+            e.preventDefault();
+            // Colocar bandera y navegar primero
+            sessionStorage.setItem("pendingLogout", "1");
+            navigate("/", { replace: true });
+          }}
         >
           <LuLogOut className="text-xl" />
           <span>{t("menu.logout")}</span>

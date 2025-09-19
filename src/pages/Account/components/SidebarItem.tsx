@@ -16,15 +16,19 @@ export default function SidebarItem(props: Props) {
       end={props.end}
       className={({ isActive }) =>
         cn(
-          "flex items-center gap-3 mt-5 px-3 py-3 rounded-lg transition-colors border border-black/15",
+      // móvil: item tipo "píldora" con ancho mínimo, scroll-snap y sin margen top
+      // padding: reducimos padding derecho en móvil y centramos contenido
+      "flex items-center gap-3 pl-3 pr-2 py-3 md:px-4 rounded-lg transition-colors border border-black/15 snap-start shrink-0 min-w-[68%] sm:min-w-[50%] md:min-w-0 md:w-full justify-center md:justify-start text-center md:text-left",
+          // separar verticalmente solo en desktop
+          "md:mt-5",
           isActive
             ? "bg-accent-warm/50 text-dark"
             : "text-neutral-700 hover:bg-accent-warm/15",
         )
       }
     >
-      <span className="text-xl">{props.icon}</span>
-      <span className="font-medium">{props.label}</span>
+    <span className="text-xl">{props.icon}</span>
+    <span className="font-medium">{props.label}</span>
     </NavLink>
   );
 }
