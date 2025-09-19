@@ -9,15 +9,19 @@ import {
 } from "react-icons/lu";
 import { FiHelpCircle } from 'react-icons/fi';
 import SidebarItem from "./SidebarItem";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getUiUser } from "../utils";
-//
+import { useDispatch } from "react-redux";
+import { logout } from "@/common/store/user.slice";
+import { setAuthToken } from "@/common/api/http";
 
 export default function AccountSidebar() {
   const { t } = useTranslation("account");
   const user = useMemo(() => getUiUser(), []);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
@@ -86,9 +90,21 @@ export default function AccountSidebar() {
           className="flex items-center gap-3 px-3 py-2 rounded-lg text-red-600 hover:bg-red-50"
           onClick={(e) => {
             e.preventDefault();
-            // Colocar bandera y navegar primero
-            sessionStorage.setItem("pendingLogout", "1");
-            navigate("/", { replace: true });
+            if (pathname === "/") {
+              // Ya estamos en home: limpiar inmediatamente sin bandera
+              try {
+                const rememberedEmail = localStorage.getItem("rememberEmail");
+                localStorage.clear();
+                if (rememberedEmail) localStorage.setItem("rememberEmail", rememberedEmail);
+              } finally {
+                setAuthToken(null);
+                dispatch(logout());
+              }
+            } else {
+              // Colocar bandera y navegar primero
+              sessionStorage.setItem("pendingLogout", "1");
+              navigate("/", { replace: true });
+            }
           }}
         >
           <LuLogOut className="text-xl" />

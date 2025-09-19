@@ -3,9 +3,12 @@ import { MdFavoriteBorder } from "react-icons/md";
 import VisuallyHidden from "@/components/VisuallyHidden";
 import { useTranslation } from "react-i18next";
 //
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { setAuthToken } from "@/common/api/http";
+import { useDispatch } from "react-redux";
+import { logout } from "@/common/store/user.slice";
 
 type Props = {
   onLoginClick?: () => void;
@@ -14,8 +17,9 @@ type Props = {
 
 export default function Actions({ onLoginClick, user }: Props) {
   const { t } = useTranslation("header");
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -98,9 +102,20 @@ export default function Actions({ onLoginClick, user }: Props) {
                 className="flex w-full items-center gap-3 px-4 py-2 text-sm text-left text-dark hover:bg-red-50 hover:text-red-600 transition-colors cursor-pointer"
                 onClick={() => {
                   setMenuOpen(false);
-                  // usar misma estrategia: bandera + navegación primero
-                  sessionStorage.setItem("pendingLogout", "1");
-                  navigate("/", { replace: true });
+                  if (pathname === "/") {
+                    try {
+                      const rememberedEmail = localStorage.getItem("rememberEmail");
+                      localStorage.clear();
+                      if (rememberedEmail) localStorage.setItem("rememberEmail", rememberedEmail);
+                    } finally {
+                      setAuthToken(null);
+                      dispatch(logout());
+                    }
+                  } else {
+                    // usar misma estrategia: bandera + navegación primero
+                    sessionStorage.setItem("pendingLogout", "1");
+                    navigate("/", { replace: true });
+                  }
                 }}
               >
                 <FiLogOut className="w-4 h-4" />
