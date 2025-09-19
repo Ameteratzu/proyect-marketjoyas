@@ -7,3 +7,16 @@ export type UiUser = {
   ordersCount: number;
   initials: string;
 };
+
+export type Address = {
+  id: string;
+  label: string;
+  streetName: string;
+  streetNumber: string;
+  district: string;
+  province: string;
+  department: string;
+  reference?: string;
+  phone?: string;
+  isPrimary?: boolean;
+};
