@@ -1,9 +1,4 @@
 
-// src/features/products/components/Filters.tsx
-
-import React from 'react';
-
-
 // Se ha eliminado las clases de tamaño fijo del componente FilterOption
 // para que se puedan aplicar de forma personalizada.
 const FilterOption = ({ label, className = '' }: { label: string; className?: string }) => {
