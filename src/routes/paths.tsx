@@ -8,4 +8,8 @@ export const PATHS = {
   CONTACT: "/contacto",
   PRODUCTS: "/productos",
   ACCOUNT: "/cuenta",
+  accountOrders: '/cuenta/pedidos',
+  accountAddress: '/cuenta/direccion',
+  accountFavorites: '/cuenta/favoritos',
+  accountHelp: '/cuenta/ayuda',
 } as const;
