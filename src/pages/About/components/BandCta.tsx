@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
+import defaultImg from "@/assets/about/EntregandoProductos.png";
 
 type Props = { image?: string };
 
-export default function BandCta({ image = "/src/assets/about/EntregandoProductos.png" }: Props) {
+export default function BandCta({ image }: Props) {
   const { t } = useTranslation("about");
+  const imgSrc = image ?? defaultImg;
 
   return (
     <section className="bg-primary text-white mt-16 text-center md:text-left">
@@ -15,15 +17,20 @@ export default function BandCta({ image = "/src/assets/about/EntregandoProductos
           <h3 className="mt-1 font-display text-3xl md:text-4xl max-w-lg">
             {t("band.title")}
           </h3>
-          <p className="mt-3 text-white/90 max-w-100 text-lg">{t("band.desc")}</p>
-          <a href="/productos" className="btn btn-light mt-6 inline-block text-lg">
+          <p className="mt-3 text-white/90 max-w-100 text-lg">
+            {t("band.desc")}
+          </p>
+          <a
+            href="/productos"
+            className="btn btn-light mt-6 inline-block text-lg"
+          >
             {t("band.cta")}
           </a>
         </div>
         <div className="order-1 md:order-2">
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={image}
+              src={imgSrc}
               alt={t("band.alt")}
               className="w-full h-[260px] md:h-[500px] object-cover hover:transition-transform duration-300 hover:scale-105"
             />
