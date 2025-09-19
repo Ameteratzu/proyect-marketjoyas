@@ -1,6 +1,6 @@
 // src/pages/Products/components/ProductDetailPage.tsx
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight, FaCheckCircle, FaRegStar } from 'react-icons/fa';
 import { HiOutlineHome } from 'react-icons/hi';

@@ -6,16 +6,13 @@ import SectionTitle from "@/components/SectionTitle";
 export default function SpecialtiesGrid() {
   const { t } = useTranslation("about");
 
-  // Referencia para el carrusel horizontal en mobile
   const listRef = useRef<HTMLUListElement | null>(null);
   const [active, setActive] = useState(0);
 
-  // Actualiza el índice activo según el scroll (solo mobile, pero sin condicional pesada)
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;
     const handler = () => {
-      // Si no hay scroll horizontal real (modo grid en desktop), fijamos 0
       if (el.scrollWidth <= el.clientWidth) {
         if (active !== 0) setActive(0);
         return;
@@ -36,7 +33,6 @@ export default function SpecialtiesGrid() {
     };
     el.addEventListener("scroll", handler, { passive: true });
     window.addEventListener("resize", handler);
-    // Inicial
     handler();
     return () => {
       el.removeEventListener("scroll", handler);
@@ -54,7 +50,7 @@ export default function SpecialtiesGrid() {
   };
 
   return (
-    <section className="">
+    <section>
       <SectionTitle decor="full" lineThickness="thick">
         {t("specialties.title")}
       </SectionTitle>
@@ -65,16 +61,15 @@ export default function SpecialtiesGrid() {
           </p>
         </div>
 
-        {/* Lista: en mobile se convierte en carrusel horizontal; en sm+ conserva el grid original */}
         <ul
           ref={listRef}
-          className="flex overflow-x-auto no-scrollbar gap-6 px-2 -mx-2 scroll-smooth snap-x snap-mandatory sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4" /* no tocamos clases existentes para desktop */
+          className="flex overflow-x-auto no-scrollbar gap-6 px-2 -mx-2 scroll-smooth snap-x snap-mandatory sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4"
           aria-label={t("specialties.title")}
         >
           {SPECIALTIES.map((s, idx) => (
             <li
               key={s.id}
-              className="rounded-2xl bg-white border border-black/5 shadow-sm overflow-hidden hover:scale-105 transition-transform duration-300 snap-center shrink-0 w-[85%] sm:w-auto sm:shrink" /* añadimos ancho relativo solo mobile */
+              className="rounded-2xl bg-white border border-black/5 shadow-sm overflow-hidden hover:scale-105 transition-transform duration-300 snap-center shrink-0 w-[85%] sm:w-auto sm:shrink"
               aria-current={idx === active ? "true" : undefined}
             >
               <div className="h-50">
@@ -94,7 +89,6 @@ export default function SpecialtiesGrid() {
           ))}
         </ul>
 
-        {/* Puntos de navegación: sólo visibles en mobile */}
         <div
           className="flex justify-center gap-2 mt-4 sm:hidden"
           aria-hidden="true"
