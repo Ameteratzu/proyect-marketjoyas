@@ -1,0 +1,53 @@
+{
+    "ordersTotal": "Pedidos totales:",
+    "menu": {
+        "info": "Mi información",
+        "orders": "Mis pedidos",
+        "address": "Mi dirección",
+        "favorites": "Mis favoritos",
+        "help": "Necesito ayuda",
+        "logout": "Cerrar sesión"
+    },
+    "info": {
+        "title": "Editar mi información personal",
+        "fullName": "Nombres y Apellidos",
+        "docType": "Tipo de documentación",
+        "docNumber": "Documento",
+        "phone": "Celular",
+        "email": "Correo electrónico",
+        "save": "Guardar Cambios"
+    },
+    "placeholders": {
+        "fullName": "Tu nombre completo",
+        "docType": "DNI / CE / Pasaporte",
+        "docNumber": "Número de documento"
+    },
+    "password": {
+        "title": "Cambiar contraseña",
+        "current": "Contraseña actual",
+        "new": "Nueva contraseña",
+        "save": "Cambiar contraseña",
+        "rules": {
+            "min": "Mín. 8 caracteres",
+            "upper": "1 mayúscula",
+            "number": "1 número",
+            "special": "1 carácter especial"
+        }
+    },
+    "orders": {
+        "title": "Mis pedidos",
+        "empty": "Aún no tienes pedidos registrados."
+    },
+    "address": {
+        "title": "Mi dirección",
+        "empty": "No has guardado una dirección todavía."
+    },
+    "favorites": {
+        "title": "Mis favoritos",
+        "empty": "Aún no has agregado productos a favoritos."
+    },
+    "help": {
+        "title": "¿Necesitas ayuda?",
+        "desc": "Aquí colocaremos preguntas frecuentes y canales de soporte."
+    }
+}

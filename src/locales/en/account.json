@@ -1,0 +1,53 @@
+{
+    "ordersTotal": "Total orders:",
+    "menu": {
+        "info": "My information",
+        "orders": "My orders",
+        "address": "My address",
+        "favorites": "My favorites",
+        "help": "Need help",
+        "logout": "Log out"
+    },
+    "info": {
+        "title": "Edit my personal information",
+        "fullName": "Full name",
+        "docType": "Document type",
+        "docNumber": "Document number",
+        "phone": "Phone",
+        "email": "Email",
+        "save": "Save changes"
+    },
+    "placeholders": {
+        "fullName": "Your full name",
+        "docType": "ID / CE / Passport",
+        "docNumber": "Document number"
+    },
+    "password": {
+        "title": "Change password",
+        "current": "Current password",
+        "new": "New password",
+        "save": "Change password",
+        "rules": {
+            "min": "Min. 8 characters",
+            "upper": "1 uppercase",
+            "number": "1 number",
+            "special": "1 special character"
+        }
+    },
+    "orders": {
+        "title": "My orders",
+        "empty": "You don't have any orders yet."
+    },
+    "address": {
+        "title": "My address",
+        "empty": "You haven't saved an address yet."
+    },
+    "favorites": {
+        "title": "My favorites",
+        "empty": "You haven't added favorites yet."
+    },
+    "help": {
+        "title": "Need help?",
+        "desc": "We'll place FAQs and support channels here."
+    }
+}
