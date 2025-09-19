@@ -58,7 +58,21 @@
         "empty": "You haven't added favorites yet."
     },
     "help": {
-        "title": "Need help?",
-        "desc": "We'll place FAQs and support channels here."
+        "title": "Need help? Contact us",
+        "subtitle": "Here you can find our support channels",
+        "whatsapp": {
+            "title": "Chat via WhatsApp",
+            "desc": "Write to us Monday to Saturday from 8:00 to 20:00.",
+            "cta": "Start WhatsApp"
+        },
+        "phone": {
+            "title": "Buy by phone",
+            "desc": "We help you buy Mon–Sat 09:00–22:00. Sundays and holidays 09:00–21:00.",
+            "cta": "Call sales"
+        },
+        "socials": {
+            "title": "Follow us",
+            "subtitle": "Find us on:"
+        }
     }
 }

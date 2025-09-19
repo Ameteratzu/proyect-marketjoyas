@@ -4,7 +4,7 @@ import AccountInfo from "./pages/AccountInfo";
 import Orders from "./pages/Orders";
 import Address from "./pages/Address/Address";
 import Favorites from "./pages/Favorites";
-import Help from "./pages/Help";
+import Help from "./pages/Help/Help";
 
 export default function Account() {
   return (
