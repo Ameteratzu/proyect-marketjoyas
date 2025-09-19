@@ -1,6 +1,4 @@
-// src/features/products/components/ProductModal.tsx
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiX } from 'react-icons/hi';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
