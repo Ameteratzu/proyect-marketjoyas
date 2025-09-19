@@ -6,6 +6,7 @@ import {
   getDistrictsLabeled,
 } from "../../../../../common/utils/ubigeo";
 import type { Labeled } from "../../../../../common/utils/ubigeo";
+import CompactSelect from "../../../../../components/CompactSelect";
 
 
 type Props = {
@@ -116,56 +117,46 @@ export default function AddressForm(props: Props) {
         <label className="block text-sm text-neutral-600 mb-1">
           Departamento
         </label>
-        <select
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 bg-white"
+        {/* Visible custom select */}
+        <CompactSelect
           value={depCode}
-          onChange={onChangeDepartment}
-          required
-        >
-          <option value="">Seleccione</option>
-          {departamentos.map((dep) => (
-            <option key={dep.code} value={dep.code}>
-              {dep.name}
-            </option>
-          ))}
+          onChange={(v) => onChangeDepartment({ target: { value: v } } as any)}
+          options={departamentos.map((d) => ({ value: d.code, label: d.name }))}
+          placeholder="Seleccione"
+        />
+        {/* Hidden native for required validation fallback */}
+        <select value={depCode} onChange={() => {}} required className="sr-only">
+          <option value=""></option>
         </select>
       </div>
 
       {/* Provincia */}
       <div>
         <label className="block text-sm text-neutral-600 mb-1">Provincia</label>
-        <select
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 bg-white"
+        <CompactSelect
           value={provCode}
-          onChange={onChangeProvince}
-          required
+          onChange={(v) => onChangeProvince({ target: { value: v } } as any)}
+          options={provincias.map((p) => ({ value: p.code, label: p.name }))}
+          placeholder="Seleccione"
           disabled={!depCode}
-        >
-          <option value="">Seleccione</option>
-          {provincias.map((prov) => (
-            <option key={prov.code} value={prov.code}>
-              {prov.name}
-            </option>
-          ))}
+        />
+        <select value={provCode} onChange={() => {}} required className="sr-only" disabled={!depCode}>
+          <option value=""></option>
         </select>
       </div>
 
       {/* Distrito */}
       <div>
         <label className="block text-sm text-neutral-600 mb-1">Distrito</label>
-        <select
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 bg-white"
+        <CompactSelect
           value={distCode}
-          onChange={onChangeDistrict}
-          required
+          onChange={(v) => onChangeDistrict({ target: { value: v } } as any)}
+          options={distritos.map((d) => ({ value: d.code, label: d.name }))}
+          placeholder="Seleccione"
           disabled={!provCode}
-        >
-          <option value="">Seleccione</option>
-          {distritos.map((dis) => (
-            <option key={dis.code} value={dis.code}>
-              {dis.name}
-            </option>
-          ))}
+        />
+        <select value={distCode} onChange={() => {}} required className="sr-only" disabled={!provCode}>
+          <option value=""></option>
         </select>
       </div>
 
