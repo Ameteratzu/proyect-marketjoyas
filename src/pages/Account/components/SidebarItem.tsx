@@ -16,7 +16,7 @@ export default function SidebarItem(props: Props) {
       end={props.end}
       className={({ isActive }) =>
         cn(
-          "flex items-center gap-3 mt-5 px-3 py-2 rounded-lg transition-colors border border-black/15",
+          "flex items-center gap-3 mt-5 px-3 py-3 rounded-lg transition-colors border border-black/15",
           isActive
             ? "bg-accent-warm/50 text-dark"
             : "text-neutral-700 hover:bg-accent-warm/15",
