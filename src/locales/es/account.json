@@ -31,7 +31,9 @@
             "min": "Mín. 8 caracteres",
             "upper": "1 mayúscula",
             "number": "1 número",
-            "special": "1 carácter especial"
+            "special": "1 carácter especial",
+            "lower": "1 minúscula",
+            "space": "Sin espacios"
         }
     },
     "orders": {
