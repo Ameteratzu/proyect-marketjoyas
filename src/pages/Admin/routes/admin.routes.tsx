@@ -1,6 +1,7 @@
 import LoadingAnimate from "@/components/LoadingAnimate";
 import { lazy, Suspense } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import RequireRole from "@/routes/RequireRole";
 import CertificatesList from "../pages/Certificates/CertificatesList";
 import Customers from "../pages/Customers/Customers";
 
@@ -28,24 +29,34 @@ function SuspenseOutlet() {
 export const adminRoutes = [
   {
     path: "/admin",
-    element: <AdminLayout />,
+    // Envuelve todo /admin con el guard de rol para evitar montar el layout si no tiene permiso
+    element: (
+      <RequireRole
+        roles={["SUPERADMIN", "ADMIN", "DEMOVENDEDOR", "VENDEDOR", "TRABAJADOR"]}
+      />
+    ),
     children: [
       {
-        element: <SuspenseOutlet />,
+        element: <AdminLayout />,
         children: [
-          { index: true, element: <Navigate to="principal" replace /> },
-          { path: "principal", element: <Dashboard /> },
-          { path: "certificados", element: <CertificatesList /> },
-          { path: "productos", element: <Products /> },
-          { path: "suscripciones", element: <Subscriptions /> },
-          { path: "pedidos", element: <Orders /> },
-          { path: "transacciones", element: <Transactions /> },
-          { path: "reembolsos", element: <Refunds /> },
-          { path: "opiniones", element: <Reviews /> },
-          { path: "inventario", element: <Inventory /> },
-          { path: "clientes", element: <Customers /> },
-          { path: "personal", element: <Staff /> },
-          { path: "reportes", element: <Reports /> },
+          {
+            element: <SuspenseOutlet />,
+            children: [
+              { index: true, element: <Navigate to="principal" replace /> },
+              { path: "principal", element: <Dashboard /> },
+              { path: "certificados", element: <CertificatesList /> },
+              { path: "productos", element: <Products /> },
+              { path: "suscripciones", element: <Subscriptions /> },
+              { path: "pedidos", element: <Orders /> },
+              { path: "transacciones", element: <Transactions /> },
+              { path: "reembolsos", element: <Refunds /> },
+              { path: "opiniones", element: <Reviews /> },
+              { path: "inventario", element: <Inventory /> },
+              { path: "clientes", element: <Customers /> },
+              { path: "personal", element: <Staff /> },
+              { path: "reportes", element: <Reports /> },
+            ],
+          },
         ],
       },
     ],
