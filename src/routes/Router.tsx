@@ -13,7 +13,7 @@ const Compare = lazy(() => import("@/pages/Compare/Compare"));
 const Blog = lazy(() => import("@/pages/Blog/Blog"));
 const Stores = lazy(() => import("@/pages/Stores/Stores"));
 const About = lazy(() => import("@/pages/About/About"));
-const Contact = lazy(() => import("@/pages/Contact/Contact"));
+const Contact = lazy(() => import("@/pages/testimony/testimony"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 const Products = lazy(() => import("@/pages/Products").then(module => ({ default: module.default })));
 const ProductDetailPage = lazy(() => import("@/pages/Products/components/ProductDetailPage"));
