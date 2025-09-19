@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AccountLayout from "./AccountLayout";
 import AccountInfo from "./pages/AccountInfo";
 import Orders from "./pages/Orders";
-import Address from "./pages/Address";
+import Address from "./pages/Address/Address";
 import Favorites from "./pages/Favorites";
 import Help from "./pages/Help";
 
