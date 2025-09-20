@@ -38,7 +38,16 @@
     },
     "orders": {
         "title": "Mis pedidos",
-        "empty": "Aún no tienes pedidos registrados."
+        "empty": "¡Oh! Aun no tienes compras online",
+        "description": "Aquí podras encontrar todos tus pedidos",
+        "action": "Comprar en Market Joyas",
+        "productTitle": "Productos agregados a tu pedido",
+        "orderDate": "Fecha del pedido",
+        "productPrice": "Precio producto:",
+        "form": {
+            "view": "Ver detalle",
+            "delete": "Eliminar pedido"
+        }
     },
     "address": {
         "title": "Mi dirección",
@@ -55,7 +64,14 @@
     },
     "favorites": {
         "title": "Mis favoritos",
-        "empty": "Aún no has agregado productos a favoritos."
+        "empty": "Aún no has agregado productos a favoritos.",
+        "action": "Agregar Favoritos",
+        "productTitle": "Productos agregados a tus favoritos",
+        "productPrice": "Precio producto:",
+        "form": {
+            "view": "Ver detalle",
+            "delete": "Eliminar favorito"
+        }
     },
     "help": {
         "title": "¿Necesitas ayuda? Contáctanos",

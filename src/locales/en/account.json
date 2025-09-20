@@ -38,7 +38,16 @@
     },
     "orders": {
         "title": "My orders",
-        "empty": "You don't have any orders yet."
+        "empty": "Oh! You don't have any online purchases yet",
+        "description": "Here you can find all your orders",
+        "action": "Buy at Market Joyas",
+        "productTitle": "Products added to your order",
+        "orderDate": "Order date",
+        "productPrice": "Product price:",
+        "form": {
+            "view": "See details",
+            "delete": "Delete order"
+        }
     },
     "address": {
         "title": "My address",
@@ -55,7 +64,14 @@
     },
     "favorites": {
         "title": "My favorites",
-        "empty": "You haven't added favorites yet."
+        "empty": "You haven't added favorites yet.",
+        "action": "Add Favorites",
+        "productTitle": "Products added to your favorites",
+        "productPrice": "Product price:",
+        "form": {
+            "view": "See details",
+            "delete": "Delete favorite"
+        }
     },
     "help": {
         "title": "Need help? Contact us",
